@@ -7,11 +7,10 @@
     <fragment
         android:id="@+id/notes_fragment"
         android:name="com.boristul.notebook.ui.notes.NotesFragment"
-        android:label="NotesFragment" />
+        android:label="NotesFragment"></fragment>
 
     <action
         android:id="@+id/nav_action_notes"
         app:destination="@id/notes_fragment"
         app:popUpTo="@id/main" />
-
 </navigation>
