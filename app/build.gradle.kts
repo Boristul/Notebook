@@ -46,6 +46,10 @@ dependencies {
     // endregion
 
     // region Local
+    implementation(project(":uikit"))
+    implementation(project(":core"))
+    implementation(project(":utils"))
+    implementation(project(":entity"))
     // endregion
 
     // region Navigation

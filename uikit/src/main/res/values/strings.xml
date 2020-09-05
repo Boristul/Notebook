@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Notebook</string>
+
+    <!-- region NotesActivity -->
+    <string name="na_notes">Notes</string>
+    <!-- endregion -->
+</resources>
