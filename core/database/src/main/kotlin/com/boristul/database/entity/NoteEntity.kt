@@ -1,4 +1,4 @@
-package com.boristul.core.database.entity
+package com.boristul.database.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

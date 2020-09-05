@@ -1,2 +1,2 @@
-include(":app", ":core", ":uikit", ":utils", ":entity")
+include(":app", ":core:database", ":uikit", ":utils", ":entity")
 rootProject.name = "Notebook"

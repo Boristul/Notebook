@@ -1,4 +1,4 @@
-package com.boristul.core.database
+package com.boristul.database
 
 import androidx.room.TypeConverter
 import org.joda.time.DateTime

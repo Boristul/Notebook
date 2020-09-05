@@ -1,8 +1,8 @@
-package com.boristul.core.database.di
+package com.boristul.database.di
 
 import android.app.Application
 import androidx.room.Room
-import com.boristul.core.database.NotebookDatabase
+import com.boristul.database.NotebookDatabase
 import org.kodein.di.DI
 import org.kodein.di.bind
 import org.kodein.di.instance
