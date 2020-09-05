@@ -45,4 +45,8 @@ dependencies {
     val kotlinVersion: String by project
     implementation(kotlin("stdlib-jdk8", kotlinVersion))
     // endregion
+
+    // region Core
+    api("joda-time:joda-time:2.10.6")
+    // endregion
 }
