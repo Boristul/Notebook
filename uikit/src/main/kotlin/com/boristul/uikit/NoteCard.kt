@@ -29,10 +29,7 @@ class NoteCard @JvmOverloads constructor(
         edit.visibility = GONE
     }
 
-    fun setExpanded(isExpanded: Boolean, isAnimate: Boolean) = binding.apply {
-        details.setExpanded(isExpanded, isAnimate)
-        edit.visibility = if (isExpanded) VISIBLE else GONE
-    }
+    fun setExpanded(isExpanded: Boolean, isAnimate: Boolean) = binding.details.setExpanded(isExpanded, isAnimate)
 
     var imageTintList: ColorStateList?
         get() = binding.statusIcon.imageTintList
