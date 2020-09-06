@@ -1,6 +1,7 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     kotlin("android")
+    kotlin("android.extensions")
     kotlin("kapt")
 }
 
@@ -8,7 +9,6 @@ android {
     compileSdkVersion(29)
 
     defaultConfig {
-        applicationId = "com.boristul.notebook"
         versionCode = 1
         versionName = "0.0.0"
 
@@ -16,10 +16,7 @@ android {
         targetSdkVersion(29)
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildFeatures {
-        viewBinding = true
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -31,6 +28,11 @@ android {
         }
     }
 
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
     sourceSets {
         getByName("main").java.srcDirs("src/main/kotlin")
         getByName("test").java.srcDirs("src/test/kotlin")
@@ -39,31 +41,24 @@ android {
 }
 
 dependencies {
-
     // region Kotlin
     val kotlinVersion: String by project
     implementation(kotlin("stdlib-jdk8", kotlinVersion))
     // endregion
 
     // region Local
-    implementation(project(":uikit"))
-    implementation(project(":core:database"))
-    implementation(project(":utils"))
     implementation(project(":entity"))
+    implementation(project(":core:database"))
     // endregion
 
-    // region Navigation
-    val navigationVersion: String by project
-    implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
-    implementation("androidx.navigation:navigation-ui-ktx:$navigationVersion")
+    // region AndroidX
+    val lifecycleVersion: String by project
+    api("androidx.lifecycle:lifecycle-livedata:$lifecycleVersion")
+    api("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
     // endregion
 
     // region Core
-    // endregion
-
-    // region androidX
-    implementation("androidx.appcompat:appcompat:1.2.0")
-    implementation("androidx.core:core-ktx:1.3.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.1")
+    val kodeinVersion: String by project
+    implementation("org.kodein.di:kodein-di-jvm:$kodeinVersion")
     // endregion
 }
