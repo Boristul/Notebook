@@ -48,19 +48,17 @@ dependencies {
 
     // region Local
     implementation(project(":entity"))
+    implementation(project(":core:database"))
+    // endregion
+
+    // region AndroidX
+    val lifecycleVersion: String by project
+    api("androidx.lifecycle:lifecycle-livedata:$lifecycleVersion")
+    api("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
     // endregion
 
     // region Core
     val kodeinVersion: String by project
     implementation("org.kodein.di:kodein-di-jvm:$kodeinVersion")
-    // endregion
-
-    // region AndroidX
-    val lifecycleVersion: String by project
-    implementation("androidx.lifecycle:lifecycle-livedata:$lifecycleVersion")
-
-    val roomVersion: String by project
-    kapt("androidx.room:room-compiler:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
     // endregion
 }
