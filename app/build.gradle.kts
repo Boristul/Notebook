@@ -47,7 +47,7 @@ dependencies {
 
     // region Local
     implementation(project(":uikit"))
-    implementation(project(":core:database"))
+    implementation(project(":core:repository"))
     implementation(project(":utils"))
     implementation(project(":entity"))
     // endregion
