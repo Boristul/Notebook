@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">Notebook</string>
 
-    <!-- region NotesActivity -->
-    <string name="na_notes">Notes</string>
+    <!-- region MainActivity -->
+    <string name="ma_notes">Notes</string>
+    <!-- endregion -->
+
+    <!-- region NotesFragment -->
+    <string name="nf_add_menu">Add</string>
     <!-- endregion -->
 </resources>
