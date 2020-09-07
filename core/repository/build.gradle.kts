@@ -59,6 +59,6 @@ dependencies {
 
     // region Core
     val kodeinVersion: String by project
-    api("org.kodein.di:kodein-di-jvm:$kodeinVersion")
+    implementation("org.kodein.di:kodein-di-jvm:$kodeinVersion")
     // endregion
 }

@@ -10,3 +10,4 @@ class MainApplication : Application(), DIAware {
         import(repositoryModule(this@MainApplication, "notebook.db"))
     }
 }
+
