@@ -5,7 +5,7 @@ import org.joda.time.DateTime
 
 interface Note : Parcelable {
     val title: String
-    val text: String
+    val description: String
     val creationTime: DateTime
     val id: Long
 }

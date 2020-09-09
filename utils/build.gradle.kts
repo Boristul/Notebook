@@ -19,6 +19,10 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
@@ -44,5 +48,15 @@ dependencies {
     // region Kotlin
     val kotlinVersion: String by project
     implementation(kotlin("stdlib-jdk8", kotlinVersion))
+    // endregion
+
+    // region Navigation
+    val navigationVersion: String by project
+    implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
+    // endregion
+
+    // region AndroidX
+    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
     // endregion
 }

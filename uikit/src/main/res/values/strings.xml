@@ -2,6 +2,6 @@
     <string name="app_name">Notebook</string>
 
     <!-- region NotesActivity -->
-    <string name="na_notes">Notes</string>
+    <string name="ma_notes">Notes</string>
     <!-- endregion -->
 </resources>

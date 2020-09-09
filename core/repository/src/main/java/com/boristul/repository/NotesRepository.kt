@@ -14,9 +14,11 @@ class NotesRepository(
         notesDao.insert(NoteEntity(title, text, dateTime))
     }
 
-    suspend fun update(title: String, text: String, dateTime: DateTime) {
-        notesDao.update(NoteEntity(title, text, dateTime))
+    suspend fun update(title: String, text: String, dateTime: DateTime, id: Long) {
+        notesDao.update(NoteEntity(title, text, dateTime, id))
     }
+
+    suspend fun delete(id: Long) = notesDao.delete(id)
 
     fun getAll(): LiveData<List<Note>> = notesDao.getAllLiveData().map()
 

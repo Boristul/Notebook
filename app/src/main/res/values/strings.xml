@@ -1,7 +1,25 @@
 <resources>
     <string name="app_name">Notebook</string>
 
-    <!-- region NotesActivity -->
-    <string name="na_notes">Notes</string>
+    <!-- region MainActivity -->
+    <string name="ma_notes">Notes</string>
     <!-- endregion -->
+
+    <!-- region NotesFragment -->
+    <string name="nf_add_menu">Add</string>
+    <string name="nf_delete_title">Delete note?</string>
+    <string name="nf_delete">Delete</string>
+    <string name="nf_successful_delete">Note has successfully deleted</string>
+    <string name="nf_cancel">Cancel</string>
+    <!-- endregion -->
+
+    <!-- region NoteEditorFragment -->
+    <string name="nef_title_edit">Edit note</string>
+    <string name="nef_title_create">Create note</string>
+    <string name="nef_title_field">Title</string>
+    <string name="nef_description_field">Description</string>
+    <string name="nef_save">Save</string>
+    <string name="nef_successful_save">Note has successfully saved</string>
+    <!-- endregion -->
+
 </resources>

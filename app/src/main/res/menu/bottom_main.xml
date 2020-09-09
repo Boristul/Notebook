@@ -3,5 +3,5 @@
     <item
         android:id="@+id/nav_action_notes"
         android:icon="@drawable/ic_book_open"
-        android:title="@string/na_notes" />
+        android:title="@string/ma_notes" />
 </menu>

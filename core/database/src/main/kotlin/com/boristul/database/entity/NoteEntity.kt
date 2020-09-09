@@ -16,8 +16,8 @@ data class NoteEntity(
     @ColumnInfo(name = "title")
     override val title: String,
 
-    @ColumnInfo(name = "text")
-    override val text: String,
+    @ColumnInfo(name = "description")
+    override val description: String,
 
     @ColumnInfo(name = "creationTime")
     override val creationTime: DateTime,

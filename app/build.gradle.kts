@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -47,7 +48,7 @@ dependencies {
 
     // region Local
     implementation(project(":uikit"))
-    implementation(project(":core:database"))
+    implementation(project(":core:repository"))
     implementation(project(":utils"))
     implementation(project(":entity"))
     // endregion
@@ -59,11 +60,12 @@ dependencies {
     // endregion
 
     // region Core
+    val kodeinVersion: String by project
+    implementation("org.kodein.di:kodein-di-jvm:$kodeinVersion")
+    implementation("org.kodein.di:kodein-di-framework-android-x:$kodeinVersion")
     // endregion
 
     // region androidX
-    implementation("androidx.appcompat:appcompat:1.2.0")
     implementation("androidx.core:core-ktx:1.3.1")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.1")
     // endregion
 }
