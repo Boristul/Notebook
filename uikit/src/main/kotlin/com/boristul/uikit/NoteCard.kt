@@ -13,9 +13,7 @@ class NoteCard @JvmOverloads constructor(
     defStyleAttr: Int = R.attr.materialCardViewStyle
 ) : MaterialCardView(context, attrs, defStyleAttr) {
 
-    private val binding = CardNoteBinding.inflate(
-        requireNotNull(context.getSystemService()), this
-    )
+    private val binding = CardNoteBinding.inflate(requireNotNull(context.getSystemService()), this)
 
     var onEditClickListener: (() -> Unit)? = null
 

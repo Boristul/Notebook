@@ -47,6 +47,5 @@ class NotesListAdapter : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>()
         }
     }
 
-
     class ItemViewHolder(val card: NoteCard) : RecyclerView.ViewHolder(card)
 }
