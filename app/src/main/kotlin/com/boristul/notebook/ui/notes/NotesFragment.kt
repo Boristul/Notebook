@@ -8,11 +8,15 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.boristul.notebook.R
 import com.boristul.notebook.databinding.FragmentNotesBinding
 import com.boristul.uikit.decoretions.SpacingItemDecoration
+import com.boristul.utils.toast
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.launch
 
 class NotesFragment : Fragment(R.layout.fragment_notes) {
 
@@ -30,6 +34,18 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
             adapter = NotesListAdapter().apply {
                 viewModel.notes.observe(viewLifecycleOwner) {
                     notes = it
+                }
+                onLongClickListener = {
+                    MaterialAlertDialogBuilder(requireContext())
+                        .setTitle(R.string.nf_delete_title)
+                        .setPositiveButton(R.string.nf_delete) { _, _ ->
+                            viewModel.viewModelScope.launch {
+                                viewModel.delete(it.id)
+                                requireActivity().toast(R.string.nf_successful_delete)
+                            }
+                        }
+                        .setNegativeButton(R.string.nf_cancel, null)
+                        .show()
                 }
             }
             layoutManager = LinearLayoutManager(requireContext())

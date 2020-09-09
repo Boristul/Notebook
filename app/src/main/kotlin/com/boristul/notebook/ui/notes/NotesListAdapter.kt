@@ -7,7 +7,7 @@ import com.boristul.uikit.NoteCard
 import org.joda.time.DateTimeZone
 import org.joda.time.format.DateTimeFormat
 
-class NotesListAdapter() : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>() {
+class NotesListAdapter : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>() {
 
     var notes: List<Note> = listOf()
         set(value) {
@@ -17,6 +17,8 @@ class NotesListAdapter() : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>
 
     private val dateTimePattern = DateTimeFormat.forPattern("dd.MM.yyyy (HH:mm)")
         .withZone(DateTimeZone.getDefault())
+
+    var onLongClickListener: ((Note) -> Unit)? = null
 
     override fun getItemCount(): Int = notes.size
 
@@ -28,8 +30,10 @@ class NotesListAdapter() : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
 
-        card.setOnClickListener {
-            card.toggleCard()
+        card.setOnClickListener { card.toggleCard() }
+        card.setOnLongClickListener {
+            onLongClickListener?.invoke(notes[adapterPosition])
+            true
         }
     }
 
@@ -42,6 +46,7 @@ class NotesListAdapter() : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>
             }
         }
     }
+
 
     class ItemViewHolder(val card: NoteCard) : RecyclerView.ViewHolder(card)
 }

@@ -18,6 +18,8 @@ class NotesRepository(
         notesDao.update(NoteEntity(title, text, dateTime, id))
     }
 
+    suspend fun delete(id: Long) = notesDao.delete(id)
+
     fun getAll(): LiveData<List<Note>> = notesDao.getAllLiveData().map()
 
     private fun LiveData<List<NoteEntity>>.map() = map { it.toList<Note>() }

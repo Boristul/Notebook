@@ -13,4 +13,6 @@ class NotesFragmentViewModel(application: Application) : AndroidViewModel(applic
     private val notesRepository by instance<NotesRepository>()
 
     val notes = notesRepository.getAll()
+
+    suspend fun delete(id: Long) = notesRepository.delete(id)
 }

@@ -7,6 +7,10 @@
 
     <!-- region NotesFragment -->
     <string name="nf_add_menu">Add</string>
+    <string name="nf_delete_title">Delete note?</string>
+    <string name="nf_delete">Delete</string>
+    <string name="nf_successful_delete">Note has successfully deleted</string>
+    <string name="nf_cancel">Cancel</string>
     <!-- endregion -->
 
     <!-- region NoteEditorFragment -->

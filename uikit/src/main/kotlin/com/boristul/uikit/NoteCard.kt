@@ -19,6 +19,10 @@ class NoteCard @JvmOverloads constructor(
 
     var onEditClickListener: (() -> Unit)? = null
 
+    init {
+        binding.edit.setOnClickListener { onEditClickListener?.invoke() }
+    }
+
     fun expandCard(isAnimate: Boolean = true) = binding.apply {
         details.expand(isAnimate)
         edit.visibility = VISIBLE
