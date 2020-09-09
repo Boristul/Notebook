@@ -19,12 +19,17 @@ class NoteCard @JvmOverloads constructor(
 
     var onEditClickListener: (() -> Unit)? = null
 
-    fun expand(isAnimate: Boolean = true) = binding.apply {
+    fun expandCard(isAnimate: Boolean = true) = binding.apply {
         details.expand(isAnimate)
         edit.visibility = VISIBLE
     }
 
-    fun collapse(isAnimate: Boolean = true) = binding.apply {
+    fun toggleCard(isAnimate: Boolean = true) = binding.apply {
+        details.toggle(isAnimate)
+        edit.visibility = if (details.isExpanded) VISIBLE else GONE
+    }
+
+    fun collapseCard(isAnimate: Boolean = true) = binding.apply {
         details.collapse(isAnimate)
         edit.visibility = GONE
     }

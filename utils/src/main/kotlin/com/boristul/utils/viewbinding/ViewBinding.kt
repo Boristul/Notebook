@@ -1,4 +1,4 @@
-package com.boristul.utils
+package com.boristul.utils.viewbinding
 
 import android.content.Context
 import android.util.Log

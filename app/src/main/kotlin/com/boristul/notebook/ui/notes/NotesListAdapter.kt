@@ -27,13 +27,17 @@ class NotesListAdapter() : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
+
+        card.setOnClickListener {
+            card.toggleCard()
+        }
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         notes[position].let { note ->
             holder.card.run {
                 title = note.title
-                text = note.text
+                text = note.description
                 datetime = note.creationTime.toString(dateTimePattern)
             }
         }

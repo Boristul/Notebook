@@ -8,14 +8,19 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.boristul.notebook.R
 import com.boristul.notebook.databinding.FragmentNotesBinding
+import com.boristul.uikit.decoretions.SpacingItemDecoration
 
 class NotesFragment : Fragment(R.layout.fragment_notes) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val viewModel by viewModels<NotesFragmentViewModel>()
         val binding = FragmentNotesBinding.bind(view)
+
+        requireActivity()
 
         (requireActivity() as AppCompatActivity).supportActionBar?.apply {
             setHasOptionsMenu(true)
@@ -27,6 +32,8 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
                     notes = it
                 }
             }
+            layoutManager = LinearLayoutManager(requireContext())
+            addItemDecoration(SpacingItemDecoration(requireContext().resources.getDimensionPixelSize(R.dimen.cards_spacing)))
         }
     }
 
@@ -35,6 +42,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.nav_action_add -> {
+            findNavController().navigate(NotesFragmentDirections.actionNotesFragmentToNoteEditorFragment(null))
             true
         }
         else -> false

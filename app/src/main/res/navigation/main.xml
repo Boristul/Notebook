@@ -1,13 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     app:startDestination="@id/notes_fragment">
 
     <fragment
         android:id="@+id/notes_fragment"
         android:name="com.boristul.notebook.ui.notes.NotesFragment"
-        android:label="NotesFragment"></fragment>
+        android:label="NotesFragment"
+        tools:layout="@layout/fragment_notes">
+        <action
+            android:id="@+id/action_notes_fragment_to_noteEditorFragment"
+            app:destination="@id/noteEditorFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/noteEditorFragment"
+        android:name="com.boristul.notebook.ui.noteeditor.NoteEditorFragment"
+        android:label="NoteEditorFragment"
+        tools:layout="@layout/fragment_note_editor">
+
+        <argument
+            android:name="note"
+            android:defaultValue="@null"
+            app:argType="com.boristul.entity.Note"
+            app:nullable="true" />
+
+    </fragment>
 
     <action
         android:id="@+id/nav_action_notes"

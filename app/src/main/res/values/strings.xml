@@ -8,4 +8,14 @@
     <!-- region NotesFragment -->
     <string name="nf_add_menu">Add</string>
     <!-- endregion -->
+
+    <!-- region NoteEditorFragment -->
+    <string name="nef_title_edit">Edit note</string>
+    <string name="nef_title_create">Create note</string>
+    <string name="nef_title_field">Title</string>
+    <string name="nef_description_field">Description</string>
+    <string name="nef_save">Save</string>
+    <string name="nef_successful_save">Note has successfully saved</string>
+    <!-- endregion -->
+
 </resources>
