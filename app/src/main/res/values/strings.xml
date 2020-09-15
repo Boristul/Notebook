@@ -3,6 +3,7 @@
 
     <!-- region MainActivity -->
     <string name="ma_notes">Notes</string>
+    <string name="ma_settings">Settings</string>
     <!-- endregion -->
 
     <!-- region NotesFragment -->
@@ -22,4 +23,9 @@
     <string name="nef_successful_save">Note has successfully saved</string>
     <!-- endregion -->
 
+    <!-- region SettingsFragment -->
+    <string name="sf_design_category">Design</string>
+    <string name="sf_theme_title">Theme</string>
+    <string name="sf_theme_summary">Select theme</string>
+    <!-- endregion -->
 </resources>

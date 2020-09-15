@@ -4,4 +4,9 @@
         android:id="@+id/nav_action_notes"
         android:icon="@drawable/ic_book_open"
         android:title="@string/ma_notes" />
+
+    <item
+        android:id="@+id/nav_action_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/ma_settings" />
 </menu>
