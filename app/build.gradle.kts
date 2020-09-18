@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+    id("com.google.gms.google-services")
     kotlin("android")
     kotlin("kapt")
     id("androidx.navigation.safeargs.kotlin")
@@ -57,6 +58,10 @@ dependencies {
     val navigationVersion: String by project
     implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navigationVersion")
+    // endregion
+
+    // region Firebase
+    implementation("com.google.firebase:firebase-analytics:17.5.0")
     // endregion
 
     // region Core
