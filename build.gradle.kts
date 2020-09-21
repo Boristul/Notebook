@@ -44,7 +44,23 @@ subprojects.forEach { module ->
 
 detekt {
     config = files("detekt-config.yml")
-    input = files(*subprojects.map { "${it.name}/src" }.toTypedArray())
+
+    input = files(*subprojects.map { subproject ->
+        if (subproject.subprojects.isEmpty())
+            "${subproject.name}/src"
+        else
+            subproject.subprojects.map {
+                "${subproject.name}/${it.name}/src"
+            }
+    }.toTypedArray())
+
+    //input = files(subprojects.flatMap { subProject ->
+    //    println("1: ${subProject.name}")
+    //    subProject.allprojects.map{
+    //        println("2: ${subProject.name}")
+    //        "${it.name}/src"
+    //    } + "${subProject.name}/src"
+    //}.toTypedArray())
     reports { xml { enabled = false } }
     failFast = false
 }
