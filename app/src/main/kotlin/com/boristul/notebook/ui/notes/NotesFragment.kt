@@ -13,7 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.boristul.notebook.R
 import com.boristul.notebook.databinding.FragmentNotesBinding
-import com.boristul.uikit.decoretions.SpacingItemDecoration
+import com.boristul.uikit.decorations.SpacingItemDecoration
 import com.boristul.utils.toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
