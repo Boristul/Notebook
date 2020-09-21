@@ -54,13 +54,6 @@ detekt {
             }
     }.toTypedArray())
 
-    //input = files(subprojects.flatMap { subProject ->
-    //    println("1: ${subProject.name}")
-    //    subProject.allprojects.map{
-    //        println("2: ${subProject.name}")
-    //        "${it.name}/src"
-    //    } + "${subProject.name}/src"
-    //}.toTypedArray())
     reports { xml { enabled = false } }
     failFast = false
 }
