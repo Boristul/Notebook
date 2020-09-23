@@ -66,11 +66,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/description_input_layout" />
 
-        <com.boristul.uikit.StepProgressIndicator
+        <com.boristul.uikit.StepProgressBar
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:count="5"
+            app:count="2"
+            app:selectedStep="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/save" />

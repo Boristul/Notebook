@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="StepProgressIndicator">
+    <declare-styleable name="StepProgressBar">
         <attr name="count" format="integer" />
         <attr name="selectedStep" format="integer" />
         <attr name="stepsColor" format="color" />

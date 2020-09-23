@@ -8,7 +8,7 @@ import android.view.View
 import androidx.core.content.withStyledAttributes
 import com.boristul.utils.getColorCompat
 
-class StepProgressIndicator @JvmOverloads constructor(
+class StepProgressBar @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -34,13 +34,13 @@ class StepProgressIndicator @JvmOverloads constructor(
             requestLayout()
         }
 
-    var stepsColor: Int = context.getColorCompat(R.color.primary)
+    var completedStepsColor: Int = context.getColorCompat(R.color.primary)
         set(value) {
             field = value
             invalidate()
         }
 
-    var stepsDividerColor: Int = context.getColorCompat(R.color.primary)
+    var unfulfilledStepColor: Int = context.getColorCompat(R.color.primary)
         set(value) {
             field = value
             invalidate()
@@ -48,6 +48,7 @@ class StepProgressIndicator @JvmOverloads constructor(
 
     var selectedStep: Int = 0
         set(value) {
+            require(selectedStep <= count) { "Selected step can't be more than the number of steps" }
             field = value
             onStepChangedListener?.invoke(field)
             invalidate()
@@ -56,12 +57,12 @@ class StepProgressIndicator @JvmOverloads constructor(
     // endregion
 
     init {
-        context.withStyledAttributes(attrs, R.styleable.StepProgressIndicator, defStyleAttr) {
-            count = getInt(R.styleable.StepProgressIndicator_count, DEFAULT_COUNT)
-            stepsRadius = getDimension(R.styleable.StepProgressIndicator_stepRadius, 40f)
-            selectedStep = getInt(R.styleable.StepProgressIndicator_selectedStep, DEFAULT_COUNT)
-            stepsColor = getColor(R.styleable.StepProgressIndicator_stepsColor, stepsColor)
-            stepsDividerColor = getColor(R.styleable.StepProgressIndicator_stepsDividerColor, stepsDividerColor)
+        context.withStyledAttributes(attrs, R.styleable.StepProgressBar, defStyleAttr) {
+            count = getInt(R.styleable.StepProgressBar_count, DEFAULT_COUNT)
+            stepsRadius = getDimension(R.styleable.StepProgressBar_stepRadius, 40f)
+            selectedStep = getInt(R.styleable.StepProgressBar_selectedStep, 0)
+            completedStepsColor = getColor(R.styleable.StepProgressBar_stepsColor, completedStepsColor)
+            unfulfilledStepColor = getColor(R.styleable.StepProgressBar_stepsDividerColor, unfulfilledStepColor)
 
         }
     }
@@ -77,7 +78,11 @@ class StepProgressIndicator @JvmOverloads constructor(
 
         for (i in 0 until count) {
             val xPosition = getStepXPosition(i)
-            drawUnfulfilledStep(canvas, xPosition, yPosition)
+
+            if (selectedStep > i)
+                drawCompletedStep(canvas, xPosition, yPosition)
+            else
+                drawUnfulfilledStep(canvas, xPosition, yPosition)
 
             if (i < count)
                 drawLine(canvas, xPosition + stepsRadius, yPosition, lineWidth)
@@ -101,17 +106,17 @@ class StepProgressIndicator @JvmOverloads constructor(
 
     private val stepsPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.FILL
-        color = stepsColor
+        color = completedStepsColor
     }
 
     private val stepsLinePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.FILL
-        color = stepsColor
+        color = completedStepsColor
     }
 
     private val stepsStrokePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.STROKE
-        color = stepsColor
+        color = completedStepsColor
     }
 
     private val yPosition
