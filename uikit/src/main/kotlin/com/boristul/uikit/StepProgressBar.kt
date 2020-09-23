@@ -16,9 +16,10 @@ class StepProgressBar @JvmOverloads constructor(
 
     companion object {
         private const val DEFAULT_COUNT = 4
+        private const val DEFAULT_STEPS_RADIUS = 40f
     }
 
-    // region Public
+    // region public
 
     var onStepChangedListener: ((item: Int) -> Unit)? = null
 
@@ -28,7 +29,7 @@ class StepProgressBar @JvmOverloads constructor(
             invalidate()
         }
 
-    var stepsRadius: Float = 0f
+    var stepsRadius: Float = DEFAULT_STEPS_RADIUS
         set(value) {
             field = value
             requestLayout()
@@ -40,7 +41,7 @@ class StepProgressBar @JvmOverloads constructor(
             invalidate()
         }
 
-    var unfulfilledStepColor: Int = context.getColorCompat(R.color.secondary)
+    var unfulfilledStepColor: Int = context.getColorCompat(R.color.on_background)
         set(value) {
             field = value
             invalidate()
@@ -59,7 +60,7 @@ class StepProgressBar @JvmOverloads constructor(
     init {
         context.withStyledAttributes(attrs, R.styleable.StepProgressBar, defStyleAttr) {
             count = getInt(R.styleable.StepProgressBar_count, DEFAULT_COUNT)
-            stepsRadius = getDimension(R.styleable.StepProgressBar_stepRadius, 40f)
+            stepsRadius = getDimension(R.styleable.StepProgressBar_stepsRadius, DEFAULT_STEPS_RADIUS)
             selectedStep = getInt(R.styleable.StepProgressBar_selectedStep, 0)
             completedStepsColor = getColor(R.styleable.StepProgressBar_stepsColor, completedStepsColor)
             unfulfilledStepColor = getColor(R.styleable.StepProgressBar_stepsDividerColor, unfulfilledStepColor)
@@ -134,7 +135,6 @@ class StepProgressBar @JvmOverloads constructor(
 
     private val lineWidth: Float
         get() = (width - (stepsRadius * 2 * count)) / (count - 1)
-
 
     private fun getStepXPosition(stepIndex: Int): Float =
         (stepsRadius * 2 + lineWidth) * stepIndex + stepsRadius
