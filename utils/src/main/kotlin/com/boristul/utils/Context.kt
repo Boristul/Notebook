@@ -19,17 +19,13 @@ fun Context.getDrawableCompat(@DrawableRes id: Int) = ContextCompat.getDrawable(
 // region Android size converters
 
 fun Context.dpToPx(dp: Int) =
-    (dp * (resources.displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT)).roundToInt()
-
+    (dp * (resources.displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
 
 fun Context.pxToDp(px: Int) =
     (px / (resources.displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT)).roundToInt()
 
 fun Context.spToPx(sp: Float) =
-    (TypedValue.applyDimension(
-        TypedValue.COMPLEX_UNIT_SP, sp, resources.displayMetrics
-    )).roundToInt()
-
+    (TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, resources.displayMetrics))
 
 fun Context.pxToSp(px: Int) = (px / resources.displayMetrics.scaledDensity).roundToInt()
 

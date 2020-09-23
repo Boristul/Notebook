@@ -40,7 +40,7 @@ class StepProgressBar @JvmOverloads constructor(
             invalidate()
         }
 
-    var unfulfilledStepColor: Int = context.getColorCompat(R.color.primary)
+    var unfulfilledStepColor: Int = context.getColorCompat(R.color.secondary)
         set(value) {
             field = value
             invalidate()
@@ -48,7 +48,7 @@ class StepProgressBar @JvmOverloads constructor(
 
     var selectedStep: Int = 0
         set(value) {
-            require(selectedStep <= count) { "Selected step can't be more than the number of steps" }
+            require(value < count) { "Selected step can't be more than the number of steps" }
             field = value
             onStepChangedListener?.invoke(field)
             invalidate()
