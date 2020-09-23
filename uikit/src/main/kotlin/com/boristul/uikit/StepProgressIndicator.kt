@@ -2,7 +2,6 @@ package com.boristul.uikit
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
@@ -61,8 +60,8 @@ class StepProgressIndicator @JvmOverloads constructor(
             count = getInt(R.styleable.StepProgressIndicator_count, DEFAULT_COUNT)
             stepsRadius = getDimension(R.styleable.StepProgressIndicator_stepRadius, 40f)
             selectedStep = getInt(R.styleable.StepProgressIndicator_selectedStep, DEFAULT_COUNT)
-            stepsColor = getColor(R.styleable.StepProgressIndicator_stepsColor, 0)
-            stepsDividerColor = getColor(R.styleable.StepProgressIndicator_stepsDividerColor, 0)
+            stepsColor = getColor(R.styleable.StepProgressIndicator_stepsColor, stepsColor)
+            stepsDividerColor = getColor(R.styleable.StepProgressIndicator_stepsDividerColor, stepsDividerColor)
 
         }
     }
@@ -74,39 +73,56 @@ class StepProgressIndicator @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        val lineSize = lineWidth
+        val lineWidth = lineWidth
 
         for (i in 0 until count) {
-            canvas?.drawCircle(calculateXPositionForStep(i), yPosition, stepsRadius, stepsPaint)
+            val xPosition = getStepXPosition(i)
+            drawUnfulfilledStep(canvas, xPosition, yPosition)
+
+            if (i < count)
+                drawLine(canvas, xPosition + stepsRadius, yPosition, lineWidth)
         }
     }
 
     // region private
 
+    private fun drawCompletedStep(canvas: Canvas?, xPosition: Float, yPosition: Float) {
+        canvas?.drawCircle(xPosition, yPosition, stepsRadius, stepsPaint)
+    }
+
+    private fun drawUnfulfilledStep(canvas: Canvas?, xPosition: Float, yPosition: Float) {
+        canvas?.drawCircle(xPosition, yPosition, stepsRadius / 4, stepsPaint)
+        canvas?.drawCircle(xPosition, yPosition, stepsRadius, stepsStrokePaint)
+    }
+
+    private fun drawLine(canvas: Canvas?, startXPosition: Float, yPosition: Float, lineWidth: Float) {
+        canvas?.drawLine(startXPosition, yPosition, startXPosition + lineWidth, yPosition, stepsLinePaint)
+    }
+
     private val stepsPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.FILL
-        color = Color.BLACK
+        color = stepsColor
     }
 
     private val stepsLinePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.FILL
-        color = Color.BLUE
+        color = stepsColor
     }
 
     private val stepsStrokePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.STROKE
-        color = Color.BLUE
+        color = stepsColor
     }
 
     private val yPosition
-        get() = stepsRadius / 2
+        get() = stepsRadius
 
     private val lineWidth: Float
-        get() = (width - (stepsRadius * count)) / (count - 1)
+        get() = (width - (stepsRadius * 2 * count)) / (count - 1)
 
 
-    private fun calculateXPositionForStep(stepIndex: Int): Float =
-        (stepsRadius + lineWidth) * stepIndex + stepsRadius / 2
+    private fun getStepXPosition(stepIndex: Int): Float =
+        (stepsRadius * 2 + lineWidth) * stepIndex + stepsRadius
 
     // endregion
 }
