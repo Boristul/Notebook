@@ -75,6 +75,7 @@ class StepProgressBar @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         val lineWidth = lineWidth
+        setPaintsColor(completedStepsColor)
 
         for (i in 0 until count) {
             val xPosition = getStepXPosition(i)
@@ -83,6 +84,9 @@ class StepProgressBar @JvmOverloads constructor(
                 drawCompletedStep(canvas, xPosition, yPosition)
             else
                 drawUnfulfilledStep(canvas, xPosition, yPosition)
+
+            if (i == selectedStep)
+                setPaintsColor(unfulfilledStepColor)
 
             if (i < count)
                 drawLine(canvas, xPosition + stepsRadius, yPosition, lineWidth)
@@ -102,6 +106,12 @@ class StepProgressBar @JvmOverloads constructor(
 
     private fun drawLine(canvas: Canvas?, startXPosition: Float, yPosition: Float, lineWidth: Float) {
         canvas?.drawLine(startXPosition, yPosition, startXPosition + lineWidth, yPosition, stepsLinePaint)
+    }
+
+    private fun setPaintsColor(color: Int) {
+        stepsPaint.color = color
+        stepsLinePaint.color = color
+        stepsStrokePaint.color = color
     }
 
     private val stepsPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {

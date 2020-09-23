@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:count="5"
-            app:selectedStep="4"
+            app:selectedStep="2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/save" />
