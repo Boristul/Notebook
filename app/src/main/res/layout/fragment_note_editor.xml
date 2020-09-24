@@ -67,15 +67,16 @@
             app:layout_constraintTop_toBottomOf="@id/description_input_layout" />
 
         <com.boristul.uikit.StepProgressBar
+            android:id="@+id/step_progress_bar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:count="5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/save"
             app:selectedStep="2"
-            app:stepsRadius="12dp" />
+            app:stepsRadius="12dp"
+            app:titlesTextSize="50sp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
