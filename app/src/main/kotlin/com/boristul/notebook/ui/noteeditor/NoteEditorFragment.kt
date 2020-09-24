@@ -46,6 +46,6 @@ class NoteEditorFragment : Fragment(R.layout.fragment_note_editor) {
             }
         }
 
-        binding.stepProgressBar.stepsTitles = listOf("Hello", "World", "DDDDDDDD", "fsdfsf sdfsd")
+        binding.stepProgressBar.stepsTitles = listOf("Hello", "World", "DDDDDDDD dgdgdfgdf dfgdgdf gdfdgdf", "fsdfsf sdfsd")
     }
 }

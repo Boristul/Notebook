@@ -76,7 +76,7 @@
             app:layout_constraintTop_toBottomOf="@id/save"
             app:selectedStep="2"
             app:stepsRadius="12dp"
-            app:titlesTextSize="50sp" />
+            app:titlesTextSize="12sp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

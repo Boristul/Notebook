@@ -23,7 +23,7 @@ class StepProgressBar @JvmOverloads constructor(
     companion object {
         private const val DEFAULT_COUNT = 4
         private const val DEFAULT_STEPS_RADIUS = 40f
-        private const val DEFAULT_TEXT_SIZE = 30f
+        private const val DEFAULT_TEXT_SIZE = 40f
 
         // TODO: create param in xml and code
         private const val TEXT_PADDING = 20f
@@ -37,17 +37,18 @@ class StepProgressBar @JvmOverloads constructor(
             invalidate()
         }
 
-    @Dimension
+    @Dimension(unit = Dimension.DP)
     var stepsRadius: Float = DEFAULT_STEPS_RADIUS
         set(value) {
             field = value
             requestLayout()
         }
 
-    @Dimension
+    @Dimension(unit = Dimension.SP)
     var titleTextSize: Float = DEFAULT_TEXT_SIZE
         set(value) {
             field = value
+            stepsTextPaint.textSize = value
             requestLayout()
         }
 
@@ -109,6 +110,7 @@ class StepProgressBar @JvmOverloads constructor(
         canvas?.drawCircle(xPosition, yPosition, stepsRadius, stepsPaint)
     }
 
+    @Suppress("MagicNumber")
     private fun drawUnfulfilledStep(canvas: Canvas?, xPosition: Float, yPosition: Float) {
         canvas?.drawCircle(xPosition, yPosition, stepsRadius / 4, stepsPaint)
         canvas?.drawCircle(xPosition, yPosition, stepsRadius, stepsStrokePaint)
@@ -183,10 +185,11 @@ class StepProgressBar @JvmOverloads constructor(
         for (i in 0 until stepsCount) {
             val xPosition = getStepXPosition(i)
 
-            if (selectedStep > i)
+            if (selectedStep > i) {
                 drawCompletedStep(canvas, xPosition, yPosition)
-            else
+            } else {
                 drawUnfulfilledStep(canvas, xPosition, yPosition)
+            }
 
             if (isTitlesEnabled) {
                 canvas?.save()
@@ -195,11 +198,9 @@ class StepProgressBar @JvmOverloads constructor(
                 canvas?.restore()
             }
 
-            if (i == selectedStep)
-                setPaintsColor(unfulfilledStepColor)
+            if (i == selectedStep) setPaintsColor(unfulfilledStepColor)
 
-            if (i < count)
-                drawLine(canvas, xPosition + stepsRadius, yPosition, lineWidth)
+            if (i < count) drawLine(canvas, xPosition + stepsRadius, yPosition, lineWidth)
         }
     }
 }
