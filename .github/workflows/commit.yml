@@ -20,7 +20,7 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle-wrapper.properties') }}
       - uses: actions/setup-java@v1
         with:
-          java-version: 14
+          java-version: 15
       - name: Detekt
         run: ./gradlew detekt
       - uses: actions/upload-artifact@v2
