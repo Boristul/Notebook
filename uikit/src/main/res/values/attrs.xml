@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StepProgressBar">
+        <attr name="count" format="integer" />
+        <attr name="selectedStep" format="integer" />
+        <attr name="stepsColor" format="color" />
+        <attr name="stepsDividerColor" format="color" />
+        <attr name="stepRadius" format="dimension" />
+        <attr name="titlesTextSize" format="dimension" />
+    </declare-styleable>
+</resources>
