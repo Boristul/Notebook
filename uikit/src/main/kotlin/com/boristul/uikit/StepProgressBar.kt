@@ -14,6 +14,7 @@ import androidx.annotation.Dimension
 import androidx.core.content.withStyledAttributes
 import com.boristul.utils.getColorCompat
 
+@Suppress("TooManyFunctions")
 class StepProgressBar @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
