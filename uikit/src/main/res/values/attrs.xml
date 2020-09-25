@@ -5,7 +5,7 @@
         <attr name="selectedStep" format="integer" />
         <attr name="stepsColor" format="color" />
         <attr name="stepsDividerColor" format="color" />
-        <attr name="stepsRadius" format="dimension" />
+        <attr name="stepRadius" format="dimension" />
         <attr name="titlesTextSize" format="dimension" />
     </declare-styleable>
 </resources>

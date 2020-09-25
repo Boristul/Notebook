@@ -38,14 +38,14 @@ class StepProgressBar @JvmOverloads constructor(
         }
 
     @Dimension(unit = Dimension.DP)
-    var stepsRadius: Float = DEFAULT_STEPS_RADIUS
+    var stepRadius: Float = DEFAULT_STEPS_RADIUS
         set(value) {
             field = value
             requestLayout()
         }
 
     private val stepDiameter
-        get() = stepsRadius * 2
+        get() = stepRadius * 2
 
     @Dimension(unit = Dimension.SP)
     var titleTextSize: Float = DEFAULT_TEXT_SIZE
@@ -78,7 +78,7 @@ class StepProgressBar @JvmOverloads constructor(
         }
 
     private val yPosition
-        get() = stepsRadius + paddingTop
+        get() = stepRadius + paddingTop
 
     private val stepsPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.FILL
@@ -107,13 +107,13 @@ class StepProgressBar @JvmOverloads constructor(
         }
 
     private fun drawCompletedStep(canvas: Canvas?, xPosition: Float, yPosition: Float) {
-        canvas?.drawCircle(xPosition, yPosition, stepsRadius, stepsPaint)
+        canvas?.drawCircle(xPosition, yPosition, stepRadius, stepsPaint)
     }
 
     @Suppress("MagicNumber")
     private fun drawUnfulfilledStep(canvas: Canvas?, xPosition: Float, yPosition: Float) {
-        canvas?.drawCircle(xPosition, yPosition, stepsRadius / 4, stepsPaint)
-        canvas?.drawCircle(xPosition, yPosition, stepsRadius, stepsStrokePaint)
+        canvas?.drawCircle(xPosition, yPosition, stepRadius / 4, stepsPaint)
+        canvas?.drawCircle(xPosition, yPosition, stepRadius, stepsStrokePaint)
     }
 
     private fun drawLine(canvas: Canvas?, startXPosition: Float, yPosition: Float, lineWidth: Float) {
@@ -130,13 +130,13 @@ class StepProgressBar @JvmOverloads constructor(
     private fun getLineWidth(isTitlesEnabled: Boolean) = if (isTitlesEnabled) {
         titlesLayouts[0].width - stepDiameter
     } else {
-        (measuredWidth / count) - stepDiameter
+        (width - (stepDiameter * count)) / (count - 1)
     }
 
     private fun getStepXPosition(stepIndex: Int, isTitlesEnabled: Boolean): Float = if (isTitlesEnabled) {
         (titlesLayouts[stepIndex].width * (0.5 + stepIndex)).toFloat()
     } else {
-        measuredWidth / count * stepIndex + stepsRadius
+        (stepRadius * 2 + getLineWidth(isTitlesEnabled)) * stepIndex + stepRadius
     }
 
     private fun getViewHeight(): Float = stepDiameter + getStepsTitlesHeight() + paddingTop + paddingBottom + TEXT_PADDING
@@ -171,7 +171,7 @@ class StepProgressBar @JvmOverloads constructor(
 
         context.withStyledAttributes(attrs, R.styleable.StepProgressBar, defStyleAttr) {
             count = getInt(R.styleable.StepProgressBar_count, DEFAULT_COUNT)
-            stepsRadius = getDimension(R.styleable.StepProgressBar_stepsRadius, DEFAULT_STEPS_RADIUS)
+            stepRadius = getDimension(R.styleable.StepProgressBar_stepRadius, DEFAULT_STEPS_RADIUS)
             titleTextSize = getDimension(R.styleable.StepProgressBar_titlesTextSize, DEFAULT_TEXT_SIZE)
             selectedStep = getInt(R.styleable.StepProgressBar_selectedStep, 0)
             completedStepsColor = getColor(R.styleable.StepProgressBar_stepsColor, completedStepsColor)
@@ -211,7 +211,7 @@ class StepProgressBar @JvmOverloads constructor(
 
             if (i == selectedStep) setPaintsColor(unfulfilledStepColor)
 
-            if (i < stepsCount - 1) drawLine(canvas, xPosition + stepsRadius, yPosition, lineWidth)
+            if (i < stepsCount - 1) drawLine(canvas, xPosition + stepRadius, yPosition, lineWidth)
         }
     }
 }
