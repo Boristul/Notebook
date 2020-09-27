@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="theme_style">
+    <string-array name="theme_style_titles">
+        <item>Default</item>
         <item>Light</item>
         <item>Dark</item>
-        <item>Default</item>
+        <item>Check battery save</item>
     </string-array>
+
+    <string-array name="theme_style_values">
+        <item>-1</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
 </resources>

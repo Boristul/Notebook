@@ -4,9 +4,10 @@
     <PreferenceCategory app:title="@string/sf_design_category">
 
         <ListPreference
+            app:defaultValue="-1"
             app:dialogTitle="@string/sf_theme_summary"
-            app:entries="@array/theme_style"
-            app:entryValues="@array/theme_style"
+            app:entries="@array/theme_style_titles"
+            app:entryValues="@array/theme_style_values"
             app:icon="@drawable/ic_theme"
             app:key="theme_type_pref"
             app:summary="@string/sf_theme_summary"

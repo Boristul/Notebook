@@ -55,6 +55,7 @@ dependencies {
     // endregion
 
     // region AndroidX
+    implementation("androidx.preference:preference:1.1.1")
     api("androidx.core:core-ktx:1.3.1")
     api("androidx.appcompat:appcompat:1.2.0")
     api("androidx.constraintlayout:constraintlayout:2.0.1")
