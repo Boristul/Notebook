@@ -14,4 +14,12 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/sf_info_category">
+
+        <Preference
+            app:icon="@drawable/ic_info"
+            app:title="@string/sf_about_title" />
+
+    </PreferenceCategory>
+
 </androidx.preference.PreferenceScreen>
