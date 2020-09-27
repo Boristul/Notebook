@@ -13,6 +13,7 @@ buildscript {
         classpath("com.android.tools.build:gradle:4.0.1")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.3.0")
+        classpath("com.google.gms:google-services:4.3.3")
     }
 }
 
@@ -43,7 +44,16 @@ subprojects.forEach { module ->
 
 detekt {
     config = files("detekt-config.yml")
-    input = files(*subprojects.map { "${it.name}/src" }.toTypedArray())
+
+    input = files(*subprojects.map { subproject ->
+        if (subproject.subprojects.isEmpty())
+            "${subproject.name}/src"
+        else
+            subproject.subprojects.map {
+                "${subproject.name}/${it.name}/src"
+            }
+    }.toTypedArray())
+
     reports { xml { enabled = false } }
     failFast = false
 }

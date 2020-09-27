@@ -45,5 +45,14 @@ class NoteEditorFragment : Fragment(R.layout.fragment_note_editor) {
                 findNavController().popBackStack()
             }
         }
+
+        binding.stepProgressBar.stepsTitles = listOf(
+            "Hellojjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
+            "World",
+            "DDDDDDDD dgdgdfgdf dfgdgdf gdfdgdf",
+            "fsdfsf sdfsd",
+            "sfdfsfsdf",
+            "sdfsdfsdfsdf"
+        )
     }
 }

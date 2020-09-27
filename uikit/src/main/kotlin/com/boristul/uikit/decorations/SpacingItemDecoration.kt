@@ -1,4 +1,4 @@
-package com.boristul.uikit.decoretions
+package com.boristul.uikit.decorations
 
 import android.graphics.Rect
 import android.view.View

@@ -50,6 +50,10 @@ dependencies {
     implementation(kotlin("stdlib-jdk8", kotlinVersion))
     // endregion
 
+    // region Local
+    implementation(project(":utils"))
+    // endregion
+
     // region AndroidX
     api("androidx.core:core-ktx:1.3.1")
     api("androidx.appcompat:appcompat:1.2.0")
