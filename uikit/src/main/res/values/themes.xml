@@ -43,6 +43,7 @@
         <!-- endregion -->
 
         <!-- region Component styles -->
+        <item name="preferenceTheme">@style/PreferenceTheme</item>
         <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.PrimarySurface</item>
         <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox</item>
         <item name="autoCompleteTextViewStyle">@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox</item>
@@ -69,6 +70,10 @@
         <item name="android:statusBarColor">@color/splash_background</item>
         <item name="android:navigationBarColor">@color/splash_background</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+    </style>
+
+    <style name="PreferenceTheme" parent="PreferenceThemeOverlay.v14.Material">
+        <item name="android:tint">@color/on_background</item>
     </style>
 
 </resources>
