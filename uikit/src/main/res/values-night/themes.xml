@@ -3,6 +3,7 @@
 
     <style name="AppTheme" parent="Base.AppTheme">
         <item name="android:statusBarColor">?colorSurface</item>
+        <item name="bottomNavigationStyle">@style/Widget.MaterialComponents.BottomNavigationView.PrimarySurface</item>
     </style>
 
 </resources>
