@@ -2,6 +2,7 @@ package com.boristul.notebook.ui.noteeditor
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -22,6 +23,12 @@ class NoteEditorFragment : Fragment(R.layout.fragment_note_editor) {
                 NoteEditorFragmentViewModel(application, note)
             }
         }
+
+        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
+            title = getString(R.string.nef_title_edit)
+            checkNotNull(this).setDisplayHomeAsUpEnabled(true)
+        }
+
         val binding = FragmentNoteEditorBinding.bind(view)
 
         binding.title.apply {
@@ -45,14 +52,5 @@ class NoteEditorFragment : Fragment(R.layout.fragment_note_editor) {
                 findNavController().popBackStack()
             }
         }
-
-        binding.stepProgressBar.stepsTitles = listOf(
-            "Hellojjjjjjjjjjjjjjjjjjjjjjjjjjjjj",
-            "World",
-            "DDDDDDDD dgdgdfgdf dfgdgdf gdfdgdf",
-            "fsdfsf sdfsd",
-            "sfdfsfsdf",
-            "sdfsdfsdfsdf"
-        )
     }
 }
