@@ -5,6 +5,20 @@
     android:id="@+id/main"
     app:startDestination="@id/notes_fragment">
 
+    <!-- region global actions -->
+
+    <action
+        android:id="@+id/nav_action_notes"
+        app:destination="@id/notes_fragment"
+        app:popUpTo="@id/main" />
+
+    <action
+        android:id="@+id/nav_action_settings"
+        app:destination="@id/settings_fragment"
+        app:popUpTo="@id/main" />
+
+    <!-- endregion -->
+
     <fragment
         android:id="@+id/notes_fragment"
         android:name="com.boristul.notebook.ui.notes.NotesFragment"
@@ -12,11 +26,11 @@
         tools:layout="@layout/fragment_notes">
         <action
             android:id="@+id/action_notes_fragment_to_noteEditorFragment"
-            app:destination="@id/noteEditorFragment" />
+            app:destination="@id/note_editor_fragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/noteEditorFragment"
+        android:id="@+id/note_editor_fragment"
         android:name="com.boristul.notebook.ui.noteeditor.NoteEditorFragment"
         android:label="NoteEditorFragment"
         tools:layout="@layout/fragment_note_editor">
@@ -29,8 +43,19 @@
 
     </fragment>
 
-    <action
-        android:id="@+id/nav_action_notes"
-        app:destination="@id/notes_fragment"
-        app:popUpTo="@id/main" />
+    <fragment
+        android:id="@+id/settings_fragment"
+        android:name="com.boristul.notebook.ui.settings.SettingsFragment"
+        android:label="SettingsFragment">
+        <action
+            android:id="@+id/action_settings_fragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.boristul.notebook.ui.about.AboutFragment"
+        android:label="AboutFragment"
+        tools:layout="@layout/fragment_about" />
+
 </navigation>

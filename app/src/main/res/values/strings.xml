@@ -3,6 +3,7 @@
 
     <!-- region MainActivity -->
     <string name="ma_notes">Notes</string>
+    <string name="ma_settings">Settings</string>
     <!-- endregion -->
 
     <!-- region NotesFragment -->
@@ -22,4 +23,15 @@
     <string name="nef_successful_save">Note has successfully saved</string>
     <!-- endregion -->
 
+    <!-- region SettingsFragment -->
+    <string name="sf_design_category">Design</string>
+    <string name="sf_theme_title">Theme</string>
+    <string name="sf_theme_summary">Select theme</string>
+    <string name="sf_about_title">About App</string>
+    <string name="sf_info_category">Information</string>
+    <!-- endregion -->
+
+    <!-- region AboutFragment -->
+    <string name="af_text">This app is the best way of creating short notes. (In WIP status)</string>
+    <!-- endregion -->
 </resources>
