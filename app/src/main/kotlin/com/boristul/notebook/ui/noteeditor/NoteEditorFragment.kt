@@ -25,7 +25,7 @@ class NoteEditorFragment : Fragment(R.layout.fragment_note_editor) {
         }
 
         (requireActivity() as AppCompatActivity).supportActionBar?.apply {
-            title = getString(R.string.nef_title_edit)
+            title = getString(R.string.nef_edit_label)
             checkNotNull(this).setDisplayHomeAsUpEnabled(true)
         }
 

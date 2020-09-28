@@ -22,7 +22,7 @@
     <fragment
         android:id="@+id/notes_fragment"
         android:name="com.boristul.notebook.ui.notes.NotesFragment"
-        android:label="NotesFragment"
+        android:label="@string/nf_label"
         tools:layout="@layout/fragment_notes">
         <action
             android:id="@+id/action_notes_fragment_to_noteEditorFragment"
@@ -32,7 +32,7 @@
     <fragment
         android:id="@+id/note_editor_fragment"
         android:name="com.boristul.notebook.ui.noteeditor.NoteEditorFragment"
-        android:label="NoteEditorFragment"
+        android:label="@string/nef_edit_label"
         tools:layout="@layout/fragment_note_editor">
 
         <argument
@@ -46,7 +46,7 @@
     <fragment
         android:id="@+id/settings_fragment"
         android:name="com.boristul.notebook.ui.settings.SettingsFragment"
-        android:label="SettingsFragment">
+        android:label="@string/sf_label">
         <action
             android:id="@+id/action_settings_fragment_to_aboutFragment"
             app:destination="@id/aboutFragment" />
@@ -55,7 +55,7 @@
     <fragment
         android:id="@+id/aboutFragment"
         android:name="com.boristul.notebook.ui.about.AboutFragment"
-        android:label="AboutFragment"
+        android:label="@string/af_label"
         tools:layout="@layout/fragment_about" />
 
 </navigation>
