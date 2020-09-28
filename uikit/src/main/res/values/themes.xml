@@ -43,10 +43,7 @@
         <!-- endregion -->
 
         <!-- region Component styles -->
-        <item name="preferenceTheme">@style/PreferenceTheme</item>
         <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.PrimarySurface</item>
-        <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox</item>
-        <item name="autoCompleteTextViewStyle">@style/Widget.MaterialComponents.AutoCompleteTextView.OutlinedBox</item>
         <!-- endregion -->
 
         <!-- region Remap legacy AppCompat attributes to MaterialComponent attributes -->
@@ -57,6 +54,8 @@
         <item name="android:navigationBarColor">?colorSurface</item>
     </style>
 
+    <!-- region AppTheme -->
+
     <style name="AppTheme" parent="Base.AppTheme">
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
     </style>
@@ -66,14 +65,16 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme.NoActionBar.BackgroundStatusBar" parent="AppTheme.NoActionBar">
+        <item name="android:statusBarColor">@color/on_background</item>
+    </style>
+
+    <!-- endregion -->
+
     <style name="SplashTheme" parent="AppTheme.NoActionBar">
         <item name="android:statusBarColor">@color/splash_background</item>
         <item name="android:navigationBarColor">@color/splash_background</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
-    </style>
-
-    <style name="PreferenceTheme" parent="PreferenceThemeOverlay.v14.Material">
-        <item name="android:tint">@color/on_background</item>
     </style>
 
 </resources>

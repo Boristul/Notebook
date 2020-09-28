@@ -7,6 +7,7 @@
     <!-- endregion -->
 
     <!-- region NotesFragment -->
+    <string name="nf_label">Notes</string>
     <string name="nf_add_menu">Add</string>
     <string name="nf_delete_title">Delete note?</string>
     <string name="nf_delete">Delete</string>
@@ -15,7 +16,7 @@
     <!-- endregion -->
 
     <!-- region NoteEditorFragment -->
-    <string name="nef_title_edit">Edit note</string>
+    <string name="nef_edit_label">Edit Note</string>
     <string name="nef_title_create">Create note</string>
     <string name="nef_title_field">Title</string>
     <string name="nef_description_field">Description</string>
@@ -24,6 +25,7 @@
     <!-- endregion -->
 
     <!-- region SettingsFragment -->
+    <string name="sf_label">Settings</string>
     <string name="sf_design_category">Design</string>
     <string name="sf_theme_title">Theme</string>
     <string name="sf_theme_summary">Select theme</string>
@@ -32,6 +34,7 @@
     <!-- endregion -->
 
     <!-- region AboutFragment -->
+    <string name="af_label">About Notebook</string>
     <string name="af_text">This app is the best way of creating short notes. (In WIP status)</string>
     <!-- endregion -->
 </resources>

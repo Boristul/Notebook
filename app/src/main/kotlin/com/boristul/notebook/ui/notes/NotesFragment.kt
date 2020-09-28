@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.boristul.notebook.R
 import com.boristul.notebook.databinding.FragmentNotesBinding
 import com.boristul.uikit.decorations.SpacingItemDecoration
+import com.boristul.utils.getColorCompat
+import com.boristul.utils.setColor
 import com.boristul.utils.toast
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
@@ -53,8 +55,10 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) =
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.top_main, menu)
+        menu.setColor(requireContext().getColorCompat(R.color.menu))
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.nav_action_add -> {
