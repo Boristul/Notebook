@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#1976d2</color>
+    <color name="primary">#ff8a65</color>
     <color name="on_primary">#ffffff</color>
-    <color name="primary_variant">@color/primary</color>
+    <color name="primary_variant">#c75b39</color>
 
-    <color name="secondary">#d81b60</color>
+    <color name="secondary">#3CB371</color>
     <color name="on_secondary">#ffffff</color>
-    <color name="secondary_variant">#a00037</color>
+    <color name="secondary_variant">#2E8B57</color>
 
     <color name="background">#f6f6fb</color>
     <color name="on_background">#454545</color>
