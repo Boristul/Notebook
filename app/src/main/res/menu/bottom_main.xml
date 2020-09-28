@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/nav_action_notes"
+        android:id="@+id/notes"
         android:icon="@drawable/ic_book_open"
         android:title="@string/ma_notes" />
 
     <item
-        android:id="@+id/nav_action_settings"
+        android:id="@+id/settings"
         android:icon="@drawable/ic_settings"
         android:title="@string/ma_settings" />
 </menu>
