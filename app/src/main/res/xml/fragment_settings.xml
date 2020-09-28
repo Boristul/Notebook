@@ -18,6 +18,7 @@
     <PreferenceCategory app:title="@string/sf_info_category">
 
         <Preference
+            app:key="about_pref"
             app:icon="@drawable/ic_info"
             app:title="@string/sf_about_title" />
 
