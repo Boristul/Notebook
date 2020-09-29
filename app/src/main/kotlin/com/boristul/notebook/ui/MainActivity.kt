@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navController = findNavControllerInOnCreate(binding.navHostFragment.id).apply {
-            //addOnDestinationChangedListener { _, destination, _ -> title = destination.label }
+            addOnDestinationChangedListener { _, destination, _ -> title = destination.label }
         }
         NavigationUI.setupWithNavController(binding.navigation, navController)
     }
