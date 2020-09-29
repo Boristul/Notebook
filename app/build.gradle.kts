@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    compileSdkVersion(29)
+    compileSdkVersion(30)
 
     defaultConfig {
         applicationId = "com.boristul.notebook"
@@ -15,7 +15,7 @@ android {
         versionName = "0.0.0"
 
         minSdkVersion(21)
-        targetSdkVersion(29)
+        targetSdkVersion(30)
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
