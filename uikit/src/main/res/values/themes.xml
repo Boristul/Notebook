@@ -51,7 +51,7 @@
         <item name="colorAccent">?colorSecondary</item>
         <!-- endregion -->
 
-        <item name="android:navigationBarColor">?colorSurface</item>
+        <item name="bottomNavigationStyle">@style/Widget.MaterialComponents.BottomNavigationView.Colored</item>
     </style>
 
     <!-- region AppTheme -->
