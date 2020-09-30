@@ -20,17 +20,36 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildFeatures {
-        viewBinding = true
+    buildFeatures.viewBinding = true
+
+    signingConfigs {
+        getByName("debug") {
+            storeFile = rootProject.file("signing/debug.jks")
+            storePassword = "debugdebug"
+            keyAlias = "debug"
+            keyPassword = "debugdebug"
+        }
     }
 
     buildTypes {
+        getByName("debug") {
+            signingConfig = checkNotNull(signingConfigs.findByName("debug"))
+        }
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude("META-INF/DEPENDENCIES")
     }
 
     sourceSets {
@@ -61,8 +80,12 @@ dependencies {
     implementation("androidx.preference:preference:1.1.1")
     // endregion
 
-    // region Firebase
+    // region Google services
     implementation("com.google.firebase:firebase-analytics:17.5.0")
+    implementation("com.google.api-client:google-api-client-android:1.26.0")
+    implementation("com.google.android.gms:play-services-auth:18.1.0")
+    implementation("com.google.http-client:google-http-client-gson:1.26.0")
+    implementation("com.google.apis:google-api-services-drive:v3-rev136-1.25.0")
     // endregion
 
     // region Core
