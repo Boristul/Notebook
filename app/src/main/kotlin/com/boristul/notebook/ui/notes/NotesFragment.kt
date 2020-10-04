@@ -26,8 +26,6 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
         val viewModel by viewModels<NotesFragmentViewModel>()
         val binding = FragmentNotesBinding.bind(view)
 
-        requireActivity()
-
         (requireActivity() as AppCompatActivity).supportActionBar?.apply {
             setHasOptionsMenu(true)
         }
