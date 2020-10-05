@@ -95,6 +95,6 @@ dependencies {
     // endregion
 
     // region androidX
-    implementation("androidx.core:core-ktx:1.3.1")
+    implementation("androidx.core:core-ktx:1.3.2")
     // endregion
 }

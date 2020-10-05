@@ -30,7 +30,9 @@
     <string name="sf_theme_title">Theme</string>
     <string name="sf_theme_summary">Select theme</string>
     <string name="sf_about_title">About App</string>
+    <string name="sf_test_title">Test Google Drive</string>
     <string name="sf_info_category">Information</string>
+    <string name="sf_test_category">Test</string>
     <!-- endregion -->
 
     <!-- region AboutFragment -->
