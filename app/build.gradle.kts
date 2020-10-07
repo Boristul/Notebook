@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
@@ -23,11 +25,41 @@ android {
     buildFeatures.viewBinding = true
 
     signingConfigs {
-        getByName("debug") {
-            storeFile = rootProject.file("signing/debug.jks")
-            storePassword = "debugdebug"
-            keyAlias = "debug"
-            keyPassword = "debugdebug"
+        val localProperties = File("${rootDir.path}/local.properties").run {
+            if (exists()) Properties().apply { load(inputStream()) } else null
+        }
+        val environment = System.getenv()
+        fun get(env: String, local: String) = environment[env] ?: run {
+            project.logger.warn("WARNING: No $env environmental variable")
+            localProperties?.getProperty(local) ?: run {
+                project.logger.warn("WARNING: No $local local property")
+                null
+            }
+        }
+
+        data class Keystore(
+            val storeFile: File,
+            val storePassword: String,
+            val keyAlias: String,
+            val keyPassword: String
+        )
+
+        fun getDebugKeystore(): Keystore? {
+            return Keystore(
+                rootProject.file("signing/debug.jks"),
+                get("DEBUG_KEYSTORE_PASSWORD", "signing.debugKeystorePassword") ?: return null,
+                get("DEBUG_KEY_ALIAS", "signing.debugKeystoreAlias") ?: return null,
+                get("DEBUG_KEY_PASSWORD", "signing.debugKeyPassword") ?: return null
+            )
+        }
+
+        getDebugKeystore()?.let { keystore ->
+            getByName("debug") {
+                storeFile = keystore.storeFile
+                storePassword = keystore.storePassword
+                keyAlias = keystore.keyAlias
+                keyPassword = keystore.keyPassword
+            }
         }
     }
 
