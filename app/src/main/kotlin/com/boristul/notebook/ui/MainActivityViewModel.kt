@@ -61,13 +61,9 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
 
         getFiles(driveService).also { files ->
             if (files.isEmpty()) {
-                sendFile(driveService, context).run {
-                    resultMessageLiveDataPrivate.postValue(id)
-                }
+                sendFile(driveService, context).run { resultMessageLiveDataPrivate.postValue(id) }
             } else {
-                resultMessageLiveDataPrivate.postValue(files.joinToString {
-                    it.name
-                })
+                resultMessageLiveDataPrivate.postValue(files.joinToString { it.name })
             }
         }
     }

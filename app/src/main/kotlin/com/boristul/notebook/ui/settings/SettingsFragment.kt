@@ -50,17 +50,16 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         checkNotNull(findPreference(TEST_GD_PREF)).setOnPreferenceClickListener {
-
             activityViewModel.requestGoogleAccount(requireContext()).let { account ->
                 if (account == null) {
                     startActivityForResult(
-                        GoogleSignIn.getClient(requireContext(), activityViewModel.signInOptions).signInIntent, 1
+                        GoogleSignIn.getClient(requireContext(), activityViewModel.signInOptions).signInIntent,
+                        1
                     )
                 } else {
                     activityViewModel.authorizedAccount.value = account
                 }
             }
-
             true
         }
 
