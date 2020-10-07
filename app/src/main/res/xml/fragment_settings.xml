@@ -24,4 +24,12 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/sf_test_category">
+
+        <Preference
+            app:key="test_gd_pref"
+            app:title="@string/sf_test_title" />
+
+    </PreferenceCategory>
+
 </androidx.preference.PreferenceScreen>

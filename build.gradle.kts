@@ -10,10 +10,10 @@ buildscript {
     dependencies {
         val kotlinVersion: String by project
 
-        classpath("com.android.tools.build:gradle:4.0.1")
+        classpath("com.android.tools.build:gradle:4.0.2")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.3.0")
-        classpath("com.google.gms:google-services:4.3.3")
+        classpath("com.google.gms:google-services:4.3.4")
     }
 }
 

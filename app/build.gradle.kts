@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
@@ -7,7 +9,7 @@ plugins {
 }
 
 android {
-    compileSdkVersion(29)
+    compileSdkVersion(30)
 
     defaultConfig {
         applicationId = "com.boristul.notebook"
@@ -15,21 +17,76 @@ android {
         versionName = "0.0.0"
 
         minSdkVersion(21)
-        targetSdkVersion(29)
+        targetSdkVersion(30)
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    buildFeatures {
-        viewBinding = true
+    buildFeatures.viewBinding = true
+
+    signingConfigs {
+        val localProperties = File("${rootDir.path}/local.properties").run {
+            if (exists()) Properties().apply { load(inputStream()) } else null
+        }
+        val environment = System.getenv()
+        fun get(env: String, local: String) = environment[env] ?: run {
+            project.logger.warn("WARNING: No $env environmental variable")
+            localProperties?.getProperty(local) ?: run {
+                project.logger.warn("WARNING: No $local local property")
+                null
+            }
+        }
+
+        data class Keystore(
+            val storeFile: File,
+            val storePassword: String,
+            val keyAlias: String,
+            val keyPassword: String
+        )
+
+        fun getDebugKeystore(): Keystore? {
+            return Keystore(
+                rootProject.file("signing/debug.jks"),
+                get("DEBUG_KEYSTORE_PASSWORD", "signing.debugKeystorePassword") ?: return null,
+                get("DEBUG_KEY_ALIAS", "signing.debugKeystoreAlias") ?: return null,
+                get("DEBUG_KEY_PASSWORD", "signing.debugKeyPassword") ?: return null
+            )
+        }
+
+        getDebugKeystore()?.let { keystore ->
+            getByName("debug") {
+                storeFile = keystore.storeFile
+                storePassword = keystore.storePassword
+                keyAlias = keystore.keyAlias
+                keyPassword = keystore.keyPassword
+            }
+        }
     }
 
     buildTypes {
+        getByName("debug") {
+            signingConfig = checkNotNull(signingConfigs.findByName("debug"))
+        }
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude("META-INF/DEPENDENCIES")
+    }
+
+    configurations {
+        all {
+            exclude(module = "httpclient")
         }
     }
 
@@ -41,7 +98,6 @@ android {
 }
 
 dependencies {
-
     // region Kotlin
     val kotlinVersion: String by project
     implementation(kotlin("stdlib-jdk8", kotlinVersion))
@@ -61,8 +117,12 @@ dependencies {
     implementation("androidx.preference:preference:1.1.1")
     // endregion
 
-    // region Firebase
-    implementation("com.google.firebase:firebase-analytics:17.5.0")
+    // region Google services
+    implementation("com.google.firebase:firebase-analytics:17.6.0")
+    implementation("com.google.android.gms:play-services-auth:18.1.0")
+    implementation("com.google.api-client:google-api-client-android:1.26.0")
+    implementation("com.google.http-client:google-http-client-gson:1.26.0")
+    implementation("com.google.apis:google-api-services-drive:v3-rev136-1.25.0")
     // endregion
 
     // region Core
@@ -72,6 +132,6 @@ dependencies {
     // endregion
 
     // region androidX
-    implementation("androidx.core:core-ktx:1.3.1")
+    implementation("androidx.core:core-ktx:1.3.2")
     // endregion
 }

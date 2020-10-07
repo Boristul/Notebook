@@ -15,13 +15,29 @@
       },
       "oauth_client": [
         {
+          "client_id": "881861061906-2kddu3d99adcfua229oc91hpc87d6v6e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.boristul.notebook",
+            "certificate_hash": "25bff063ec0850cc879599e0fce8e8a109f46528"
+          }
+        },
+        {
+          "client_id": "881861061906-spl5rd1c6sn4rtvd4hi9rir9bfl3v1se.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.boristul.notebook",
+            "certificate_hash": "a4cb7ed0b024b3f75a8f3d00e625de1b6b156387"
+          }
+        },
+        {
           "client_id": "881861061906-330rc77i8id8u9ignv5n7gaaeai87kfg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB6zrfVZ-BsIfvve1Z5k7EEWBCHhMSeO4M"
+          "current_key": "AIzaSyAafVYb9WgVlZVLy_LHIUNP4m5nsJhUMuw"
         }
       ],
       "services": {
