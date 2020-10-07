@@ -30,7 +30,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
         private const val FILE_NAME = "test.txt"
     }
 
-    private val resultMessageLiveDataPrivate = MutableLiveData<String>("")
+    private val resultMessageLiveDataPrivate = MutableLiveData("")
     val resultMessageLiveData: LiveData<String> get() = resultMessageLiveDataPrivate
 
     val signInOptions: GoogleSignInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

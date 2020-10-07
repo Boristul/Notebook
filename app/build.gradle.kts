@@ -52,6 +52,12 @@ android {
         exclude("META-INF/DEPENDENCIES")
     }
 
+    configurations {
+        all {
+            exclude(module = "httpclient")
+        }
+    }
+
     sourceSets {
         getByName("main").java.srcDirs("src/main/kotlin")
         getByName("test").java.srcDirs("src/test/kotlin")
@@ -60,7 +66,6 @@ android {
 }
 
 dependencies {
-
     // region Kotlin
     val kotlinVersion: String by project
     implementation(kotlin("stdlib-jdk8", kotlinVersion))
@@ -81,9 +86,9 @@ dependencies {
     // endregion
 
     // region Google services
-    implementation("com.google.firebase:firebase-analytics:17.5.0")
-    implementation("com.google.api-client:google-api-client-android:1.26.0")
+    implementation("com.google.firebase:firebase-analytics:17.6.0")
     implementation("com.google.android.gms:play-services-auth:18.1.0")
+    implementation("com.google.api-client:google-api-client-android:1.26.0")
     implementation("com.google.http-client:google-http-client-gson:1.26.0")
     implementation("com.google.apis:google-api-services-drive:v3-rev136-1.25.0")
     // endregion
