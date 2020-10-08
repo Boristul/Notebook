@@ -40,7 +40,7 @@
 
     <fragment
         android:id="@+id/about"
-        android:name="com.boristul.notebook.ui.about.AboutFragment"
+        android:name="com.boristul.notebook.ui.settings.about.AboutFragment"
         android:label="@string/af_label"
         tools:layout="@layout/fragment_about" />
 
