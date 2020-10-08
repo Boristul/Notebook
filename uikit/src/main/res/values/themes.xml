@@ -72,6 +72,7 @@
     <!-- endregion -->
 
     <style name="SplashTheme" parent="AppTheme.NoActionBar">
+        <item name="android:windowBackground">@drawable/bg_splash</item>
         <item name="android:statusBarColor">@color/splash_background</item>
         <item name="android:navigationBarColor">@color/splash_background</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
