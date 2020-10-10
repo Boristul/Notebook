@@ -45,7 +45,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         }
 
         checkNotNull(findPreference(ABOUT_PREF)).setOnPreferenceClickListener {
-            findNavController().navigate(R.id.action_settings_fragment_to_aboutFragment)
+            findNavController().navigate(R.id.action_settings_to_about)
             true
         }
 

@@ -1,13 +1,16 @@
 package com.boristul.notebook.ui.notes
 
+import android.content.Context
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.boristul.entity.Note
+import com.boristul.notebook.R
 import com.boristul.uikit.NoteCard
 import org.joda.time.DateTimeZone
 import org.joda.time.format.DateTimeFormat
 
-class NotesListAdapter : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>() {
+class NotesListAdapter(context: Context) : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>() {
 
     var notes: List<Note> = listOf()
         set(value) {
@@ -15,6 +18,7 @@ class NotesListAdapter : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>()
             notifyDataSetChanged()
         }
 
+    private val cardMargin = context.resources.getDimensionPixelSize(R.dimen.cards_spacing)
     private val dateTimePattern = DateTimeFormat.forPattern("dd.MM.yyyy (HH:mm)")
         .withZone(DateTimeZone.getDefault())
 
@@ -25,12 +29,12 @@ class NotesListAdapter : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder = ItemViewHolder(
         NoteCard(parent.context)
     ).apply {
-        itemView.layoutParams = ViewGroup.LayoutParams(
+        itemView.layoutParams = ConstraintLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
 
-        card.setOnClickListener { card.toggleCard() }
+        card.setOnClickListener { }
         card.setOnLongClickListener {
             onLongClickListener?.invoke(notes[adapterPosition])
             true
@@ -41,7 +45,6 @@ class NotesListAdapter : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>()
         notes[position].let { note ->
             holder.card.run {
                 title = note.title
-                text = note.description
                 datetime = note.creationTime.toString(dateTimePattern)
             }
         }

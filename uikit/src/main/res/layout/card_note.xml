@@ -3,13 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:layout_height="wrap_content"
-    tools:parentTag="com.google.android.material.card.MaterialCardView"
+    tools:paddingBottom="@dimen/activity_vertical_margin"
+    tools:paddingEnd="@dimen/activity_horizontal_margin"
+    tools:paddingStart="@dimen/activity_horizontal_margin"
+    tools:paddingTop="@dimen/activity_vertical_margin"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
     tools:theme="@style/AppTheme">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/status_icon"
@@ -17,7 +20,7 @@
             android:layout_height="40dp"
             android:src="@drawable/ic_success"
 
-            app:layout_constraintBottom_toBottomOf="@id/bottom_barrier"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -29,71 +32,33 @@
             android:layout_marginStart="8dp"
             android:textAppearance="?textAppearanceBody2"
 
-            app:layout_constraintBottom_toBottomOf="@id/status_icon"
-            app:layout_constraintEnd_toStartOf="@id/edit"
+            app:layout_constraintBottom_toTopOf="@id/datetime"
+            app:layout_constraintEnd_toStartOf="@id/completed"
             app:layout_constraintStart_toEndOf="@id/status_icon"
             app:layout_constraintTop_toTopOf="@id/status_icon"
             tools:text="Title of note" />
 
-        <ImageButton
-            android:id="@+id/edit"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
+        <TextView
+            android:id="@+id/datetime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+
+            app:layout_constraintEnd_toStartOf="@id/completed"
+            app:layout_constraintStart_toEndOf="@id/status_icon"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="Sunday 22:45" />
+
+        <CheckBox
+            android:id="@+id/completed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/ic_pencil"
-            android:visibility="gone"
 
             app:layout_constraintBottom_toBottomOf="@id/status_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/title"
-            app:layout_constraintTop_toTopOf="@id/status_icon"
-            tools:visibility="visible" />
-
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/bottom_barrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="title,status_icon" />
-
-        <net.cachapa.expandablelayout.ExpandableLayout
-            android:id="@+id/details"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="vertical"
-
-            app:el_duration="300"
-            app:el_expanded="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bottom_barrier"
-            tools:el_expanded="true">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?textAppearanceBody2"
-                    tools:text="Hello world" />
-
-                <TextView
-                    android:id="@+id/datetime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    tools:text="Sunday 22:45" />
-
-            </LinearLayout>
-
-        </net.cachapa.expandablelayout.ExpandableLayout>
+            app:layout_constraintTop_toTopOf="@id/status_icon" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
