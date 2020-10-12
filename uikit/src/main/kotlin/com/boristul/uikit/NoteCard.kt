@@ -39,8 +39,10 @@ class NoteCard @JvmOverloads constructor(
         context.apply {
             val cardPadding = resources.getDimensionPixelSize(R.dimen.cards_spacing)
             setPaddingRelative(
-                cardPadding, cardPadding,
-                cardPadding, cardPadding
+                cardPadding,
+                cardPadding,
+                cardPadding,
+                cardPadding
             )
             background = ContextCompat.getDrawable(this, attr(android.R.attr.selectableItemBackground).resourceId)
         }

@@ -39,8 +39,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return findNavController(binding.navHostFragment.id).navigateUp(appBarConfiguration)
-            || super.onSupportNavigateUp()
-    }
+    override fun onSupportNavigateUp(): Boolean =
+        findNavController(binding.navHostFragment.id).navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
 }

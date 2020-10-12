@@ -8,7 +8,7 @@ import com.boristul.uikit.NoteCard
 import org.joda.time.DateTimeZone
 import org.joda.time.format.DateTimeFormat
 
-class NotesListAdapter() : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>() {
+class NotesListAdapter : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>() {
 
     var notes: List<Note> = listOf()
         set(value) {
