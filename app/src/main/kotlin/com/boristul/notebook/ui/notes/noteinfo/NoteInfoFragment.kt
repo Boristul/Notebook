@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.boristul.notebook.R
 import com.boristul.notebook.databinding.FragmentNoteInfoBinding
 import com.boristul.utils.navArgsFactory
@@ -27,6 +28,10 @@ class NoteInfoFragment : BottomSheetDialogFragment() {
             binding.title.text = title
             binding.description.text = description
             binding.datetime.text = viewModel.getDateTimeString()
+        }
+
+        binding.edit.setOnClickListener {
+            findNavController().navigate(NoteInfoFragmentDirections.actionNoteInfoToNoteEditor(viewModel.note))
         }
     }
 }

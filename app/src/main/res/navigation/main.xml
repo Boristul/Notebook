@@ -21,7 +21,7 @@
     <fragment
         android:id="@+id/note_editor"
         android:name="com.boristul.notebook.ui.noteeditor.NoteEditorFragment"
-        android:label="@string/nef_edit_label"
+        android:label="@string/nef_title_edit"
         tools:layout="@layout/fragment_note_editor">
 
         <argument

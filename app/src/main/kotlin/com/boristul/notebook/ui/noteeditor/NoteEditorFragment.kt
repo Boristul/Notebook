@@ -2,6 +2,7 @@ package com.boristul.notebook.ui.noteeditor
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -22,6 +23,10 @@ class NoteEditorFragment : Fragment(R.layout.fragment_note_editor) {
                 NoteEditorFragmentViewModel(application, note)
             }
         }
+
+        (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(
+            if (viewModel.isEdition) R.string.nef_title_edit else R.string.nef_title_create
+        )
 
         val binding = FragmentNoteEditorBinding.bind(view)
 
