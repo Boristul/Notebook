@@ -1,6 +1,7 @@
 package com.boristul.notebook.ui.notes
 
 import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.boristul.entity.Note
 import com.boristul.uikit.NoteCard
@@ -19,18 +20,19 @@ class NotesListAdapter : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>()
         .withZone(DateTimeZone.getDefault())
 
     var onLongClickListener: ((Note) -> Unit)? = null
+    var onClickListener: ((Note) -> Unit)? = null
 
     override fun getItemCount(): Int = notes.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder = ItemViewHolder(
         NoteCard(parent.context)
     ).apply {
-        itemView.layoutParams = ViewGroup.LayoutParams(
+        itemView.layoutParams = ConstraintLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
 
-        card.setOnClickListener { card.toggleCard() }
+        card.setOnClickListener { onClickListener?.invoke(notes[adapterPosition]) }
         card.setOnLongClickListener {
             onLongClickListener?.invoke(notes[adapterPosition])
             true
@@ -41,7 +43,6 @@ class NotesListAdapter : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>()
         notes[position].let { note ->
             holder.card.run {
                 title = note.title
-                text = note.description
                 datetime = note.creationTime.toString(dateTimePattern)
             }
         }

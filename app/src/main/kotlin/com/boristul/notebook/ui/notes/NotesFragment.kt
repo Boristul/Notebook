@@ -10,10 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.boristul.notebook.R
 import com.boristul.notebook.databinding.FragmentNotesBinding
-import com.boristul.uikit.decorations.SpacingItemDecoration
 import com.boristul.utils.getColorCompat
 import com.boristul.utils.setColor
 import com.boristul.utils.toast
@@ -47,9 +48,13 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
                         .setNegativeButton(R.string.nf_cancel, null)
                         .show()
                 }
+
+                onClickListener = {
+                    findNavController().navigate(NotesFragmentDirections.actionNotesToNoteInfo(it))
+                }
             }
             layoutManager = LinearLayoutManager(requireContext())
-            addItemDecoration(SpacingItemDecoration(requireContext().resources.getDimensionPixelSize(R.dimen.cards_spacing)))
+            addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
         }
     }
 
@@ -60,7 +65,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.nav_action_add -> {
-            findNavController().navigate(NotesFragmentDirections.actionNotesFragmentToNoteEditorFragment(null))
+            findNavController().navigate(NotesFragmentDirections.actionNotesToNoteEditor(null))
             true
         }
         else -> false

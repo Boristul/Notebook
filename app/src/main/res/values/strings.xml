@@ -15,6 +15,10 @@
     <string name="nf_cancel">Cancel</string>
     <!-- endregion -->
 
+    <!-- region NoteInfoFragment -->
+    <string name="nif_label">Info</string>
+    <!-- endregion -->
+
     <!-- region NoteEditorFragment -->
     <string name="nef_edit_label">Edit Note</string>
     <string name="nef_title_create">Create note</string>

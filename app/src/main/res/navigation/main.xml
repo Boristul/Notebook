@@ -11,8 +11,11 @@
         android:label="@string/nf_label"
         tools:layout="@layout/fragment_notes">
         <action
-            android:id="@+id/action_notes_fragment_to_noteEditorFragment"
+            android:id="@+id/action_notes_to_note_editor"
             app:destination="@id/note_editor" />
+        <action
+            android:id="@+id/action_notes_to_note_info"
+            app:destination="@id/note_info" />
     </fragment>
 
     <fragment
@@ -34,14 +37,29 @@
         android:name="com.boristul.notebook.ui.settings.SettingsFragment"
         android:label="@string/sf_label">
         <action
-            android:id="@+id/action_settings_fragment_to_aboutFragment"
+            android:id="@+id/action_settings_to_about"
             app:destination="@id/about" />
     </fragment>
 
     <fragment
         android:id="@+id/about"
-        android:name="com.boristul.notebook.ui.about.AboutFragment"
+        android:name="com.boristul.notebook.ui.settings.about.AboutFragment"
         android:label="@string/af_label"
         tools:layout="@layout/fragment_about" />
+
+    <dialog
+        android:id="@+id/note_info"
+        android:name="com.boristul.notebook.ui.notes.noteinfo.NoteInfoFragment"
+        android:label="@string/nif_label"
+        tools:layout="@layout/fragment_note_info">
+        <action
+            android:id="@+id/action_note_info_to_note_editor"
+            app:destination="@id/note_editor" />
+
+        <argument
+            android:name="note"
+            app:argType="com.boristul.entity.Note" />
+
+    </dialog>
 
 </navigation>
