@@ -32,7 +32,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
         }
 
         binding.notesList.apply {
-            adapter = NotesListAdapter(requireContext()).apply {
+            adapter = NotesListAdapter().apply {
                 viewModel.notes.observe(viewLifecycleOwner) {
                     notes = it
                 }
@@ -47,6 +47,10 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
                         }
                         .setNegativeButton(R.string.nf_cancel, null)
                         .show()
+                }
+
+                onClickListener = {
+                    findNavController().navigate(NotesFragmentDirections.actionNotesToNoteInfo(it))
                 }
             }
             layoutManager = LinearLayoutManager(requireContext())

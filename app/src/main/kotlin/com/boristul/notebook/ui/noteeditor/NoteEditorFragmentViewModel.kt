@@ -16,14 +16,6 @@ class NoteEditorFragmentViewModel(
     private val note: Note?
 ) : AndroidViewModel(application), DIAware {
 
-    init {
-        note?.let {
-            isEdition = true
-            title.value = it.title
-            description.value = it.description
-        }
-    }
-
     override val di: DI by di()
     private val notesRepository by instance<NotesRepository>()
 
@@ -31,6 +23,14 @@ class NoteEditorFragmentViewModel(
     val description = MutableLiveData("")
     var isEdition: Boolean = false
         private set
+
+    init {
+        note?.let {
+            isEdition = true
+            title.value = it.title
+            description.value = it.description
+        }
+    }
 
     suspend fun save() = notesRepository.apply {
         if (!isEdition) insert(requireNotNull(title.value), requireNotNull(description.value), DateTime.now())

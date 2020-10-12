@@ -51,14 +51,14 @@
 
         <CheckBox
             android:id="@+id/completed"
+            style="?android:attr/starStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_pencil"
 
-            app:layout_constraintBottom_toBottomOf="@id/status_icon"
+            app:layout_constraintBottom_toBottomOf="@id/datetime"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/title"
-            app:layout_constraintTop_toTopOf="@id/status_icon" />
+            app:layout_constraintTop_toTopOf="@id/title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

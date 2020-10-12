@@ -1,16 +1,14 @@
 package com.boristul.notebook.ui.notes
 
-import android.content.Context
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.boristul.entity.Note
-import com.boristul.notebook.R
 import com.boristul.uikit.NoteCard
 import org.joda.time.DateTimeZone
 import org.joda.time.format.DateTimeFormat
 
-class NotesListAdapter(context: Context) : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>() {
+class NotesListAdapter() : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>() {
 
     var notes: List<Note> = listOf()
         set(value) {
@@ -18,11 +16,11 @@ class NotesListAdapter(context: Context) : RecyclerView.Adapter<NotesListAdapter
             notifyDataSetChanged()
         }
 
-    private val cardMargin = context.resources.getDimensionPixelSize(R.dimen.cards_spacing)
     private val dateTimePattern = DateTimeFormat.forPattern("dd.MM.yyyy (HH:mm)")
         .withZone(DateTimeZone.getDefault())
 
     var onLongClickListener: ((Note) -> Unit)? = null
+    var onClickListener: ((Note) -> Unit)? = null
 
     override fun getItemCount(): Int = notes.size
 
@@ -34,7 +32,7 @@ class NotesListAdapter(context: Context) : RecyclerView.Adapter<NotesListAdapter
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
 
-        card.setOnClickListener { }
+        card.setOnClickListener { onClickListener?.invoke(notes[adapterPosition]) }
         card.setOnLongClickListener {
             onLongClickListener?.invoke(notes[adapterPosition])
             true
