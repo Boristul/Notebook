@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.boristul.notebook.R
 import com.boristul.notebook.databinding.FragmentNoteEditorBinding
 import com.boristul.utils.distinctUntilChanged
+import com.boristul.utils.hideKeyboard
 import com.boristul.utils.navArgsFactory
 import com.boristul.utils.toast
 import kotlinx.coroutines.launch
@@ -51,5 +52,10 @@ class NoteEditorFragment : Fragment(R.layout.fragment_note_editor) {
                 findNavController().popBackStack()
             }
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        hideKeyboard()
     }
 }
