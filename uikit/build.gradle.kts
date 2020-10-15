@@ -56,13 +56,13 @@ dependencies {
 
     // region AndroidX
     implementation("androidx.preference:preference:1.1.1")
-    api("androidx.core:core-ktx:1.3.1")
+    api("androidx.core:core-ktx:1.3.2")
     api("androidx.appcompat:appcompat:1.2.0")
-    api("androidx.constraintlayout:constraintlayout:2.0.1")
+    api("androidx.constraintlayout:constraintlayout:2.0.2")
     // endregion
 
     // region UI
-    api("com.google.android.material:material:1.3.0-alpha02")
+    api("com.google.android.material:material:1.3.0-alpha03")
     implementation("net.cachapa.expandablelayout:expandablelayout:2.9.2")
     // endregion
 }

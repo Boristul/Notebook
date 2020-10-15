@@ -1,5 +1,6 @@
 package com.boristul.notebook.ui.notes.noteinfo
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +33,19 @@ class NoteInfoFragment : BottomSheetDialogFragment() {
 
         binding.edit.setOnClickListener {
             findNavController().navigate(NoteInfoFragmentDirections.actionNoteInfoToNoteEditor(viewModel.note))
+        }
+
+        binding.share.setOnClickListener {
+            startActivity(
+                Intent.createChooser(
+                    Intent().apply {
+                        action = Intent.ACTION_SEND
+                        putExtra(Intent.EXTRA_TEXT, viewModel.getNoteForShare())
+                        type = "text/plain"
+                    },
+                    getString(R.string.app_name)
+                )
+            )
         }
     }
 }
