@@ -1,4 +1,4 @@
-package com.boristul.notebook.ui.noteeditor
+package com.boristul.notebook.ui.notes.noteeditor
 
 import android.os.Bundle
 import android.view.View

@@ -142,7 +142,7 @@ class StepProgressBar @JvmOverloads constructor(
 
     private fun getViewHeight(): Float = stepDiameter + getStepsTitlesHeight() + paddingTop + paddingBottom + TEXT_PADDING
 
-    private fun getStepsTitlesHeight(): Int = titlesLayouts.map { it.height }.max() ?: 0
+    private fun getStepsTitlesHeight(): Int = titlesLayouts.map { it.height }.maxOrNull() ?: 0
 
     private fun initTitlesLayouts() {
         titlesLayouts = stepsTitles.map { text ->
