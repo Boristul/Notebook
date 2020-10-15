@@ -12,5 +12,7 @@ class NoteInfoFragmentViewModel(
 ) : AndroidViewModel(application) {
     private val dateTimePattern = DateTimeFormat.forPattern("dd.MM.yyyy (HH:mm)").withZone(DateTimeZone.getDefault())
 
-    fun getDateTimeString() = note.creationTime.toString(dateTimePattern)
+    fun getDateTimeString(): String = note.creationTime.toString(dateTimePattern)
+
+    fun getNoteForShare() = "${note.title}\n${note.description}\n${getDateTimeString()}"
 }
