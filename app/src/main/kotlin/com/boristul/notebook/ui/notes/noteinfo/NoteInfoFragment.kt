@@ -27,7 +27,12 @@ class NoteInfoFragment : BottomSheetDialogFragment() {
 
         viewModel.note.run {
             binding.title.text = title
-            binding.description.text = description
+            binding.description.let {
+                if (description.isNotEmpty()) {
+                    it.visibility = View.VISIBLE
+                    it.text = description
+                }
+            }
             binding.datetime.text = viewModel.getDateTimeString()
         }
 
