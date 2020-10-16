@@ -23,7 +23,7 @@ data class NoteEntity(
     override val creationTime: DateTime,
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "_id")
+    @ColumnInfo(name = "note_id")
     override val id: Long = 0L
 
 ) : Note {
