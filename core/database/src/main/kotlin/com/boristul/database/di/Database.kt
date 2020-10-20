@@ -18,5 +18,5 @@ fun databaseKodein(application: Application, databaseName: String? = null) = DI.
     }
 
     bind() from provider { instance<NotebookDatabase>().notesDao }
-    bind() from provider { instance<NotebookDatabase>().tagDao }
+    bind() from provider { instance<NotebookDatabase>().tagsDao }
 }

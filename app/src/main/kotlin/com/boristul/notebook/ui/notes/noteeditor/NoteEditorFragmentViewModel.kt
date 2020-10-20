@@ -33,7 +33,7 @@ class NoteEditorFragmentViewModel(
     }
 
     suspend fun save() = notesRepository.apply {
-        if (!isEdition) insert(requireNotNull(title.value), requireNotNull(description.value), DateTime.now())
+        if (!isEdition) insert(requireNotNull(title.value), requireNotNull(description.value), DateTime.now(), listOf())
         else update(requireNotNull(title.value), requireNotNull(description.value), DateTime.now(), requireNotNull(note).id)
     }
 }

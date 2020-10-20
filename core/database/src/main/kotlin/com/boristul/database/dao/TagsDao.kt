@@ -10,7 +10,7 @@ import com.boristul.database.entity.TagEntity
 import com.boristul.database.entity.TagWithNotesEntity
 
 @Dao
-abstract class TagDao {
+abstract class TagsDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     abstract suspend fun insert(tag: TagEntity)
 

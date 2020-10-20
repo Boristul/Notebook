@@ -11,4 +11,5 @@ fun repositoryModule(application: Application, databaseName: String? = null) = D
     val db = databaseKodein(application, databaseName)
 
     bind() from singleton { NotesRepository(db.instance()) }
+    bind() from singleton { TagsRepository(db.instance()) }
 }

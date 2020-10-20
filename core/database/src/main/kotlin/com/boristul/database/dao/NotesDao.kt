@@ -1,5 +1,6 @@
 package com.boristul.database.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -25,7 +26,7 @@ abstract class NotesDao {
 
     @Transaction
     @Query("SELECT * FROM notes")
-    abstract fun getAll(): List<NoteWithTagsEntity>
+    abstract fun getAllLiveData(): LiveData<List<NoteWithTagsEntity>>
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     protected abstract suspend fun insert(note: NoteEntity)
