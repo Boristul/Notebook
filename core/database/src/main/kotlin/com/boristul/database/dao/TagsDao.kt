@@ -23,4 +23,7 @@ abstract class TagsDao {
     @Transaction
     @Query("SELECT * FROM tags")
     abstract fun getAllTagsWithNotesLiveData(): LiveData<List<TagWithNotesEntity>>
+
+    @Query("DELETE FROM tags WHERE tag_id = :id")
+    abstract suspend fun delete(id: Long)
 }

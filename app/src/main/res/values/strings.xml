@@ -34,6 +34,7 @@
     <string name="sf_theme_title">Theme</string>
     <string name="sf_theme_summary">Select theme</string>
     <string name="sf_about_title">About App</string>
+    <string name="sf_tags_title">Tags</string>
     <string name="sf_test_title">Test Google Drive</string>
     <string name="sf_info_category">Information</string>
     <string name="sf_test_category">Test</string>
@@ -45,4 +46,16 @@
     <string name="af_label">About Notebook</string>
     <string name="af_text">This app is the best way of creating short notes. (In WIP status)</string>
     <!-- endregion -->
+
+    <!-- region TagsFragment -->
+    <string name="tf_label">Tags</string>
+    <string name="tf_name_tint">Tag name</string>
+    <string name="tf_add_button">Add tag</string>
+    <string name="tf_existing_tags">Existing tags:</string>
+    <string name="tf_add_label">Add your tag to group notes: </string>
+    <string name="tf_delete_title">Are you sure you want to remove this tag?</string>
+    <string name="tf_cancel">Cancel</string>
+    <string name="tf_delete">Delete</string>
+    <!-- endregion -->
+
 </resources>
