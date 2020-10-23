@@ -2,9 +2,12 @@ package com.boristul.notebook.ui.notes.noteeditor
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import com.boristul.entity.Note
+import com.boristul.entity.NoteWithTags
+import com.boristul.entity.Tag
 import com.boristul.repository.NotesRepository
+import com.boristul.repository.TagsRepository
 import org.joda.time.DateTime
 import org.kodein.di.DI
 import org.kodein.di.DIAware
@@ -13,27 +16,46 @@ import org.kodein.di.instance
 
 class NoteEditorFragmentViewModel(
     application: Application,
-    private val note: Note?
+    private val noteWithTags: NoteWithTags?
 ) : AndroidViewModel(application), DIAware {
 
     override val di: DI by di()
     private val notesRepository by instance<NotesRepository>()
+    private val tagsRepository by instance<TagsRepository>()
 
     val title = MutableLiveData("")
     val description = MutableLiveData("")
     var isEdition: Boolean = false
         private set
 
+    val tags = tagsRepository.getAllLiveData()
+    private val selectedTags = mutableListOf<Tag>()
+    fun updateTagsList(tag: Tag, isSelected: Boolean) = selectedTags.run { if (isSelected) add(tag) else remove(tag) }
+
     init {
-        note?.let {
+        noteWithTags?.let {
             isEdition = true
-            title.value = it.title
-            description.value = it.description
+            title.value = it.note.title
+            description.value = it.note.description
+        }
+    }
+
+    val isTitleNotEmpty = MediatorLiveData<Boolean>().apply {
+        addSource(title) {
+            value = it.isNotBlank()
         }
     }
 
     suspend fun save() = notesRepository.apply {
-        if (!isEdition) insert(requireNotNull(title.value), requireNotNull(description.value), DateTime.now(), listOf())
-        else update(requireNotNull(title.value), requireNotNull(description.value), DateTime.now(), requireNotNull(note).id)
+        if (!isEdition) {
+            insert(requireNotNull(title.value), requireNotNull(description.value), DateTime.now(), selectedTags)
+        } else {
+            update(
+                requireNotNull(title.value),
+                requireNotNull(description.value),
+                DateTime.now(),
+                requireNotNull(noteWithTags).note.id
+            )
+        }
     }
 }

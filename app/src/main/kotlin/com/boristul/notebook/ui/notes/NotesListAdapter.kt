@@ -3,7 +3,6 @@ package com.boristul.notebook.ui.notes
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.boristul.entity.Note
 import com.boristul.entity.NoteWithTags
 import com.boristul.uikit.NoteCard
 import org.joda.time.DateTimeZone
@@ -20,8 +19,8 @@ class NotesListAdapter : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>()
     private val dateTimePattern = DateTimeFormat.forPattern("dd.MM.yyyy (HH:mm)")
         .withZone(DateTimeZone.getDefault())
 
-    var onLongClickListener: ((Note) -> Unit)? = null
-    var onClickListener: ((Note) -> Unit)? = null
+    var onLongClickListener: ((NoteWithTags) -> Unit)? = null
+    var onClickListener: ((NoteWithTags) -> Unit)? = null
 
     override fun getItemCount(): Int = notes.size
 
@@ -33,9 +32,9 @@ class NotesListAdapter : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>()
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
 
-        card.setOnClickListener { onClickListener?.invoke(notes[adapterPosition].note) }
+        card.setOnClickListener { onClickListener?.invoke(notes[adapterPosition]) }
         card.setOnLongClickListener {
-            onLongClickListener?.invoke(notes[adapterPosition].note)
+            onLongClickListener?.invoke(notes[adapterPosition])
             true
         }
     }

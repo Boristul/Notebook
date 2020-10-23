@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("kotlinx-serialization")
 }
 
 android {
@@ -51,6 +52,7 @@ dependencies {
     // region Core
     val kodeinVersion: String by project
     implementation("org.kodein.di:kodein-di-jvm:$kodeinVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0")
     // endregion
 
     // region AndroidX

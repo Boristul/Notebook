@@ -1,6 +1,8 @@
 package com.boristul.entity
 
-interface NoteWithTags {
+import android.os.Parcelable
+
+interface NoteWithTags : Parcelable {
     val note: Note
     val tags: List<Tag>
 }

@@ -41,7 +41,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
                         .setTitle(R.string.nf_delete_title)
                         .setPositiveButton(R.string.nf_delete) { _, _ ->
                             viewModel.viewModelScope.launch {
-                                viewModel.delete(it.id)
+                                viewModel.delete(it.note.id)
                                 requireActivity().toast(R.string.nf_successful_delete)
                             }
                         }

@@ -25,7 +25,7 @@ class TagsFragment : Fragment(R.layout.fragment_tags) {
         viewModel.tags.observe(viewLifecycleOwner) { tags ->
             binding.chips.setViewCount(
                 tags.size,
-                { layoutInflater.inflate(R.layout.item_tag_chip, this, false) as Chip },
+                { layoutInflater.inflate(R.layout.item_tag_chip_edit, this, false) as Chip },
                 {
                     setOnCloseIconClickListener { _ ->
                         MaterialAlertDialogBuilder(requireContext())

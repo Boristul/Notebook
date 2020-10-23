@@ -4,7 +4,9 @@ import androidx.room.Embedded
 import androidx.room.Junction
 import androidx.room.Relation
 import com.boristul.entity.NoteWithTags
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class NoteWithTagsEntity(
     @Embedded override val note: NoteEntity,
     @Relation(

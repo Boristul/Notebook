@@ -25,7 +25,7 @@ class NoteInfoFragment : BottomSheetDialogFragment() {
         }
         val binding by viewBinding<FragmentNoteInfoBinding>()
 
-        viewModel.note.run {
+        viewModel.noteWithTags.note.run {
             binding.title.text = title
             binding.description.let {
                 if (description.isNotEmpty()) {
@@ -37,7 +37,7 @@ class NoteInfoFragment : BottomSheetDialogFragment() {
         }
 
         binding.edit.setOnClickListener {
-            findNavController().navigate(NoteInfoFragmentDirections.actionNoteInfoToNoteEditor(viewModel.note))
+            findNavController().navigate(NoteInfoFragmentDirections.actionNoteInfoToNoteEditor(viewModel.noteWithTags))
         }
 
         binding.share.setOnClickListener {

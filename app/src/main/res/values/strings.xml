@@ -25,6 +25,7 @@
     <string name="nef_title_field">Title</string>
     <string name="nef_description_field">Description</string>
     <string name="nef_save">Save</string>
+    <string name="nef_selection_tag">Select tags if needed:</string>
     <string name="nef_successful_save">Note has successfully saved</string>
     <!-- endregion -->
 
