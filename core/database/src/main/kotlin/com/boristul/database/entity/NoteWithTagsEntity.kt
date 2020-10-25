@@ -1,7 +1,6 @@
 package com.boristul.database.entity
 
 import androidx.room.Embedded
-import androidx.room.Junction
 import androidx.room.Relation
 import com.boristul.entity.NoteWithTags
 import kotlinx.android.parcel.Parcelize
@@ -10,9 +9,10 @@ import kotlinx.android.parcel.Parcelize
 data class NoteWithTagsEntity(
     @Embedded override val note: NoteEntity,
     @Relation(
-        parentColumn = "note_id",
+        parentColumn = "_id",
         entityColumn = "tag_id",
-        associateBy = Junction(NoteTagCrossRef::class)
+        entity = NoteTagCrossRef::class,
+        projection = ["note_id"]
     )
     override val tags: List<TagEntity>
 ) : NoteWithTags

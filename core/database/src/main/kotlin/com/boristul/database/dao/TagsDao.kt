@@ -24,6 +24,9 @@ abstract class TagsDao {
     @Query("SELECT * FROM tags")
     abstract fun getAllTagsWithNotesLiveData(): LiveData<List<TagWithNotesEntity>>
 
-    @Query("DELETE FROM tags WHERE tag_id = :id")
+    @Query("DELETE FROM tags WHERE _id = :id")
     abstract suspend fun delete(id: Long)
+
+    @Query("SELECT * FROM tags INNER JOIN note_tag_cross_ref ON tags._id = tag_id AND :noteId = note_id")
+    abstract suspend fun getTags(noteId: Long): List<TagEntity>
 }

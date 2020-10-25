@@ -3,7 +3,6 @@ plugins {
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
-    id("kotlinx-serialization")
 }
 
 android {
@@ -49,6 +48,5 @@ dependencies {
 
     // region Core
     api("joda-time:joda-time:2.10.6")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.0")
     // endregion
 }

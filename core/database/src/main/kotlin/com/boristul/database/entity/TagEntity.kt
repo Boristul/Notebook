@@ -16,6 +16,6 @@ data class TagEntity(
     override val name: String,
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "tag_id")
+    @ColumnInfo(name = "_id")
     override val id: Long = 0L
 ) : Tag

@@ -37,6 +37,6 @@ abstract class NotesDao {
     @Update
     abstract suspend fun update(note: NoteEntity)
 
-    @Query("DELETE FROM notes WHERE note_id = :id")
+    @Query("DELETE FROM notes WHERE _id = :id")
     abstract suspend fun delete(id: Long)
 }

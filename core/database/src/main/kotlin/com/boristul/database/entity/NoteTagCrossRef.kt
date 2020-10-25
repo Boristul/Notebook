@@ -3,6 +3,7 @@ package com.boristul.database.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 
 @Entity(
     tableName = "note_tag_cross_ref",
@@ -10,17 +11,18 @@ import androidx.room.ForeignKey
     foreignKeys = [
         ForeignKey(
             entity = TagEntity::class,
-            parentColumns = ["tag_id"],
+            parentColumns = ["_id"],
             childColumns = ["tag_id"],
             onDelete = ForeignKey.CASCADE
         ),
         ForeignKey(
             entity = NoteEntity::class,
-            parentColumns = ["note_id"],
+            parentColumns = ["_id"],
             childColumns = ["note_id"],
             onDelete = ForeignKey.CASCADE
         ),
-    ]
+    ],
+    indices = [Index("tag_id"), Index("note_id")]
 )
 data class NoteTagCrossRef(
     @ColumnInfo(name = "note_id")
