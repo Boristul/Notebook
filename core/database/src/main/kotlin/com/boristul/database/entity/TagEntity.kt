@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.boristul.entity.Tag
 import kotlinx.android.parcel.Parcelize
+import org.joda.time.DateTimeUtils.currentTimeMillis
 
 @Entity(
     tableName = "tags"
@@ -15,7 +16,7 @@ data class TagEntity(
     @ColumnInfo(name = "name")
     override val name: String,
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "_id")
-    override val id: Long = 0L
+    override val id: Long = currentTimeMillis()
 ) : Tag
