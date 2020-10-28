@@ -31,6 +31,9 @@ abstract class NotesDao {
     @Insert(onConflict = OnConflictStrategy.ABORT)
     protected abstract suspend fun insert(note: NoteEntity)
 
+    //@Query("INSERT INTO notes VALUES (:note)")
+    //protected abstract suspend fun insert1(note: NoteEntity)
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     protected abstract suspend fun insert(crossRef: NoteTagCrossRef)
 

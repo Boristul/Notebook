@@ -69,7 +69,7 @@ class NoteEditorFragment : Fragment(R.layout.fragment_note_editor) {
                 {
                     text = tags[it].name
 
-                    setOnFocusChangeListener { _, isChecked ->
+                    setOnCheckedChangeListener { _, isChecked ->
                         viewModel.updateTagsList(tags[it], isChecked)
                     }
                 }

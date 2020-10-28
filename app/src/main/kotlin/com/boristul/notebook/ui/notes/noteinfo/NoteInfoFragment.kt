@@ -10,8 +10,10 @@ import androidx.navigation.fragment.findNavController
 import com.boristul.notebook.R
 import com.boristul.notebook.databinding.FragmentNoteInfoBinding
 import com.boristul.utils.navArgsFactory
+import com.boristul.utils.setViewCount
 import com.boristul.utils.viewbinding.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.chip.Chip
 
 class NoteInfoFragment : BottomSheetDialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
@@ -38,6 +40,17 @@ class NoteInfoFragment : BottomSheetDialogFragment() {
 
         binding.edit.setOnClickListener {
             findNavController().navigate(NoteInfoFragmentDirections.actionNoteInfoToNoteEditor(viewModel.noteWithTags))
+        }
+
+        viewModel.noteWithTags.tags.let { tags ->
+            binding.chips.setViewCount(
+                tags.size,
+                { layoutInflater.inflate(R.layout.item_tag_chip_choice, this, false) as Chip },
+                {
+                    text = tags[it].name
+                    isClickable = false
+                }
+            )
         }
 
         binding.share.setOnClickListener {
