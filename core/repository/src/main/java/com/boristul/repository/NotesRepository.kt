@@ -14,16 +14,13 @@ class NotesRepository(
     private val notesDao: NotesDao
 ) {
     suspend fun insert(title: String, text: String, dateTime: DateTime, tags: List<Tag>) {
-        notesDao.insert(
-            NoteWithTagsEntity(
-                NoteEntity(title, text, dateTime),
-                tags.map { it.toEntity() }
-            )
-        )
+        // TODO: Think about this constructions
+        notesDao.insert(NoteWithTagsEntity(NoteEntity(title, text, dateTime), tags.map { it.toEntity() }))
     }
 
-    suspend fun update(title: String, text: String, dateTime: DateTime, id: Long) {
-        notesDao.update(NoteEntity(title, text, dateTime, id))
+    suspend fun update(title: String, text: String, dateTime: DateTime, id: Long, tags: List<Tag>) {
+        // TODO: Think about this constructions
+        notesDao.update(NoteWithTagsEntity(NoteEntity(title, text, dateTime, id), tags.map { it.toEntity() }))
     }
 
     suspend fun delete(id: Long) = notesDao.delete(id)

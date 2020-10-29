@@ -28,8 +28,8 @@ class NoteEditorFragmentViewModel(
     var isEdition: Boolean = false
         private set
 
+    private val selectedTags = noteWithTags?.tags?.toMutableList() ?: mutableListOf()
     val tags = tagsRepository.getAllLiveData()
-    private val selectedTags = mutableListOf<Tag>()
     fun updateTagsList(tag: Tag, isSelected: Boolean) = selectedTags.run { if (isSelected) add(tag) else remove(tag) }
 
     init {
@@ -46,6 +46,8 @@ class NoteEditorFragmentViewModel(
         }
     }
 
+    fun isTagSelected(tag: Tag): Boolean = selectedTags.contains(tag)
+
     suspend fun save() = notesRepository.apply {
         if (!isEdition) {
             insert(requireNotNull(title.value), requireNotNull(description.value), DateTime.now(), selectedTags)
@@ -54,7 +56,8 @@ class NoteEditorFragmentViewModel(
                 requireNotNull(title.value),
                 requireNotNull(description.value),
                 DateTime.now(),
-                requireNotNull(noteWithTags).note.id
+                requireNotNull(noteWithTags).note.id,
+                selectedTags
             )
         }
     }

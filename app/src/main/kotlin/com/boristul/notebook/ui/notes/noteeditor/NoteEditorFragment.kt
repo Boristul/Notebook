@@ -68,6 +68,7 @@ class NoteEditorFragment : Fragment(R.layout.fragment_note_editor) {
                 { layoutInflater.inflate(R.layout.item_tag_chip_choice, this, false) as Chip },
                 {
                     text = tags[it].name
+                    isChecked = viewModel.isTagSelected(tags[it])
 
                     setOnCheckedChangeListener { _, isChecked ->
                         viewModel.updateTagsList(tags[it], isChecked)

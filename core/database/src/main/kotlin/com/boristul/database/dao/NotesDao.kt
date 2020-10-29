@@ -25,21 +25,32 @@ abstract class NotesDao {
     }
 
     @Transaction
+    open suspend fun update(noteWithTagsEntity: NoteWithTagsEntity) {
+        noteWithTagsEntity.run {
+            update(note)
+            deleteTagsForNote(note.id)
+            tags.forEach { tag ->
+                insert(NoteTagCrossRef(note.id, tag.id))
+            }
+        }
+    }
+
+    @Transaction
     @Query("SELECT * FROM notes")
     abstract fun getAllLiveData(): LiveData<List<NoteWithTagsEntity>>
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     protected abstract suspend fun insert(note: NoteEntity)
 
-    //@Query("INSERT INTO notes VALUES (:note)")
-    //protected abstract suspend fun insert1(note: NoteEntity)
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     protected abstract suspend fun insert(crossRef: NoteTagCrossRef)
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.ABORT)
     abstract suspend fun update(note: NoteEntity)
 
     @Query("DELETE FROM notes WHERE _id = :id")
     abstract suspend fun delete(id: Long)
+
+    @Query("DELETE from note_tag_cross_ref WHERE note_id = :noteId")
+    abstract fun deleteTagsForNote(noteId: Long)
 }
