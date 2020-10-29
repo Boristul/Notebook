@@ -10,20 +10,20 @@ import com.boristul.database.entity.TagEntity
 import com.boristul.database.entity.TagWithNotesEntity
 
 @Dao
-abstract class TagsDao {
+interface TagsDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    abstract suspend fun insert(tag: TagEntity)
+    suspend fun insert(tag: TagEntity)
 
     @Query("SELECT * FROM tags")
-    abstract suspend fun getAll(): List<TagEntity>
+    suspend fun getAll(): List<TagEntity>
 
     @Query("SELECT * FROM tags")
-    abstract fun getAllLiveData(): LiveData<List<TagEntity>>
+    fun getAllLiveData(): LiveData<List<TagEntity>>
 
     @Transaction
     @Query("SELECT * FROM tags")
-    abstract fun getAllTagsWithNotesLiveData(): LiveData<List<TagWithNotesEntity>>
+    fun getAllTagsWithNotesLiveData(): LiveData<List<TagWithNotesEntity>>
 
     @Query("DELETE FROM tags WHERE _id = :id")
-    abstract suspend fun delete(id: Long)
+    suspend fun delete(id: Long)
 }

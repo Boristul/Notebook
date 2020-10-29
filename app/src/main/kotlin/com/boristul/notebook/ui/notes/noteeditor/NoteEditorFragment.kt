@@ -48,7 +48,6 @@ class NoteEditorFragment : Fragment(R.layout.fragment_note_editor) {
         }
 
         binding.save.apply {
-
             viewModel.isTitleNotEmpty.observe(viewLifecycleOwner) {
                 isEnabled = it
             }
