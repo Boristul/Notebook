@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 import com.boristul.entity.Note
 import kotlinx.android.parcel.Parcelize
 import org.joda.time.DateTime
+import org.joda.time.DateTimeUtils.currentTimeMillis
 
 @Entity(
     tableName = "notes"
@@ -22,9 +23,9 @@ data class NoteEntity(
     @ColumnInfo(name = "creationTime")
     override val creationTime: DateTime,
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "_id")
-    override val id: Long = 0L
+    override val id: Long = currentTimeMillis()
 
 ) : Note {
     init {

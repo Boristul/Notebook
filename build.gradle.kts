@@ -1,5 +1,6 @@
 plugins {
-    id("io.gitlab.arturbosch.detekt") version ("1.12.0")
+    id("io.gitlab.arturbosch.detekt") version "1.12.0"
+    kotlin("plugin.serialization") version "1.4.10"
 }
 
 buildscript {
@@ -12,7 +13,8 @@ buildscript {
 
         classpath("com.android.tools.build:gradle:4.1.0")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.3.0")
+        classpath("org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion")
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.3.1")
         classpath("com.google.gms:google-services:4.3.4")
     }
 }

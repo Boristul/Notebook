@@ -41,7 +41,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textCapSentences"
-                android:maxLines="1" />
+                android:maxLines="1"
+                tools:text="Hello world" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -64,21 +65,46 @@
                 android:layout_height="wrap_content"
                 android:gravity="top"
                 android:inputType="textCapSentences"
-                android:lines="3" />
+                android:lines="3"
+                tools:text="Hello world" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tags_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/nef_selection_tag"
+            android:textAppearance="?textAppearanceBody2"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/description_input_layout" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chips"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tags_label" />
 
         <Button
             android:id="@+id/save"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:padding="16dp"
+            android:enabled="false"
             android:text="@string/nef_save"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/description_input_layout" />
+            app:layout_constraintTop_toBottomOf="@id/chips"
+            tools:enabled="true" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

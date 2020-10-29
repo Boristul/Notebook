@@ -19,6 +19,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     companion object {
         private const val THEME_PREF = "theme_type_pref"
         private const val ABOUT_PREF = "about_pref"
+        private const val TAGS_PREF = "tags_pref"
         private const val TEST_GD_PREF = "test_gd_pref"
     }
 
@@ -46,6 +47,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         checkNotNull(findPreference(ABOUT_PREF)).setOnPreferenceClickListener {
             findNavController().navigate(R.id.action_settings_to_about)
+            true
+        }
+
+        checkNotNull(findPreference(TAGS_PREF)).setOnPreferenceClickListener {
+            findNavController().navigate(R.id.action_settings_to_tags)
             true
         }
 

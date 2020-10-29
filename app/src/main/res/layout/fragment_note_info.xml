@@ -60,6 +60,16 @@
             app:layout_constraintTop_toBottomOf="@id/description"
             tools:text="25.05.2020 20:15" />
 
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chips"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/datetime" />
+
         <ImageButton
             android:id="@+id/edit"
             android:layout_width="wrap_content"
@@ -73,7 +83,7 @@
 
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/datetime" />
+            app:layout_constraintTop_toBottomOf="@id/chips" />
 
         <ImageButton
             android:id="@+id/completed"
@@ -87,7 +97,7 @@
 
             app:layout_constraintEnd_toStartOf="@id/share"
             app:layout_constraintStart_toEndOf="@id/edit"
-            app:layout_constraintTop_toBottomOf="@id/datetime" />
+            app:layout_constraintTop_toBottomOf="@id/chips" />
 
         <ImageButton
             android:id="@+id/share"
@@ -101,7 +111,7 @@
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/completed"
-            app:layout_constraintTop_toBottomOf="@id/datetime" />
+            app:layout_constraintTop_toBottomOf="@id/chips" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
