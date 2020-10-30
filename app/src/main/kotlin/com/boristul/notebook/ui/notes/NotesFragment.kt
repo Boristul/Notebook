@@ -33,7 +33,11 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
 
         binding.notesList.apply {
             adapter = NotesListAdapter().apply {
+                val notEmptyIndex = 0
+                val emptyIndex = 1
+
                 viewModel.notes.observe(viewLifecycleOwner) {
+                    binding.viewSwitcher.displayedChild = if (it.isNotEmpty()) notEmptyIndex else emptyIndex
                     notes = it
                 }
                 onLongClickListener = {
