@@ -36,7 +36,7 @@ abstract class NotesDao {
     }
 
     @Transaction
-    @Query("SELECT * FROM notes")
+    @Query("SELECT * FROM notes ORDER BY _id DESC")
     abstract fun getAllLiveData(): LiveData<List<NoteWithTagsEntity>>
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
