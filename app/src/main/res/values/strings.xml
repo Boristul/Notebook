@@ -9,6 +9,7 @@
     <!-- region NotesFragment -->
     <string name="nf_label">Notes</string>
     <string name="nf_add_menu">Add</string>
+    <string name="nf_empty_note">Create your first note</string>
     <string name="nf_delete_title">Delete note?</string>
     <string name="nf_delete">Delete</string>
     <string name="nf_successful_delete">Note has successfully deleted</string>
