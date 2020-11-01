@@ -40,7 +40,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
                     binding.viewSwitcher.displayedChild = if (it.isNotEmpty()) notEmptyIndex else emptyIndex
                     notes = it
                 }
-                onLongClickListener = {
+                onDeleteClickListener = {
                     MaterialAlertDialogBuilder(requireContext())
                         .setTitle(R.string.nf_delete_title)
                         .setPositiveButton(R.string.nf_delete) { _, _ ->

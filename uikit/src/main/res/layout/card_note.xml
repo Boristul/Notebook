@@ -3,64 +3,79 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:layout_height="wrap_content"
-    tools:paddingBottom="@dimen/activity_vertical_margin"
-    tools:paddingEnd="@dimen/activity_horizontal_margin"
-    tools:paddingStart="@dimen/activity_horizontal_margin"
-    tools:paddingTop="@dimen/activity_vertical_margin"
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
     tools:theme="@style/AppTheme">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.daimajia.swipe.SwipeLayout
+        android:id="@+id/swipe_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/status_icon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_success"
+        <ImageButton
+            android:id="@+id/delete"
+            android:layout_width="72dp"
+            android:layout_height="match_parent"
+            android:background="?colorError"
+            android:src="@drawable/ic_delete"
+            android:tint="?colorOnPrimary" />
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="@dimen/card_margin_inside"
+            android:paddingTop="@dimen/card_margin_inside"
+            android:paddingEnd="@dimen/card_margin_inside"
+            android:paddingBottom="@dimen/card_margin_inside">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:textAppearance="?textAppearanceBody2"
+            <ImageView
+                android:id="@+id/status_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_success"
 
-            app:layout_constraintBottom_toTopOf="@id/datetime"
-            app:layout_constraintEnd_toStartOf="@id/completed"
-            app:layout_constraintStart_toEndOf="@id/status_icon"
-            app:layout_constraintTop_toTopOf="@id/status_icon"
-            tools:text="Title of note" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/datetime"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:textAppearance="?textAppearanceBody2"
 
-            app:layout_constraintEnd_toStartOf="@id/completed"
-            app:layout_constraintStart_toEndOf="@id/status_icon"
-            app:layout_constraintTop_toBottomOf="@id/title"
-            tools:text="Sunday 22:45" />
+                app:layout_constraintBottom_toTopOf="@id/datetime"
+                app:layout_constraintEnd_toStartOf="@id/completed"
+                app:layout_constraintStart_toEndOf="@id/status_icon"
+                app:layout_constraintTop_toTopOf="@id/status_icon"
+                tools:text="Title of note" />
 
-        <CheckBox
-            android:id="@+id/completed"
-            style="?android:attr/starStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/datetime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
 
-            app:layout_constraintBottom_toBottomOf="@id/datetime"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/title"
-            app:layout_constraintTop_toTopOf="@id/title" />
+                app:layout_constraintEnd_toStartOf="@id/completed"
+                app:layout_constraintStart_toEndOf="@id/status_icon"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                tools:text="Sunday 22:45" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <CheckBox
+                android:id="@+id/completed"
+                style="?android:attr/starStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintBottom_toBottomOf="@id/datetime"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/title"
+                app:layout_constraintTop_toTopOf="@id/title" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.daimajia.swipe.SwipeLayout>
 
 </merge>
 

@@ -14,7 +14,6 @@ class NoteCard @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
-
     private val binding = CardNoteBinding.inflate(requireNotNull(context.getSystemService()), this)
 
     var imageTintList: ColorStateList?
@@ -35,15 +34,12 @@ class NoteCard @JvmOverloads constructor(
             binding.title.text = value
         }
 
+    var onDeleteClickListener: (() -> Unit)? = null
+
     init {
+        binding.delete.setOnClickListener { onDeleteClickListener?.invoke() }
+
         context.apply {
-            val cardPadding = resources.getDimensionPixelSize(R.dimen.cards_spacing)
-            setPaddingRelative(
-                cardPadding,
-                cardPadding,
-                cardPadding,
-                cardPadding
-            )
             background = ContextCompat.getDrawable(this, attr(android.R.attr.selectableItemBackground).resourceId)
         }
     }
