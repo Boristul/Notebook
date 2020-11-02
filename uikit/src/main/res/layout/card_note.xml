@@ -3,13 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:layout_height="wrap_content"
-    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
+    tools:parentTag="com.daimajia.swipe.SwipeLayout"
     tools:theme="@style/AppTheme">
-
-    <com.daimajia.swipe.SwipeLayout
-        android:id="@+id/swipe_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
         <ImageButton
             android:id="@+id/delete"
@@ -20,6 +15,7 @@
             android:tint="?colorOnPrimary" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/surface_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingStart="@dimen/card_margin_inside"
@@ -74,8 +70,6 @@
                 app:layout_constraintTop_toTopOf="@id/title" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.daimajia.swipe.SwipeLayout>
 
 </merge>
 

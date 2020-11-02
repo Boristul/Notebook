@@ -32,10 +32,8 @@ class NotesListAdapter : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>()
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
 
-        card.setOnClickListener { onClickListener?.invoke(notes[adapterPosition]) }
-        card.onDeleteClickListener = {
-            onDeleteClickListener?.invoke(notes[adapterPosition])
-        }
+        card.surfaceView.setOnClickListener { onClickListener?.invoke(notes[adapterPosition]) }
+        card.onDeleteClickListener = { onDeleteClickListener?.invoke(notes[adapterPosition]) }
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
