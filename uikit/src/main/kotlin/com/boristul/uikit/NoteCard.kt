@@ -3,18 +3,17 @@ package com.boristul.uikit
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
 import com.boristul.uikit.databinding.CardNoteBinding
 import com.boristul.utils.attr
+import com.daimajia.swipe.SwipeLayout
 
 class NoteCard @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : ConstraintLayout(context, attrs, defStyleAttr) {
-
+) : SwipeLayout(context, attrs, defStyleAttr) {
     private val binding = CardNoteBinding.inflate(requireNotNull(context.getSystemService()), this)
 
     var imageTintList: ColorStateList?
@@ -35,16 +34,14 @@ class NoteCard @JvmOverloads constructor(
             binding.title.text = value
         }
 
+    var onDeleteClickListener: (() -> Unit)? = null
+
     init {
+        binding.delete.setOnClickListener { onDeleteClickListener?.invoke() }
+
         context.apply {
-            val cardPadding = resources.getDimensionPixelSize(R.dimen.cards_spacing)
-            setPaddingRelative(
-                cardPadding,
-                cardPadding,
-                cardPadding,
-                cardPadding
-            )
-            background = ContextCompat.getDrawable(this, attr(android.R.attr.selectableItemBackground).resourceId)
+            binding.surfaceLayout.background =
+                ContextCompat.getDrawable(this, attr(android.R.attr.selectableItemBackground).resourceId)
         }
     }
 }

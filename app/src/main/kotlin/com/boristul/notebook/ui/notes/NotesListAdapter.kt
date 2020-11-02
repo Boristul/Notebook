@@ -19,7 +19,7 @@ class NotesListAdapter : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>()
     private val dateTimePattern = DateTimeFormat.forPattern("dd.MM.yyyy (HH:mm)")
         .withZone(DateTimeZone.getDefault())
 
-    var onLongClickListener: ((NoteWithTags) -> Unit)? = null
+    var onDeleteClickListener: ((NoteWithTags) -> Unit)? = null
     var onClickListener: ((NoteWithTags) -> Unit)? = null
 
     override fun getItemCount(): Int = notes.size
@@ -32,11 +32,8 @@ class NotesListAdapter : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>()
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
 
-        card.setOnClickListener { onClickListener?.invoke(notes[adapterPosition]) }
-        card.setOnLongClickListener {
-            onLongClickListener?.invoke(notes[adapterPosition])
-            true
-        }
+        card.surfaceView.setOnClickListener { onClickListener?.invoke(notes[adapterPosition]) }
+        card.onDeleteClickListener = { onDeleteClickListener?.invoke(notes[adapterPosition]) }
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {

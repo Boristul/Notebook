@@ -118,7 +118,7 @@ dependencies {
     // endregion
 
     // region Google services
-    implementation("com.google.firebase:firebase-analytics:17.6.0")
+    implementation("com.google.firebase:firebase-analytics:18.0.0")
     implementation("com.google.android.gms:play-services-auth:18.1.0")
     implementation("com.google.api-client:google-api-client-android:1.26.0")
     implementation("com.google.http-client:google-http-client-gson:1.26.0")
@@ -131,7 +131,7 @@ dependencies {
     implementation("org.kodein.di:kodein-di-framework-android-x:$kodeinVersion")
     // endregion
 
-    // region androidX
+    // region AndroidX
     implementation("androidx.core:core-ktx:1.3.2")
     // endregion
 }
