@@ -29,10 +29,6 @@
             "package_name": "com.boristul.notebook",
             "certificate_hash": "a4cb7ed0b024b3f75a8f3d00e625de1b6b156387"
           }
-        },
-        {
-          "client_id": "881861061906-330rc77i8id8u9ignv5n7gaaeai87kfg.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
       "api_key": [
@@ -42,12 +38,7 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "881861061906-330rc77i8id8u9ignv5n7gaaeai87kfg.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
