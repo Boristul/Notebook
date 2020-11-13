@@ -11,7 +11,7 @@ buildscript {
     dependencies {
         val kotlinVersion: String by project
 
-        classpath("com.android.tools.build:gradle:4.1.0")
+        classpath("com.android.tools.build:gradle:4.1.1")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
         classpath("org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion")
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.3.1")
