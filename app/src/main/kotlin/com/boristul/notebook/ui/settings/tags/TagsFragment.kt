@@ -29,7 +29,8 @@ class TagsFragment : Fragment(R.layout.fragment_tags) {
                 {
                     setOnCloseIconClickListener { _ ->
                         MaterialAlertDialogBuilder(requireContext())
-                            .setTitle(R.string.tf_delete_title)
+                            .setTitle(getString(R.string.tf_delete_title, tags[it].name))
+                            .setMessage(R.string.tf_delete_message)
                             .setPositiveButton(R.string.tf_delete) { _, _ ->
                                 viewModel.viewModelScope.launch {
                                     viewModel.delete(tags[it].id)
