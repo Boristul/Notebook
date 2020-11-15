@@ -25,6 +25,7 @@
         <!-- endregion -->
 
         <!-- region Text styles -->
+        <item name="android:fontFamily">@font/gilroy</item>
         <item name="textAppearanceHeadline1">@style/TextAppearance.AppTheme.Headline1</item>
         <item name="textAppearanceHeadline2">@style/TextAppearance.AppTheme.Headline2</item>
         <item name="textAppearanceHeadline3">@style/TextAppearance.AppTheme.Headline3</item>
@@ -79,7 +80,7 @@
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
     </style>
 
-    <style name="BottomSheetDialogTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+    <style name="BottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/AppModalStyle</item>
     </style>
 
