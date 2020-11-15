@@ -18,6 +18,7 @@
 
     <!-- region NoteInfoFragment -->
     <string name="nif_label">Info</string>
+    <string name="nif_tags">Tags:</string>
     <!-- endregion -->
 
     <!-- region NoteEditorFragment -->
