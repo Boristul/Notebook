@@ -25,6 +25,7 @@
         <!-- endregion -->
 
         <!-- region Text styles -->
+        <item name="android:fontFamily">@font/gilroy</item>
         <item name="textAppearanceHeadline1">@style/TextAppearance.AppTheme.Headline1</item>
         <item name="textAppearanceHeadline2">@style/TextAppearance.AppTheme.Headline2</item>
         <item name="textAppearanceHeadline3">@style/TextAppearance.AppTheme.Headline3</item>
@@ -44,6 +45,7 @@
 
         <!-- region Component styles -->
         <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.PrimarySurface</item>
+        <item name="bottomSheetDialogTheme">@style/BottomSheetDialogTheme</item>
         <!-- endregion -->
 
         <!-- region Remap legacy AppCompat attributes to MaterialComponent attributes -->
@@ -76,6 +78,10 @@
         <item name="android:statusBarColor">@color/splash_background</item>
         <item name="android:navigationBarColor">@color/splash_background</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+    </style>
+
+    <style name="BottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
     </style>
 
 </resources>

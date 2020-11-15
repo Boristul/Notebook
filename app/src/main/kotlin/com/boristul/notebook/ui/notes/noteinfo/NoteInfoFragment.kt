@@ -43,14 +43,19 @@ class NoteInfoFragment : BottomSheetDialogFragment() {
         }
 
         viewModel.noteWithTags.tags.let { tags ->
-            binding.chips.setViewCount(
-                tags.size,
-                { layoutInflater.inflate(R.layout.item_tag_chip_choice, this, false) as Chip },
-                {
-                    text = tags[it].name
-                    isClickable = false
-                }
-            )
+            if (tags.isNotEmpty()) {
+                binding.chips.visibility = View.VISIBLE
+                binding.tagsTitle.visibility = View.VISIBLE
+
+                binding.chips.setViewCount(
+                    tags.size,
+                    { layoutInflater.inflate(R.layout.item_tag_chip_choice, this, false) as Chip },
+                    {
+                        text = tags[it].name
+                        isClickable = false
+                    }
+                )
+            }
         }
 
         binding.share.setOnClickListener {

@@ -64,8 +64,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top"
-                android:inputType="textCapSentences"
-                android:lines="3"
+                android:inputType="textCapSentences|textMultiLine"
+                android:lines="5"
                 tools:text="Hello world" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -97,8 +97,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:padding="16dp"
             android:enabled="false"
+            android:padding="16dp"
             android:text="@string/nef_save"
 
             app:layout_constraintEnd_toEndOf="parent"
