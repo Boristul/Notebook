@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import com.boristul.entity.NoteWithTags
 import com.boristul.entity.Tag
 import com.boristul.repository.NotesRepository
@@ -41,9 +42,11 @@ class NoteEditorFragmentViewModel(
     }
 
     val isTitleNotEmpty = MediatorLiveData<Boolean>().apply {
-        addSource(title) {
-            value = it.isNotBlank()
+        val observer = Observer<Any?> {
+            value = !title.value.isNullOrBlank() || !description.value.isNullOrBlank()
         }
+        addSource(title, observer)
+        addSource(description, observer)
     }
 
     fun isTagSelected(tag: Tag): Boolean = selectedTags.contains(tag)

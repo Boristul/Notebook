@@ -40,6 +40,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:textAppearance="?textAppearanceBody2"
+                android:ellipsize="end"
+                android:singleLine="true"
 
                 app:layout_constraintBottom_toTopOf="@id/datetime"
                 app:layout_constraintEnd_toStartOf="@id/completed"

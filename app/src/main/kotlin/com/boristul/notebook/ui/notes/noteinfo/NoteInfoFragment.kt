@@ -28,7 +28,12 @@ class NoteInfoFragment : BottomSheetDialogFragment() {
         val binding by viewBinding<FragmentNoteInfoBinding>()
 
         viewModel.noteWithTags.note.run {
-            binding.title.text = title
+            binding.title.let {
+                if (title.isNotEmpty()) {
+                    it.visibility = View.VISIBLE
+                    it.text = title
+                }
+            }
             binding.description.let {
                 if (description.isNotEmpty()) {
                     it.visibility = View.VISIBLE

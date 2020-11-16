@@ -27,8 +27,4 @@ data class NoteEntity(
     @ColumnInfo(name = "_id")
     override val id: Long = currentTimeMillis()
 
-) : Note {
-    init {
-        require(title.isNotBlank()) { "Empty title" }
-    }
-}
+) : Note
