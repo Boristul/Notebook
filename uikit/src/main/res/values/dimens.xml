@@ -7,7 +7,8 @@
     <dimen name="cards_spacing">12dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
-    <dimen name="card_margin_inside">8dp</dimen>
+    <dimen name="card_vertical_margin">16dp</dimen>
+    <dimen name="card_horizontal_margin">8dp</dimen>
 
     <dimen name="divider_margin">4dp</dimen>
     <dimen name="divider_margin_top_bottom">4dp</dimen>
