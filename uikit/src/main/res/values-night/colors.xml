@@ -10,17 +10,17 @@
     <color name="secondary_variant">@color/primary</color>
 
     <color name="background">#202124</color>
-    <color name="on_background">#f6f6fb</color>
+    <color name="on_background">#e7e8e9</color>
 
     <color name="surface">#323232</color>
-    <color name="on_surface">#ffffff</color>
+    <color name="on_surface">#e7e8e9</color>
 
     <color name="error">#d32f2f</color>
     <color name="on_error">#ffffff</color>
 
-    <color name="primary_text">#EBEBEB</color>
-    <color name="secondary_text">#ADADAD</color>
-    <color name="divider">#C4C4C4</color>
+    <color name="primary_text">#e7e8e9</color>
+    <color name="secondary_text">#e7e8e9</color>
+    <color name="divider">#e7e8e9</color>
 
     <color name="splash_background">@color/surface</color>
     <color name="ic_launcher_background">#43a047</color>

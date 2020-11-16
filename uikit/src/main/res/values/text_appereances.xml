@@ -8,7 +8,9 @@
 
     <style name="TextAppearance.AppTheme.Headline4" parent="TextAppearance.MaterialComponents.Headline4" />
 
-    <style name="TextAppearance.AppTheme.Headline5" parent="TextAppearance.MaterialComponents.Headline5" />
+    <style name="TextAppearance.AppTheme.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="android:textColor">@color/primary_text</item>
+    </style>
 
     <style name="TextAppearance.AppTheme.Headline6" parent="TextAppearance.MaterialComponents.Headline6" />
 
@@ -21,6 +23,7 @@
     </style>
 
     <style name="TextAppearance.AppTheme.Body2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">@color/primary_text</item>
         <item name="android:textSize">16sp</item>
     </style>
 
