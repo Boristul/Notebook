@@ -39,7 +39,7 @@ class NotesListAdapter : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>()
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         notes[position].note.let { note ->
             holder.card.run {
-                title = note.title
+                title = note.run { if (title.isNotBlank()) title else description }
                 datetime = note.creationTime.toString(dateTimePattern)
             }
         }
