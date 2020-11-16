@@ -1,7 +1,6 @@
 package com.boristul.uikit
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.util.AttributeSet
 import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
@@ -15,12 +14,6 @@ class NoteCard @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : SwipeLayout(context, attrs, defStyleAttr) {
     private val binding = CardNoteBinding.inflate(requireNotNull(context.getSystemService()), this)
-
-    var imageTintList: ColorStateList?
-        get() = binding.statusIcon.imageTintList
-        set(value) {
-            binding.statusIcon.imageTintList = value
-        }
 
     var datetime: CharSequence?
         get() = binding.datetime.text

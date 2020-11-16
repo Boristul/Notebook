@@ -16,7 +16,7 @@ class NotesListAdapter : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>()
             notifyDataSetChanged()
         }
 
-    private val dateTimePattern = DateTimeFormat.forPattern("dd.MM.yyyy (HH:mm)")
+    private val dateTimePattern = DateTimeFormat.forPattern("dd.MM.yyyy HH:mm")
         .withZone(DateTimeZone.getDefault())
 
     var onDeleteClickListener: ((NoteWithTags) -> Unit)? = null

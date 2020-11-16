@@ -6,59 +6,60 @@
     tools:parentTag="com.daimajia.swipe.SwipeLayout"
     tools:theme="@style/AppTheme">
 
-        <ImageButton
-            android:id="@+id/delete"
-            android:layout_width="72dp"
-            android:layout_height="match_parent"
-            android:background="?colorError"
-            android:src="@drawable/ic_delete"
-            android:tint="?colorOnPrimary" />
+    <ImageButton
+        android:id="@+id/delete"
+        android:layout_width="72dp"
+        android:layout_height="match_parent"
+        android:background="?colorError"
+        android:src="@drawable/ic_delete"
+        android:tint="?colorOnPrimary" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/surface_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingStart="@dimen/card_horizontal_margin"
-            android:paddingTop="@dimen/card_vertical_margin"
-            android:paddingEnd="@dimen/card_horizontal_margin"
-            android:paddingBottom="@dimen/card_vertical_margin">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/surface_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/card_horizontal_margin"
+        android:paddingTop="@dimen/card_vertical_margin"
+        android:paddingEnd="@dimen/card_horizontal_margin"
+        android:paddingBottom="@dimen/card_vertical_margin">
 
-            <ImageView
-                android:id="@+id/status_icon"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_success"
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textAppearance="?textAppearanceBody2"
 
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@id/datetime"
+            app:layout_constraintEnd_toStartOf="@id/arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Title of note" />
 
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:textAppearance="?textAppearanceBody2"
-                android:ellipsize="end"
-                android:singleLine="true"
+        <TextView
+            android:id="@+id/datetime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
 
-                app:layout_constraintBottom_toTopOf="@id/datetime"
-                app:layout_constraintStart_toEndOf="@id/status_icon"
-                app:layout_constraintTop_toTopOf="@id/status_icon"
-                tools:text="Title of note" />
+            app:layout_constraintEnd_toStartOf="@id/arrow"
+            app:layout_constraintStart_toStartOf="@id/title"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="Sunday 22:45" />
 
-            <TextView
-                android:id="@+id/datetime"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_right_arrow"
+            android:tint="?colorOnBackground"
 
-                app:layout_constraintStart_toEndOf="@id/status_icon"
-                app:layout_constraintTop_toBottomOf="@id/title"
-                tools:text="Sunday 22:45" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/title"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </merge>
-
