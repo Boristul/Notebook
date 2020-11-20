@@ -66,5 +66,6 @@ dependencies {
     api("com.daimajia.swipelayout:library:1.2.0@aar")
     api("com.google.android.material:material:1.3.0-alpha03")
     implementation("net.cachapa.expandablelayout:expandablelayout:2.9.2")
+    api("com.airbnb.android:lottie:3.5.0")
     // endregion
 }
