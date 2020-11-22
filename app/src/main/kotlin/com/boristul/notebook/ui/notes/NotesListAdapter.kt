@@ -3,6 +3,7 @@ package com.boristul.notebook.ui.notes
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import com.boristul.entity.Note
 import com.boristul.entity.NoteWithTags
 import com.boristul.uikit.NoteCard
 import org.joda.time.DateTimeZone
@@ -36,14 +37,15 @@ class NotesListAdapter : RecyclerView.Adapter<NotesListAdapter.ItemViewHolder>()
         card.onDeleteClickListener = { onDeleteClickListener?.invoke(notes[adapterPosition]) }
     }
 
-    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) =
         notes[position].note.let { note ->
             holder.card.run {
-                title = note.run { if (title.isNotBlank()) title else description }
+                title = getTitle(note)
                 datetime = note.creationTime.toString(dateTimePattern)
             }
         }
-    }
+
+    private fun getTitle(note: Note): String = note.run { if (title.isNotBlank()) title else description }
 
     class ItemViewHolder(val card: NoteCard) : RecyclerView.ViewHolder(card)
 }
