@@ -7,10 +7,8 @@ import com.boristul.entity.Tag
 import kotlinx.android.parcel.Parcelize
 import org.joda.time.DateTimeUtils.currentTimeMillis
 
-@Entity(
-    tableName = "tags"
-)
 @Parcelize
+@Entity(tableName = "tags")
 data class TagEntity(
 
     @ColumnInfo(name = "name")
