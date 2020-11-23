@@ -10,7 +10,7 @@
         android:id="@+id/delete"
         android:layout_width="72dp"
         android:layout_height="match_parent"
-        android:background="?colorError"
+        android:background="?colorSecondary"
         android:foreground="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_delete"
         android:tint="?colorOnPrimary" />
