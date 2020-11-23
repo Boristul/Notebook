@@ -6,6 +6,11 @@
         android:title="@string/ma_notes" />
 
     <item
+        android:id="@+id/planner"
+        android:icon="@drawable/ic_book_open"
+        android:title="@string/ma_planner" />
+
+    <item
         android:id="@+id/settings"
         android:icon="@drawable/ic_settings"
         android:title="@string/ma_settings" />

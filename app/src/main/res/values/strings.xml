@@ -4,6 +4,7 @@
     <!-- region MainActivity -->
     <string name="ma_notes">Notes</string>
     <string name="ma_settings">Settings</string>
+    <string name="ma_planner">Planner</string>
     <!-- endregion -->
 
     <!-- region NotesFragment -->
@@ -61,5 +62,9 @@
     <string name="tf_cancel">Cancel</string>
     <string name="tf_delete">Delete</string>
     <!-- endregion -->
+
+    <!--  region PlannerFragment  -->
+    <string name="pf_label">Planner</string>
+    <!--  endregion  -->
 
 </resources>
