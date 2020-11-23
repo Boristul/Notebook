@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.boristul.database.entity.TaskPointEntity
-import java.time.LocalDate
+import org.joda.time.LocalDate
 
 @Dao
 interface TaskPointsDao {

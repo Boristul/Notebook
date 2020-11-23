@@ -21,6 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:textAppearance="?textAppearanceHeadline5"
+            android:textIsSelectable="true"
             android:visibility="gone"
 
             app:layout_constraintBottom_toBottomOf="@id/top_divider"
@@ -45,6 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:textAppearance="?textAppearanceBody2"
+            android:textIsSelectable="true"
             android:visibility="gone"
 
             app:layout_constraintEnd_toEndOf="parent"
