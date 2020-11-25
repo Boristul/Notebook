@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:layout_height="wrap_content"
+    tools:parentTag="com.daimajia.swipe.SwipeLayout"
+    tools:theme="@style/AppTheme">
+
+    <ImageButton
+        android:id="@+id/delete"
+        android:layout_width="72dp"
+        android:layout_height="match_parent"
+        android:background="?colorSecondary"
+        android:src="@drawable/ic_delete"
+        android:tint="?colorOnPrimary" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/surface_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/card_horizontal_margin"
+        android:paddingTop="@dimen/card_vertical_margin"
+        android:paddingEnd="@dimen/card_horizontal_margin"
+        android:paddingBottom="@dimen/card_vertical_margin">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textAppearance="?textAppearanceBody2"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/checkbox"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Title of note" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/checkbox"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toEndOf="@id/title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_rawRes="@raw/flex" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</merge>
