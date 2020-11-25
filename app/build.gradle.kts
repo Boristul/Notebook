@@ -3,6 +3,8 @@ import java.util.Properties
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
+    id("com.google.firebase.firebase-perf")
     kotlin("android")
     kotlin("kapt")
     id("androidx.navigation.safeargs.kotlin")
@@ -118,7 +120,10 @@ dependencies {
     // endregion
 
     // region Google services
-    implementation("com.google.firebase:firebase-analytics:18.0.0")
+    implementation(platform("com.google.firebase:firebase-bom:26.1.0"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-crashlytics-ktx")
+    implementation("com.google.firebase:firebase-perf-ktx")
     implementation("com.google.android.gms:play-services-auth:19.0.0")
     implementation("com.google.api-client:google-api-client-android:1.26.0")
     implementation("com.google.http-client:google-http-client-gson:1.26.0")
