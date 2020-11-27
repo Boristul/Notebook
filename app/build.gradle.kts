@@ -135,6 +135,8 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-perf-ktx")
+    implementation("com.google.firebase:firebase-inappmessaging-display")
+    implementation("com.google.firebase:firebase-messaging-ktx")
     implementation("com.google.android.gms:play-services-auth:19.0.0")
     implementation("com.google.api-client:google-api-client-android:1.26.0")
     implementation("com.google.http-client:google-http-client-gson:1.26.0")
