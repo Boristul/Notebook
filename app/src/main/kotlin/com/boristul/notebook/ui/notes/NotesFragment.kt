@@ -23,8 +23,8 @@ import kotlinx.coroutines.launch
 class NotesFragment : Fragment(R.layout.fragment_notes) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val viewModel by viewModels<NotesFragmentViewModel>()
         val binding = FragmentNotesBinding.bind(view)
+        val viewModel by viewModels<NotesFragmentViewModel>()
 
         (requireActivity() as AppCompatActivity).supportActionBar?.apply {
             setHasOptionsMenu(true)

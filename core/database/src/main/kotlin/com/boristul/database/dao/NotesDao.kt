@@ -52,5 +52,5 @@ abstract class NotesDao {
     abstract suspend fun delete(id: Long)
 
     @Query("DELETE from note_tag_cross_ref WHERE note_id = :noteId")
-    abstract fun deleteTagsForNote(noteId: Long)
+    abstract suspend fun deleteTagsForNote(noteId: Long)
 }

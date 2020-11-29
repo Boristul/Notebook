@@ -65,6 +65,7 @@
 
     <!--  region PlannerFragment  -->
     <string name="pf_label">Planner</string>
+    <string name="pf_successful_delete">Task has successfully deleted</string>
     <!--  endregion  -->
 
 </resources>

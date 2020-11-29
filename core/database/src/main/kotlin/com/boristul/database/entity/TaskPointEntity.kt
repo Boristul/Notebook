@@ -10,14 +10,14 @@ import org.joda.time.LocalDate
 @Parcelize
 @Entity(tableName = "task_points")
 data class TaskPointEntity(
-    @ColumnInfo(name = "task")
-    override val task: String,
+    @ColumnInfo(name = "title")
+    override val title: String,
 
     @ColumnInfo(name = "date")
     override val date: LocalDate,
 
     @ColumnInfo(name = "is_completed")
-    override val isCompleted: Boolean,
+    override val isCompleted: Boolean = false,
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "_id")

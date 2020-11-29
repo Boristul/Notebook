@@ -15,4 +15,7 @@ interface TaskPointsDao {
 
     @Query("SELECT * FROM task_points WHERE date = :date")
     fun get(date: LocalDate): LiveData<List<TaskPointEntity>>
+
+    @Query("DELETE from task_points WHERE _id = :id")
+    suspend fun delete(id: Long)
 }

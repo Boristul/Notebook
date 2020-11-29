@@ -13,9 +13,12 @@ import com.google.firebase.ktx.Firebase
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Firebase.crashlytics.log("OnCreate")
-        Firebase.analytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW) {
-            param(FirebaseAnalytics.Param.SCREEN_CLASS, "SplashActivity")
+
+        Firebase.apply {
+            crashlytics.log("OnCreate")
+            analytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW) {
+                param(FirebaseAnalytics.Param.SCREEN_CLASS, "SplashActivity")
+            }
         }
 
         startActivity<MainActivity>()
