@@ -14,10 +14,25 @@
         app:colorTopTextSelected="?colorOnSecondary"
         app:selectedDateBackground="?colorSecondary" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/tasks_list"
+    <ViewSwitcher
+        android:id="@+id/view_switcher"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tasks_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/pf_empty_tasks"
+            android:textAppearance="?textAppearanceBody1"
+            app:drawableTopCompat="@drawable/ic_plan" />
+
+    </ViewSwitcher>
 
 </LinearLayout>

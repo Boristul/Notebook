@@ -52,7 +52,11 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
 
         binding.tasksList.apply {
             adapter = TaskListAdapter().apply {
+                val notEmptyIndex = 0
+                val emptyIndex = 1
+
                 viewModel.taskPoints.observe(viewLifecycleOwner) {
+                    binding.viewSwitcher.displayedChild = if (it.isNotEmpty()) notEmptyIndex else emptyIndex
                     tasks = it
                 }
 
@@ -80,7 +84,7 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
                 .setTitle(R.string.pf_add_task_title)
                 .setPositiveButton(R.string.pf_create) { dialog, _ ->
                     // TODO: Think about how to get text using View Binding
-                    val text = (dialog as AlertDialog).requireViewById<TextInputEditText>(R.id.md_input_message).text.toString()
+                    val text = (dialog as AlertDialog).requireViewById<TextInputEditText>(R.id.tei_input_message).text.toString()
                     viewModel.apply {
                         viewModelScope.launch {
                             addTask(text)

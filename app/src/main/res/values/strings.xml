@@ -69,6 +69,7 @@
     <string name="pf_add_task_title">Create task</string>
     <string name="pf_create">Create</string>
     <string name="pf_cancel">Cancel</string>
+    <string name="pf_empty_tasks">Start creating plan for day</string>
     <!--  endregion  -->
 
     <!--  region TaskEditorItem  -->
