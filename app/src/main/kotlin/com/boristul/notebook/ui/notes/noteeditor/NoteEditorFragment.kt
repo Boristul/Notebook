@@ -15,13 +15,14 @@ import com.boristul.utils.hideKeyboard
 import com.boristul.utils.navArgsFactory
 import com.boristul.utils.setViewCount
 import com.boristul.utils.toast
+import com.boristul.utils.viewbinding.viewBinding
 import com.google.android.material.chip.Chip
 import kotlinx.coroutines.launch
 
 class NoteEditorFragment : Fragment(R.layout.fragment_note_editor) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val binding = FragmentNoteEditorBinding.bind(view)
+        val binding by viewBinding<FragmentNoteEditorBinding>()
         val viewModel by viewModels<NoteEditorFragmentViewModel> {
             navArgsFactory<NoteEditorFragmentArgs> { application ->
                 NoteEditorFragmentViewModel(application, note)

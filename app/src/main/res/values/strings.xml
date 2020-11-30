@@ -66,6 +66,13 @@
     <!--  region PlannerFragment  -->
     <string name="pf_label">Planner</string>
     <string name="pf_successful_delete">Task has successfully deleted</string>
+    <string name="pf_add_task_title">Create task</string>
+    <string name="pf_create">Create</string>
+    <string name="pf_cancel">Cancel</string>
+    <!--  endregion  -->
+
+    <!--  region TaskEditorItem  -->
+    <string name="tei_hint">Input task</string>
     <!--  endregion  -->
 
 </resources>
