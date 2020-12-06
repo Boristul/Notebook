@@ -21,16 +21,31 @@ class TaskPointCard @JvmOverloads constructor(
             binding.title.text = value
         }
 
-    var isCompleted: Boolean
-        get() = binding.checkbox.isChecked
-        set(value) {
-            binding.checkbox.isChecked = value
-        }
-
     var onDeleteClickListener: (() -> Unit)? = null
+
+    var onClickListener: (() -> Unit)? = null
+
+    fun setChecked(isChecked: Boolean, isAnimated: Boolean = true) {
+        binding.checkbox.apply {
+            when {
+                isAnimated && isChecked -> {
+                    speed = 2f
+                    playAnimation()
+                }
+                isAnimated && !isChecked -> {
+                    speed = -2f
+                    playAnimation()
+                }
+                else -> {
+                    binding.checkbox.progress = if (isChecked) 1f else 0f
+                }
+            }
+        }
+    }
 
     init {
         binding.delete.setOnClickListener { onDeleteClickListener?.invoke() }
+        surfaceView.setOnClickListener { onClickListener?.invoke() }
 
         context.apply {
             binding.surfaceLayout.background =

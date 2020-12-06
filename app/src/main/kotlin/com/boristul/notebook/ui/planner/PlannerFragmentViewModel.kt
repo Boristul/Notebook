@@ -26,4 +26,5 @@ class PlannerFragmentViewModel(application: Application) : AndroidViewModel(appl
     suspend fun addTask(text: String) = taskPointRepository.insert(text, checkNotNull(selectedDate.value))
 
     suspend fun delete(id: Long) = taskPointRepository.delete(id)
+    suspend fun update(id: Long, isCompleted: Boolean) = taskPointRepository.update(id, isCompleted)
 }

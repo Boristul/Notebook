@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.textfield.TextInputLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tei_input_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:padding="16dp"
+    app:counterEnabled="true"
+    app:counterMaxLength="50">
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/tei_input_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLength="50"
         android:hint="@string/tei_hint"
         tools:text="Hello, World!" />
 </com.google.android.material.textfield.TextInputLayout>

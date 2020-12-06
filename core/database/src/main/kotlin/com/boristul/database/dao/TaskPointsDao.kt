@@ -18,4 +18,7 @@ interface TaskPointsDao {
 
     @Query("DELETE from task_points WHERE _id = :id")
     suspend fun delete(id: Long)
+
+    @Query("UPDATE task_points SET is_completed = :isCompleted WHERE _id = :id")
+    suspend fun update(id: Long, isCompleted: Boolean)
 }

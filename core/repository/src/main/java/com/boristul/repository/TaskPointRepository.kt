@@ -12,6 +12,8 @@ class TaskPointRepository(
 ) {
     suspend fun insert(title: String, date: LocalDate) = taskPointsDao.insert(TaskPointEntity(title, date))
 
+    suspend fun update(id: Long, isCompleted: Boolean) = taskPointsDao.update(id, isCompleted)
+
     fun getTaskPoints(date: LocalDate): LiveData<List<TaskPoint>> = taskPointsDao.get(date).map()
 
     suspend fun delete(id: Long) = taskPointsDao.delete(id)

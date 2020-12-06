@@ -17,7 +17,6 @@ import com.boristul.notebook.R
 import com.boristul.notebook.databinding.FragmentPlannerBinding
 import com.boristul.utils.getColorCompat
 import com.boristul.utils.setColor
-import com.boristul.utils.toast
 import com.boristul.utils.viewbinding.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
@@ -60,10 +59,15 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
                     tasks = it
                 }
 
+                onClickListener = { task ->
+                    viewModel.viewModelScope.launch {
+                        viewModel.update(task.id, !task.isCompleted)
+                    }
+                }
+
                 onDeleteClickListener = {
                     viewModel.viewModelScope.launch {
                         viewModel.delete(it.id)
-                        requireActivity().toast(R.string.pf_successful_delete)
                     }
                 }
             }

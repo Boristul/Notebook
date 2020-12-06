@@ -14,6 +14,11 @@
         app:colorTopTextSelected="?colorOnSecondary"
         app:selectedDateBackground="?colorSecondary" />
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider" />
+
     <ViewSwitcher
         android:id="@+id/view_switcher"
         android:layout_width="match_parent"
