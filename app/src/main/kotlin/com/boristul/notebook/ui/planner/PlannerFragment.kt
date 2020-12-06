@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -54,7 +55,7 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
                 val notEmptyIndex = 0
                 val emptyIndex = 1
 
-                viewModel.taskPoints.observe(viewLifecycleOwner) {
+                viewModel.taskPoints.distinctUntilChanged().observe(viewLifecycleOwner) {
                     binding.viewSwitcher.displayedChild = if (it.isNotEmpty()) notEmptyIndex else emptyIndex
                     tasks = it
                 }
