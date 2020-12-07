@@ -2,10 +2,10 @@ package com.boristul.uikit
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
 import com.boristul.uikit.databinding.CardTaskPointBinding
 import com.boristul.utils.attr
+import com.boristul.utils.getDrawableCompat
 import com.daimajia.swipe.SwipeLayout
 
 class TaskPointCard @JvmOverloads constructor(
@@ -49,7 +49,7 @@ class TaskPointCard @JvmOverloads constructor(
 
         context.apply {
             binding.surfaceLayout.background =
-                ContextCompat.getDrawable(this, attr(android.R.attr.selectableItemBackground).resourceId)
+                getDrawableCompat(attr(android.R.attr.selectableItemBackground).resourceId)
         }
     }
 }
