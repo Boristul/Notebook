@@ -2,16 +2,18 @@ package com.boristul.notebook.ui.planner
 
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.boristul.entity.TaskPoint
+import com.boristul.notebook.ui.planner.taskeditor.TaskListDiffCallback
 import com.boristul.uikit.TaskPointCard
 
 class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.ItemViewHolder>() {
 
     var tasks: List<TaskPoint> = listOf()
         set(value) {
+            DiffUtil.calculateDiff(TaskListDiffCallback(field, value)).dispatchUpdatesTo(this)
             field = value
-            notifyDataSetChanged()
         }
 
     var onDeleteClickListener: ((TaskPoint) -> Unit)? = null
