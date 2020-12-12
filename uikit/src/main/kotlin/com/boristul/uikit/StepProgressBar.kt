@@ -169,7 +169,6 @@ class StepProgressBar @JvmOverloads constructor(
     }
 
     init {
-
         context.withStyledAttributes(attrs, R.styleable.StepProgressBar, defStyleAttr) {
             count = getInt(R.styleable.StepProgressBar_count, DEFAULT_COUNT)
             stepRadius = getDimension(R.styleable.StepProgressBar_stepRadius, DEFAULT_STEPS_RADIUS)

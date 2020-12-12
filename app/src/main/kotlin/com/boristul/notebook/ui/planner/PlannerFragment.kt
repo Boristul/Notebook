@@ -18,6 +18,7 @@ import com.boristul.notebook.R
 import com.boristul.notebook.databinding.FragmentPlannerBinding
 import com.boristul.utils.getColorCompat
 import com.boristul.utils.setColor
+import com.boristul.utils.showDatePicker
 import com.boristul.utils.viewbinding.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
@@ -31,18 +32,20 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
     private val viewModel by viewModels<PlannerFragmentViewModel>()
     private val binding by viewBinding<FragmentPlannerBinding>()
 
+    private val calendar: HorizontalCalendar by lazy {
+        HorizontalCalendar.Builder(view, binding.calendar.id)
+            .range(
+                Calendar.getInstance().apply { add(Calendar.YEAR, -1) },
+                Calendar.getInstance().apply { add(Calendar.YEAR, 1) }
+            )
+            .datesNumberOnScreen(5)
+            .build()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         (requireActivity() as AppCompatActivity).supportActionBar?.apply {
             setHasOptionsMenu(true)
         }
-
-        val calendar = HorizontalCalendar.Builder(view, binding.calendar.id)
-            .range(
-                Calendar.getInstance().apply { add(Calendar.MONTH, -1) },
-                Calendar.getInstance().apply { add(Calendar.MONTH, 1) }
-            )
-            .datesNumberOnScreen(5)
-            .build()
 
         calendar.calendarListener = object : HorizontalCalendarListener() {
             override fun onDateSelected(date: Calendar?, position: Int) {
@@ -78,12 +81,12 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.top_main, menu)
+        inflater.inflate(R.menu.menu_planner, menu)
         menu.setColor(requireContext().getColorCompat(R.color.menu))
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.nav_action_add -> {
+        R.id.mp_add -> {
             MaterialAlertDialogBuilder(requireActivity())
                 .setView(R.layout.item_task_editor)
                 .setTitle(R.string.pf_add_task_title)
@@ -98,6 +101,16 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
                 }
                 .setNegativeButton(R.string.pf_cancel, null)
                 .show()
+            true
+        }
+        R.id.mp_calendar -> {
+            requireContext().showDatePicker(
+                viewModel.selectedDate.value, LocalDate.now().minusYears(1), LocalDate.now().plusYears(1)
+            ) {
+                calendar.selectDate(Calendar.getInstance().apply {
+                    time = it.toDate()
+                }, true)
+            }
             true
         }
         else -> false

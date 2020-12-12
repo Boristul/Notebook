@@ -59,4 +59,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
     // endregion
+
+    // region Core
+    implementation("joda-time:joda-time:2.10.8")
+    // endregion
 }
