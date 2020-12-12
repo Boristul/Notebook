@@ -64,8 +64,21 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
                 }
 
                 onClickListener = { task ->
-                    viewModel.viewModelScope.launch {
-                        viewModel.update(task.id, !task.isCompleted)
+                    if (task.isCompleted) {
+                        MaterialAlertDialogBuilder(requireActivity())
+                            .setTitle(R.string.pf_mark_uncompleted_title)
+                            .setMessage(R.string.pf_mark_uncompleted_description)
+                            .setPositiveButton(R.string.pf_yes) { _, _ ->
+                                viewModel.viewModelScope.launch {
+                                    viewModel.update(task.id, !task.isCompleted)
+                                }
+                            }
+                            .setNegativeButton(R.string.pf_cancel, null)
+                            .show()
+                    } else {
+                        viewModel.viewModelScope.launch {
+                            viewModel.update(task.id, !task.isCompleted)
+                        }
                     }
                 }
 

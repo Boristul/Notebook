@@ -72,6 +72,9 @@
     <string name="pf_create">Create</string>
     <string name="pf_cancel">Cancel</string>
     <string name="pf_empty_tasks">Start creating plan for day</string>
+    <string name="pf_mark_uncompleted_title">Mark as uncompleted</string>
+    <string name="pf_mark_uncompleted_description">Are you sure you want to mark this task as uncompleted?</string>
+    <string name="pf_yes">Yes</string>
     <!--  endregion  -->
 
     <!--  region TaskEditorItem  -->
