@@ -1,4 +1,4 @@
-package com.boristul.notebook.ui.planner.taskeditor
+package com.boristul.notebook.ui.planner.taskadapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.boristul.entity.TaskPoint

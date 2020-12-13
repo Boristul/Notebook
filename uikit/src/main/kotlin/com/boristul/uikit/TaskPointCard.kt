@@ -13,6 +13,12 @@ class TaskPointCard @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : SwipeLayout(context, attrs, defStyleAttr) {
+
+    companion object {
+        private const val CHECKED_SPEED = 2f
+        private const val UNCHECKED_SPEED = -2f
+    }
+
     private val binding = CardTaskPointBinding.inflate(requireNotNull(context.getSystemService()), this)
 
     var title: CharSequence?
@@ -29,16 +35,14 @@ class TaskPointCard @JvmOverloads constructor(
         binding.checkbox.apply {
             when {
                 isAnimated && isChecked -> {
-                    speed = 2f
+                    speed = CHECKED_SPEED
                     playAnimation()
                 }
                 isAnimated && !isChecked -> {
-                    speed = -2f
+                    speed = UNCHECKED_SPEED
                     playAnimation()
                 }
-                else -> {
-                    binding.checkbox.progress = if (isChecked) 1f else 0f
-                }
+                else -> binding.checkbox.progress = if (isChecked) 1f else 0f
             }
         }
     }

@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.boristul.notebook.R
 import com.boristul.notebook.databinding.FragmentPlannerBinding
+import com.boristul.notebook.ui.planner.taskadapter.TaskListAdapter
 import com.boristul.utils.getColorCompat
 import com.boristul.utils.setColor
 import com.boristul.utils.showDatePicker
@@ -29,6 +30,11 @@ import org.joda.time.LocalDate
 import java.util.Calendar
 
 class PlannerFragment : Fragment(R.layout.fragment_planner) {
+
+    companion object {
+        private const val COUNT_DATES_ON_SCREEN = 5
+    }
+
     private val viewModel by viewModels<PlannerFragmentViewModel>()
     private val binding by viewBinding<FragmentPlannerBinding>()
 
@@ -38,12 +44,11 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
                 Calendar.getInstance().apply { add(Calendar.YEAR, -1) },
                 Calendar.getInstance().apply { add(Calendar.YEAR, 1) }
             )
-            .datesNumberOnScreen(5)
+            .datesNumberOnScreen(COUNT_DATES_ON_SCREEN)
             .build()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         val owner = viewLifecycleOwner
 
         (requireActivity() as AppCompatActivity).supportActionBar?.apply {
@@ -125,11 +130,16 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
         }
         R.id.mp_calendar -> {
             requireContext().showDatePicker(
-                viewModel.selectedDate.value, LocalDate.now().minusYears(1), LocalDate.now().plusYears(1)
+                viewModel.selectedDate.value,
+                LocalDate.now().minusYears(1),
+                LocalDate.now().plusYears(1)
             ) {
-                calendar.selectDate(Calendar.getInstance().apply {
-                    time = it.toDate()
-                }, true)
+                calendar.selectDate(
+                    Calendar.getInstance().apply {
+                        time = it.toDate()
+                    },
+                    true
+                )
             }
             true
         }

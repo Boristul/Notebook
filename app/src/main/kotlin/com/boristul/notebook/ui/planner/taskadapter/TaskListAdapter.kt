@@ -1,11 +1,10 @@
-package com.boristul.notebook.ui.planner
+package com.boristul.notebook.ui.planner.taskadapter
 
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.boristul.entity.TaskPoint
-import com.boristul.notebook.ui.planner.taskeditor.TaskListDiffCallback
 import com.boristul.uikit.TaskPointCard
 
 class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.ItemViewHolder>() {
