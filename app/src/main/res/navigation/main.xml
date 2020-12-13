@@ -18,6 +18,21 @@
             app:destination="@id/note_info" />
     </fragment>
 
+    <dialog
+        android:id="@+id/note_info"
+        android:name="com.boristul.notebook.ui.notes.noteinfo.NoteInfoFragment"
+        android:label="@string/nif_label"
+        tools:layout="@layout/fragment_note_info">
+        <action
+            android:id="@+id/action_note_info_to_note_editor"
+            app:destination="@id/note_editor" />
+
+        <argument
+            android:name="note"
+            app:argType="com.boristul.entity.NoteWithTags" />
+
+    </dialog>
+
     <fragment
         android:id="@+id/note_editor"
         android:name="com.boristul.notebook.ui.notes.noteeditor.NoteEditorFragment"
@@ -61,20 +76,5 @@
         android:name="com.boristul.notebook.ui.settings.tags.TagsFragment"
         android:label="@string/tf_label"
         tools:layout="@layout/fragment_tags" />
-
-    <dialog
-        android:id="@+id/note_info"
-        android:name="com.boristul.notebook.ui.notes.noteinfo.NoteInfoFragment"
-        android:label="@string/nif_label"
-        tools:layout="@layout/fragment_note_info">
-        <action
-            android:id="@+id/action_note_info_to_note_editor"
-            app:destination="@id/note_editor" />
-
-        <argument
-            android:name="note"
-            app:argType="com.boristul.entity.NoteWithTags" />
-
-    </dialog>
 
 </navigation>
