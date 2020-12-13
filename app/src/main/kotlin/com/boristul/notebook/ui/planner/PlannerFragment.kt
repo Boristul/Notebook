@@ -43,8 +43,15 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        val owner = viewLifecycleOwner
+
         (requireActivity() as AppCompatActivity).supportActionBar?.apply {
             setHasOptionsMenu(true)
+
+            viewModel.tasksCount.observe(owner) {
+                title = getString(R.string.pf_completed_count, it.first, it.second)
+            }
         }
 
         calendar.calendarListener = object : HorizontalCalendarListener() {
@@ -58,7 +65,7 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
                 val notEmptyIndex = 0
                 val emptyIndex = 1
 
-                viewModel.taskPoints.distinctUntilChanged().observe(viewLifecycleOwner) {
+                viewModel.taskPoints.distinctUntilChanged().observe(owner) {
                     binding.viewSwitcher.displayedChild = if (it.isNotEmpty()) notEmptyIndex else emptyIndex
                     tasks = it
                 }
