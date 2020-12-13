@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -55,7 +56,7 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
             setHasOptionsMenu(true)
 
             viewModel.tasksCount.observe(owner) {
-                title = getString(R.string.pf_completed_count, it.first, it.second)
+                title = getString(R.string.pf_completed_count, it.first.toString(), it.second.toString())
             }
         }
 
@@ -99,6 +100,7 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
                         viewModel.delete(it.id)
                     }
                 }
+                onLongClickListener = { findNavController().navigate(R.id.action_planner_to_task_editor) }
             }
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
@@ -113,7 +115,7 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.mp_add -> {
             MaterialAlertDialogBuilder(requireActivity())
-                .setView(R.layout.item_task_editor)
+                .setView(R.layout.dialog_task_editor)
                 .setTitle(R.string.pf_add_task_title)
                 .setPositiveButton(R.string.pf_create) { dialog, _ ->
                     // TODO: Think about how to get text using View Binding

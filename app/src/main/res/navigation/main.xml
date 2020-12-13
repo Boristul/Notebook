@@ -63,7 +63,15 @@
         android:id="@+id/planner"
         android:name="com.boristul.notebook.ui.planner.PlannerFragment"
         android:label="@string/pf_label"
-        tools:layout="@layout/fragment_planner" />
+        tools:layout="@layout/fragment_planner">
+        <action
+            android:id="@+id/action_planner_to_task_editor"
+            app:destination="@id/task_editor" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/task_editor"
+        android:name="com.boristul.notebook.ui.planner.taskeditor.TaskEditorDialog" />
 
     <fragment
         android:id="@+id/about"
