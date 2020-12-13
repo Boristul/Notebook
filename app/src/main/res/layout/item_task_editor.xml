@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/tei_hint"
         android:maxLength="50"
+        android:inputType="textCapSentences"
         android:singleLine="true"
         tools:text="Hello, World!" />
 </com.google.android.material.textfield.TextInputLayout>

@@ -28,9 +28,11 @@ class NoteCard @JvmOverloads constructor(
         }
 
     var onDeleteClickListener: (() -> Unit)? = null
+    var onClickListener: (() -> Unit)? = null
 
     init {
         binding.delete.setOnClickListener { onDeleteClickListener?.invoke() }
+        binding.surfaceLayout.setOnClickListener { onClickListener?.invoke() }
 
         context.apply {
             binding.surfaceLayout.background =

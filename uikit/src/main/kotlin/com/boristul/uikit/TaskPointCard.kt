@@ -28,8 +28,8 @@ class TaskPointCard @JvmOverloads constructor(
         }
 
     var onDeleteClickListener: (() -> Unit)? = null
-
     var onClickListener: (() -> Unit)? = null
+    var onLongClickListener: (() -> Unit)? = null
 
     fun setChecked(isChecked: Boolean, isAnimated: Boolean = true) {
         binding.checkbox.apply {
@@ -50,6 +50,10 @@ class TaskPointCard @JvmOverloads constructor(
     init {
         binding.delete.setOnClickListener { onDeleteClickListener?.invoke() }
         surfaceView.setOnClickListener { onClickListener?.invoke() }
+        surfaceView.setOnLongClickListener {
+            onLongClickListener?.invoke()
+            true
+        }
 
         context.apply {
             binding.surfaceLayout.background =

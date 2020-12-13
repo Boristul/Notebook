@@ -17,6 +17,7 @@ class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.ItemViewHolder>() {
 
     var onDeleteClickListener: ((TaskPoint) -> Unit)? = null
     var onClickListener: ((TaskPoint) -> Unit)? = null
+    var onLongClickListener: ((TaskPoint) -> Unit)? = null
 
     private var updatedItem: Long? = null
 
@@ -30,11 +31,12 @@ class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.ItemViewHolder>() {
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
 
-        card.surfaceView.setOnClickListener {
-            updatedItem = tasks[adapterPosition].id
+        card.onClickListener = {
             onClickListener?.invoke(tasks[adapterPosition])
+            updatedItem = tasks[adapterPosition].id
         }
         card.onDeleteClickListener = { onDeleteClickListener?.invoke(tasks[adapterPosition]) }
+        card.onLongClickListener = { onLongClickListener?.invoke(tasks[adapterPosition]) }
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) =

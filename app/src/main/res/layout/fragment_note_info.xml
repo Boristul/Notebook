@@ -107,24 +107,10 @@
             android:padding="8dp"
             android:src="@drawable/ic_pencil"
             android:tint="?colorOnBackground"
-            app:layout_constraintEnd_toStartOf="@id/completed"
+            app:layout_constraintEnd_toStartOf="@id/share"
 
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bottom_divider" />
-
-        <ImageButton
-            android:id="@+id/completed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:padding="8dp"
-            android:src="@drawable/ic_star"
-            android:tint="?colorOnBackground"
-
-            app:layout_constraintEnd_toStartOf="@id/share"
-            app:layout_constraintStart_toEndOf="@id/edit"
             app:layout_constraintTop_toBottomOf="@id/bottom_divider" />
 
         <ImageButton
@@ -138,7 +124,7 @@
             android:tint="?colorOnBackground"
 
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/completed"
+            app:layout_constraintStart_toEndOf="@id/edit"
             app:layout_constraintTop_toBottomOf="@id/bottom_divider" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
