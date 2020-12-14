@@ -4,6 +4,7 @@
     <!-- region MainActivity -->
     <string name="ma_notes">Notes</string>
     <string name="ma_settings">Settings</string>
+    <string name="ma_planner">Planner</string>
     <!-- endregion -->
 
     <!-- region NotesFragment -->
@@ -61,5 +62,29 @@
     <string name="tf_cancel">Cancel</string>
     <string name="tf_delete">Delete</string>
     <!-- endregion -->
+
+    <!--  region PlannerFragment  -->
+    <string name="pf_label">Planner</string>
+    <string name="pf_completed_count">Completed %1$s/%2$s</string>
+    <string name="pf_add">Add</string>
+    <string name="pf_calendar">Calendar</string>
+    <string name="pf_successful_delete">Task has successfully deleted</string>
+    <string name="pf_add_task_title">Create task</string>
+    <string name="pf_create">Create</string>
+    <string name="pf_cancel">Cancel</string>
+    <string name="pf_add_task">+ Add new task</string>
+    <string name="pf_mark_uncompleted_title">Mark as uncompleted</string>
+    <string name="pf_mark_uncompleted_description">Are you sure you want to mark this task as uncompleted?</string>
+    <string name="pf_yes">Yes</string>
+    <!--  endregion  -->
+
+    <!--  region TaskEditorDialog  -->
+    <string name="ted_hint">Input task</string>
+    <string name="ted_save">Save</string>
+    <string name="ted_add">Add</string>
+    <string name="ted_cancel">Cancel</string>
+    <string name="ted_edit_title">Edit task</string>
+    <string name="ted_create_title">Create task</string>
+    <!--  endregion  -->
 
 </resources>

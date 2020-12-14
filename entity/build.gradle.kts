@@ -47,6 +47,6 @@ dependencies {
     // endregion
 
     // region Core
-    api("joda-time:joda-time:2.10.7")
+    api("joda-time:joda-time:2.10.8")
     // endregion
 }

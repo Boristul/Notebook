@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<MainActivityViewModel>()
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    private val appBarConfiguration by lazy { AppBarConfiguration(setOf(R.id.notes, R.id.settings)) }
+    private val appBarConfiguration by lazy { AppBarConfiguration(setOf(R.id.notes, R.id.planner, R.id.settings)) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

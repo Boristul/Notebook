@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.boristul.notebook.R
@@ -15,12 +16,14 @@ import com.boristul.utils.hideKeyboard
 import com.boristul.utils.navArgsFactory
 import com.boristul.utils.setViewCount
 import com.boristul.utils.toast
+import com.boristul.utils.viewbinding.viewBinding
 import com.google.android.material.chip.Chip
 import kotlinx.coroutines.launch
 
 class NoteEditorFragment : Fragment(R.layout.fragment_note_editor) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val binding by viewBinding<FragmentNoteEditorBinding>()
         val viewModel by viewModels<NoteEditorFragmentViewModel> {
             navArgsFactory<NoteEditorFragmentArgs> { application ->
                 NoteEditorFragmentViewModel(application, note)
@@ -30,8 +33,6 @@ class NoteEditorFragment : Fragment(R.layout.fragment_note_editor) {
         (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(
             if (viewModel.isEdition) R.string.nef_title_edit else R.string.nef_title_create
         )
-
-        val binding = FragmentNoteEditorBinding.bind(view)
 
         binding.title.apply {
             viewModel.title.distinctUntilChanged { value ->
@@ -48,7 +49,7 @@ class NoteEditorFragment : Fragment(R.layout.fragment_note_editor) {
         }
 
         binding.save.apply {
-            viewModel.isTitleNotEmpty.observe(viewLifecycleOwner) {
+            viewModel.isTitleNotEmpty.distinctUntilChanged().observe(viewLifecycleOwner) {
                 isEnabled = it
             }
 

@@ -23,8 +23,8 @@ import kotlinx.coroutines.launch
 class NotesFragment : Fragment(R.layout.fragment_notes) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val viewModel by viewModels<NotesFragmentViewModel>()
         val binding = FragmentNotesBinding.bind(view)
+        val viewModel by viewModels<NotesFragmentViewModel>()
 
         (requireActivity() as AppCompatActivity).supportActionBar?.apply {
             setHasOptionsMenu(true)
@@ -56,12 +56,12 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.top_main, menu)
+        inflater.inflate(R.menu.menu_notes, menu)
         menu.setColor(requireContext().getColorCompat(R.color.menu))
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.nav_action_add -> {
+        R.id.mn_add -> {
             findNavController().navigate(NotesFragmentDirections.actionNotesToNoteEditor(null))
             true
         }
