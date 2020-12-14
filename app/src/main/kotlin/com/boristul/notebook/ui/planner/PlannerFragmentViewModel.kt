@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.switchMap
 import com.boristul.entity.TaskPoint
-import com.boristul.repository.TaskPointRepository
+import com.boristul.repository.TaskPointsRepository
 import org.joda.time.LocalDate
 import org.kodein.di.DI
 import org.kodein.di.DIAware
@@ -16,7 +16,7 @@ import org.kodein.di.instance
 
 class PlannerFragmentViewModel(application: Application) : AndroidViewModel(application), DIAware {
     override val di: DI by di()
-    private val taskPointRepository by instance<TaskPointRepository>()
+    private val taskPointRepository by instance<TaskPointsRepository>()
 
     val selectedDate = MutableLiveData(LocalDate.now())
 
@@ -30,8 +30,6 @@ class PlannerFragmentViewModel(application: Application) : AndroidViewModel(appl
             tasks.size
         )
     }
-
-    suspend fun addTask(text: String) = taskPointRepository.insert(text, checkNotNull(selectedDate.value))
 
     suspend fun delete(id: Long) = taskPointRepository.delete(id)
     suspend fun update(id: Long, isCompleted: Boolean) = taskPointRepository.update(id, isCompleted)

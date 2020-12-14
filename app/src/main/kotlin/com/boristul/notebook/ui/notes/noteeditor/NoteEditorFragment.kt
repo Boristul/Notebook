@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.boristul.notebook.R
@@ -48,7 +49,7 @@ class NoteEditorFragment : Fragment(R.layout.fragment_note_editor) {
         }
 
         binding.save.apply {
-            viewModel.isTitleNotEmpty.observe(viewLifecycleOwner) {
+            viewModel.isTitleNotEmpty.distinctUntilChanged().observe(viewLifecycleOwner) {
                 isEnabled = it
             }
 

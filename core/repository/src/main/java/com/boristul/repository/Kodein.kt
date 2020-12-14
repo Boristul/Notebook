@@ -12,5 +12,5 @@ fun repositoryModule(application: Application, databaseName: String? = null) = D
 
     bind() from singleton { NotesRepository(db.instance()) }
     bind() from singleton { TagsRepository(db.instance()) }
-    bind() from singleton { TaskPointRepository(db.instance()) }
+    bind() from singleton { TaskPointsRepository(db.instance()) }
 }

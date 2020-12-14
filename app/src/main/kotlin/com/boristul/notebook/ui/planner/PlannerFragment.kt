@@ -100,7 +100,7 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
                         viewModel.delete(it.id)
                     }
                 }
-                onLongClickListener = { findNavController().navigate(R.id.action_planner_to_task_editor) }
+                onLongClickListener = { PlannerFragmentDirections.actionPlannerToTaskEditor(task = it) }
             }
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
@@ -114,20 +114,7 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.mp_add -> {
-            MaterialAlertDialogBuilder(requireActivity())
-                .setView(R.layout.dialog_task_editor)
-                .setTitle(R.string.pf_add_task_title)
-                .setPositiveButton(R.string.pf_create) { dialog, _ ->
-                    // TODO: Think about how to get text using View Binding
-                    val text = (dialog as AlertDialog).requireViewById<TextInputEditText>(R.id.tei_input_message).text.toString()
-                    viewModel.apply {
-                        viewModelScope.launch {
-                            addTask(text)
-                        }
-                    }
-                }
-                .setNegativeButton(R.string.pf_cancel, null)
-                .show()
+            PlannerFragmentDirections.actionPlannerToTaskEditor(date = checkNotNull(viewModel.selectedDate.value))
             true
         }
         R.id.mp_calendar -> {

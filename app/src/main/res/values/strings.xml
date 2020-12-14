@@ -78,8 +78,13 @@
     <string name="pf_yes">Yes</string>
     <!--  endregion  -->
 
-    <!--  region TaskEditorItem  -->
-    <string name="tei_hint">Input task</string>
+    <!--  region TaskEditorDialog  -->
+    <string name="ted_hint">Input task</string>
+    <string name="ted_save">Save</string>
+    <string name="ted_add">Add</string>
+    <string name="ted_cancel">Cancel</string>
+    <string name="ted_edit_title">Edit task</string>
+    <string name="ted_create_title">Create task</string>
     <!--  endregion  -->
 
 </resources>

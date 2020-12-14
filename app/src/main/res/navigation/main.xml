@@ -71,7 +71,21 @@
 
     <dialog
         android:id="@+id/task_editor"
-        android:name="com.boristul.notebook.ui.planner.taskeditor.TaskEditorDialog" />
+        android:name="com.boristul.notebook.ui.planner.taskeditor.TaskEditorDialog">
+
+        <argument
+            android:name="date"
+            android:defaultValue="@null"
+            app:argType="org.joda.time.LocalDate"
+            app:nullable="true" />
+
+        <argument
+            android:name="task"
+            android:defaultValue="@null"
+            app:argType="com.boristul.entity.TaskPoint"
+            app:nullable="true" />
+
+    </dialog>
 
     <fragment
         android:id="@+id/about"

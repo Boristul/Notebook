@@ -10,14 +10,14 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello world"
+        android:text="@string/ted_create_title"
         android:textAppearance="?textAppearanceBody2"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tei_input_layout"
+        android:id="@+id/input_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -29,10 +29,10 @@
         app:layout_constraintTop_toBottomOf="@id/title">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tei_input_message"
+            android:id="@+id/task_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/tei_hint"
+            android:hint="@string/ted_hint"
             android:inputType="textCapSentences"
             android:maxLength="50"
             android:singleLine="true"
@@ -44,26 +44,21 @@
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/ted_add"
 
-        android:text="Hello"
         app:layout_constraintBottom_toBottomOf="parent"
-
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tei_input_layout" />
+        app:layout_constraintTop_toBottomOf="@id/input_layout" />
 
     <Button
         android:id="@+id/cancel"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="World"
+        android:text="@string/ted_cancel"
 
         app:layout_constraintBottom_toBottomOf="parent"
-
         app:layout_constraintEnd_toStartOf="@id/save"
-        app:layout_constraintTop_toBottomOf="@id/tei_input_layout" />
+        app:layout_constraintTop_toBottomOf="@id/input_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
