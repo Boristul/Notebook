@@ -25,7 +25,7 @@ class TaskEditorDialogViewModel(
         private set
 
     val title = MutableLiveData("")
-    val isTitleNotBlank: LiveData<Boolean> = title.map { it.isNullOrBlank() }
+    val isTitleNotBlank: LiveData<Boolean> = title.map { !it.isNullOrBlank() }
 
     init {
         task?.let {

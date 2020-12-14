@@ -5,13 +5,13 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,7 +23,6 @@ import com.boristul.utils.setColor
 import com.boristul.utils.showDatePicker
 import com.boristul.utils.viewbinding.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.textfield.TextInputEditText
 import devs.mulham.horizontalcalendar.HorizontalCalendar
 import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener
 import kotlinx.coroutines.launch
@@ -100,10 +99,17 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
                         viewModel.delete(it.id)
                     }
                 }
-                onLongClickListener = { PlannerFragmentDirections.actionPlannerToTaskEditor(task = it) }
+                onLongClickListener = {
+                    findNavController().navigate(PlannerFragmentDirections.actionPlannerToTaskEditor(task = it))
+                }
             }
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
+        }
+        binding.addTask.setOnClickListener {
+            findNavController().navigate(
+                PlannerFragmentDirections.actionPlannerToTaskEditor(date = checkNotNull(viewModel.selectedDate.value))
+            )
         }
     }
 
@@ -114,7 +120,9 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.mp_add -> {
-            PlannerFragmentDirections.actionPlannerToTaskEditor(date = checkNotNull(viewModel.selectedDate.value))
+            findNavController().navigate(
+                PlannerFragmentDirections.actionPlannerToTaskEditor(date = checkNotNull(viewModel.selectedDate.value))
+            )
             true
         }
         R.id.mp_calendar -> {

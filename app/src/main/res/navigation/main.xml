@@ -71,7 +71,8 @@
 
     <dialog
         android:id="@+id/task_editor"
-        android:name="com.boristul.notebook.ui.planner.taskeditor.TaskEditorDialog">
+        android:name="com.boristul.notebook.ui.planner.taskeditor.TaskEditorDialog"
+        tools:layout="@layout/dialog_task_editor">
 
         <argument
             android:name="date"

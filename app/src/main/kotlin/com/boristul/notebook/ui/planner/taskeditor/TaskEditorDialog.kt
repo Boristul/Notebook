@@ -9,12 +9,8 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.boristul.notebook.R
 import com.boristul.notebook.databinding.DialogTaskEditorBinding
-import com.boristul.notebook.ui.notes.noteeditor.NoteEditorFragmentArgs
-import com.boristul.notebook.ui.notes.noteeditor.NoteEditorFragmentViewModel
 import com.boristul.utils.distinctUntilChanged
 import com.boristul.utils.navArgsFactory
 import com.boristul.utils.viewbinding.inflateViewBinding
@@ -49,6 +45,8 @@ class TaskEditorDialog : DialogFragment() {
         }
 
         binding.save.apply {
+            text = getString(if (viewModel.isEdition) R.string.ted_save else R.string.ted_add)
+
             viewModel.isTitleNotBlank.distinctUntilChanged().observe(owner) {
                 isEnabled = it
             }
@@ -56,13 +54,13 @@ class TaskEditorDialog : DialogFragment() {
             setOnClickListener {
                 viewModel.viewModelScope.launch {
                     viewModel.save()
-                    findNavController().popBackStack()
+                    dialog?.dismiss()
                 }
             }
         }
 
         binding.cancel.setOnClickListener {
-            findNavController().popBackStack()
+            dialog?.dismiss()
         }
     }
 
