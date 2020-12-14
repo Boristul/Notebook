@@ -18,10 +18,8 @@ import com.boristul.utils.viewbinding.viewBinding
 import kotlinx.coroutines.launch
 
 class TaskEditorDialog : DialogFragment() {
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        return inflater.inflateViewBinding<DialogTaskEditorBinding>(container, false).root
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
+        inflater.inflateViewBinding<DialogTaskEditorBinding>(container, false).root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding by viewBinding<DialogTaskEditorBinding>()
