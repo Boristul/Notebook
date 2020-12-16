@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/planner_graph"
+    app:startDestination="@id/planner">
+
+    <fragment
+        android:id="@+id/planner"
+        android:name="com.boristul.notebook.ui.planner.PlannerFragment"
+        android:label="@string/pf_label"
+        tools:layout="@layout/fragment_planner">
+        <action
+            android:id="@+id/action_planner_to_task_editor"
+            app:destination="@id/task_editor" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/task_editor"
+        android:name="com.boristul.notebook.ui.planner.taskeditor.TaskEditorDialog"
+        tools:layout="@layout/dialog_task_editor">
+
+        <argument
+            android:name="date"
+            android:defaultValue="@null"
+            app:argType="org.joda.time.LocalDate"
+            app:nullable="true" />
+
+        <argument
+            android:name="task"
+            android:defaultValue="@null"
+            app:argType="com.boristul.entity.TaskPoint"
+            app:nullable="true" />
+
+    </dialog>
+
+</navigation>

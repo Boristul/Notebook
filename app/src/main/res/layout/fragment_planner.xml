@@ -42,12 +42,20 @@
                 android:layout_gravity="center"
                 android:src="@drawable/ic_plan" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/pf_no_tasks"
+                android:textAppearance="?textAppearanceBody2" />
+
             <Button
                 android:id="@+id/add_task"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="8dp"
                 android:text="@string/pf_add_task"
                 android:textAppearance="?textAppearanceBody1"
                 android:textStyle="bold" />

@@ -53,6 +53,10 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
         }
+
+        binding.addNote.setOnClickListener {
+            findNavController().navigate(NotesFragmentDirections.actionNotesToNoteEditor(null))
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

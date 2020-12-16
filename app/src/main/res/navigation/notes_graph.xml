@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/notes_graph"
+    app:startDestination="@id/notes">
+
+    <fragment
+        android:id="@+id/notes"
+        android:name="com.boristul.notebook.ui.notes.NotesFragment"
+        android:label="@string/nf_label"
+        tools:layout="@layout/fragment_notes">
+        <action
+            android:id="@+id/action_notes_to_note_editor"
+            app:destination="@id/note_editor"
+            app:enterAnim="@android:anim/fade_in" />
+        <action
+            android:id="@+id/action_notes_to_note_info"
+            app:destination="@id/note_info" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/note_info"
+        android:name="com.boristul.notebook.ui.notes.noteinfo.NoteInfoFragment"
+        android:label="@string/nif_label"
+        tools:layout="@layout/fragment_note_info">
+        <action
+            android:id="@+id/action_note_info_to_note_editor"
+            app:destination="@id/note_editor"
+            app:enterAnim="@android:anim/fade_in" />
+
+        <argument
+            android:name="note"
+            app:argType="com.boristul.entity.NoteWithTags" />
+
+    </dialog>
+
+    <fragment
+        android:id="@+id/note_editor"
+        android:name="com.boristul.notebook.ui.notes.noteeditor.NoteEditorFragment"
+        android:label="@string/nef_title_edit"
+        tools:layout="@layout/fragment_note_editor">
+
+        <argument
+            android:name="note"
+            android:defaultValue="@null"
+            app:argType="com.boristul.entity.NoteWithTags"
+            app:nullable="true" />
+
+    </fragment>
+
+</navigation>
