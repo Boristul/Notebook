@@ -12,7 +12,8 @@
         tools:layout="@layout/fragment_notes">
         <action
             android:id="@+id/action_notes_to_note_editor"
-            app:destination="@id/note_editor" />
+            app:destination="@id/note_editor"
+            app:enterAnim="@android:anim/fade_in" />
         <action
             android:id="@+id/action_notes_to_note_info"
             app:destination="@id/note_info" />
@@ -25,7 +26,8 @@
         tools:layout="@layout/fragment_note_info">
         <action
             android:id="@+id/action_note_info_to_note_editor"
-            app:destination="@id/note_editor" />
+            app:destination="@id/note_editor"
+            app:enterAnim="@android:anim/fade_in" />
 
         <argument
             android:name="note"
@@ -53,10 +55,12 @@
         android:label="@string/sf_label">
         <action
             android:id="@+id/action_settings_to_about"
-            app:destination="@id/about" />
+            app:destination="@id/about"
+            app:enterAnim="@android:anim/fade_in" />
         <action
             android:id="@+id/action_settings_to_tags"
-            app:destination="@id/tags" />
+            app:destination="@id/tags"
+            app:enterAnim="@android:anim/fade_in" />
     </fragment>
 
     <fragment
