@@ -13,6 +13,8 @@
     <string name="nf_empty_note">Create your first note</string>
     <string name="nf_delete_title">Delete note?</string>
     <string name="nf_delete">Delete</string>
+    <string name="nf_add_note">Add note</string>
+    <string name="nf_no_notes">No notes have been created, let"'"s try!</string>
     <string name="nf_successful_delete">Note has successfully deleted</string>
     <string name="nf_cancel">Cancel</string>
     <!-- endregion -->
@@ -72,7 +74,8 @@
     <string name="pf_add_task_title">Create task</string>
     <string name="pf_create">Create</string>
     <string name="pf_cancel">Cancel</string>
-    <string name="pf_add_task">+ Add new task</string>
+    <string name="pf_add_task">Add task</string>
+    <string name="pf_no_tasks">No tasks have been created for the day</string>
     <string name="pf_mark_uncompleted_title">Mark as uncompleted</string>
     <string name="pf_mark_uncompleted_description">Are you sure you want to mark this task as uncompleted?</string>
     <string name="pf_yes">Yes</string>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ViewSwitcher xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/view_switcher"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -12,13 +11,37 @@
         android:layout_height="match_parent"
         android:scrollbars="vertical" />
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/nf_empty_note"
-        android:textAppearance="?textAppearanceBody1"
-        app:drawableTopCompat="@drawable/ic_note" />
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_note" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/nf_no_notes"
+            android:textAppearance="?textAppearanceBody2" />
+
+        <Button
+            android:id="@+id/add_note"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:text="@string/nf_add_note"
+            android:textAppearance="?textAppearanceBody1"
+            android:textStyle="bold" />
+
+    </LinearLayout>
 
 </ViewSwitcher>
 
