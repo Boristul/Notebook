@@ -12,7 +12,9 @@ import androidx.lifecycle.viewModelScope
 import com.boristul.notebook.R
 import com.boristul.notebook.databinding.DialogTaskEditorBinding
 import com.boristul.utils.distinctUntilChanged
+import com.boristul.utils.hideKeyboard
 import com.boristul.utils.navArgsFactory
+import com.boristul.utils.showKeyboard
 import com.boristul.utils.viewbinding.inflateViewBinding
 import com.boristul.utils.viewbinding.viewBinding
 import kotlinx.coroutines.launch
@@ -36,6 +38,8 @@ class TaskEditorDialog : DialogFragment() {
         )
 
         binding.taskTitle.apply {
+            requestFocus()
+            showKeyboard()
             viewModel.title.distinctUntilChanged { value ->
                 value == text?.toString() ?: ""
             }.observe(owner) { setText(it) }
@@ -65,5 +69,10 @@ class TaskEditorDialog : DialogFragment() {
     override fun onResume() {
         super.onResume()
         dialog?.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        hideKeyboard()
     }
 }
