@@ -49,16 +49,20 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
             }
 
             TabLayoutMediator(binding.tabLayout, this) { tab, position ->
-                tab.text =
-                    checkNotNull(viewModel.selectedDate.value).withDayOfMonth(1).plusDays(position).toString(dayPattern)
+                tab.text = checkNotNull(viewModel.selectedDate.value)
+                    .withDayOfMonth(1)
+                    .plusDays(position)
+                    .toString(dayPattern)
             }.attach()
 
-            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    viewModel.selectedDate.value =
-                        checkNotNull(viewModel.selectedDate.value).withDayOfMonth(1).plusDays(position)
+            registerOnPageChangeCallback(
+                object : ViewPager2.OnPageChangeCallback() {
+                    override fun onPageSelected(position: Int) {
+                        viewModel.selectedDate.value =
+                            checkNotNull(viewModel.selectedDate.value).withDayOfMonth(1).plusDays(position)
+                    }
                 }
-            })
+            )
         }
     }
 
