@@ -5,63 +5,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <devs.mulham.horizontalcalendar.HorizontalCalendarView
-        android:id="@+id/calendar"
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:colorBottomTextSelected="?colorOnSecondary"
-        app:colorMiddleTextSelected="?colorOnSecondary"
-        app:colorTopTextSelected="?colorOnSecondary"
-        app:selectedDateBackground="?colorSecondary" />
+        app:tabMinWidth="120dp"
+        app:tabMode="scrollable" />
 
-    <View
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/divider" />
-
-    <ViewSwitcher
-        android:id="@+id/view_switcher"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/tasks_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_plan" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/pf_no_tasks"
-                android:textAppearance="?textAppearanceBody2" />
-
-            <Button
-                android:id="@+id/add_task"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="8dp"
-                android:text="@string/pf_add_task"
-                android:textAppearance="?textAppearanceBody1"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-    </ViewSwitcher>
+        android:layout_height="match_parent" />
 
 </LinearLayout>

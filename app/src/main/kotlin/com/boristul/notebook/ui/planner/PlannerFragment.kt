@@ -8,48 +8,28 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.distinctUntilChanged
-import androidx.lifecycle.viewModelScope
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.boristul.notebook.R
 import com.boristul.notebook.databinding.FragmentPlannerBinding
-import com.boristul.notebook.ui.planner.taskadapter.TaskListAdapter
+import com.boristul.notebook.ui.planner.dayplan.DayPlanViewPagerAdapter
 import com.boristul.utils.getColorCompat
 import com.boristul.utils.setColor
 import com.boristul.utils.showDatePicker
 import com.boristul.utils.viewbinding.viewBinding
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import devs.mulham.horizontalcalendar.HorizontalCalendar
-import devs.mulham.horizontalcalendar.utils.HorizontalCalendarListener
-import kotlinx.coroutines.launch
+import com.google.android.material.tabs.TabLayoutMediator
+import org.joda.time.DateTimeZone
 import org.joda.time.LocalDate
-import java.util.Calendar
+import org.joda.time.format.DateTimeFormat
 
 class PlannerFragment : Fragment(R.layout.fragment_planner) {
-
-    companion object {
-        private const val COUNT_DATES_ON_SCREEN = 5
-    }
 
     private val viewModel by viewModels<PlannerFragmentViewModel>()
     private val binding by viewBinding<FragmentPlannerBinding>()
 
-    private val calendar: HorizontalCalendar by lazy {
-        HorizontalCalendar.Builder(view, binding.calendar.id)
-            .range(
-                Calendar.getInstance().apply { add(Calendar.YEAR, -1) },
-                Calendar.getInstance().apply { add(Calendar.YEAR, 1) }
-            )
-            .datesNumberOnScreen(COUNT_DATES_ON_SCREEN)
-            .build()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val owner = viewLifecycleOwner
+        val dayPattern = DateTimeFormat.forPattern("dd.MM.YYYY").withZone(DateTimeZone.getDefault())
 
         (requireActivity() as AppCompatActivity).supportActionBar?.apply {
             setHasOptionsMenu(true)
@@ -59,57 +39,20 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
             }
         }
 
-        calendar.calendarListener = object : HorizontalCalendarListener() {
-            override fun onDateSelected(date: Calendar?, position: Int) {
-                viewModel.selectedDate.value = LocalDate(date)
-            }
-        }
+        binding.viewPager.apply {
+            val startDate = checkNotNull(viewModel.selectedDate.value)
+            adapter = DayPlanViewPagerAdapter(this@PlannerFragment)
+            setCurrentItem(startDate.dayOfMonth - 1, false)
 
-        binding.tasksList.apply {
-            adapter = TaskListAdapter().apply {
-                val notEmptyIndex = 0
-                val emptyIndex = 1
+            TabLayoutMediator(binding.tabLayout, this) { tab, position ->
+                tab.text = startDate.withDayOfMonth(1).plusDays(position).toString(dayPattern)
+            }.attach()
 
-                viewModel.taskPoints.distinctUntilChanged().observe(owner) {
-                    binding.viewSwitcher.displayedChild = if (it.isNotEmpty()) notEmptyIndex else emptyIndex
-                    tasks = it
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    viewModel.selectedDate.value = startDate.withDayOfMonth(1).plusDays(position)
                 }
-
-                onClickListener = { task ->
-                    if (task.isCompleted) {
-                        MaterialAlertDialogBuilder(requireActivity())
-                            .setTitle(R.string.pf_mark_uncompleted_title)
-                            .setMessage(R.string.pf_mark_uncompleted_description)
-                            .setPositiveButton(R.string.pf_yes) { _, _ ->
-                                viewModel.viewModelScope.launch {
-                                    viewModel.update(task.id, !task.isCompleted)
-                                }
-                            }
-                            .setNegativeButton(R.string.pf_cancel, null)
-                            .show()
-                    } else {
-                        viewModel.viewModelScope.launch {
-                            viewModel.update(task.id, !task.isCompleted)
-                        }
-                    }
-                }
-
-                onDeleteClickListener = {
-                    viewModel.viewModelScope.launch {
-                        viewModel.delete(it.id)
-                    }
-                }
-                onLongClickListener = {
-                    findNavController().navigate(PlannerFragmentDirections.actionPlannerToTaskEditor(task = it))
-                }
-            }
-            layoutManager = LinearLayoutManager(requireContext())
-            addItemDecoration(DividerItemDecoration(requireContext(), RecyclerView.VERTICAL))
-        }
-        binding.addTask.setOnClickListener {
-            findNavController().navigate(
-                PlannerFragmentDirections.actionPlannerToTaskEditor(date = checkNotNull(viewModel.selectedDate.value))
-            )
+            })
         }
     }
 
@@ -126,20 +69,19 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
             true
         }
         R.id.mp_calendar -> {
-            requireContext().showDatePicker(
-                viewModel.selectedDate.value,
-                LocalDate.now().minusYears(1),
-                LocalDate.now().plusYears(1)
-            ) {
-                calendar.selectDate(
-                    Calendar.getInstance().apply {
-                        time = it.toDate()
-                    },
-                    true
-                )
-            }
+            showCalendarDialog()
             true
         }
         else -> false
+    }
+
+    private fun showCalendarDialog() {
+        requireContext().showDatePicker(
+            viewModel.selectedDate.value,
+            LocalDate.now().minusMonths(1),
+            LocalDate.now().plusMonths(1)
+        ) {
+            viewModel.selectedDate.value = it
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.boristul.notebook.ui.planner
+package com.boristul.notebook.ui.planner.dayplan
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -14,7 +14,7 @@ import org.kodein.di.DIAware
 import org.kodein.di.android.x.di
 import org.kodein.di.instance
 
-class PlannerFragmentViewModel(application: Application) : AndroidViewModel(application), DIAware {
+class DayPlanFragmentViewModel(application: Application) : AndroidViewModel(application), DIAware {
     override val di: DI by di()
     private val taskPointRepository by instance<TaskPointsRepository>()
 
@@ -30,4 +30,7 @@ class PlannerFragmentViewModel(application: Application) : AndroidViewModel(appl
             tasks.size
         )
     }
+
+    suspend fun delete(id: Long) = taskPointRepository.delete(id)
+    suspend fun update(id: Long, isCompleted: Boolean) = taskPointRepository.update(id, isCompleted)
 }
