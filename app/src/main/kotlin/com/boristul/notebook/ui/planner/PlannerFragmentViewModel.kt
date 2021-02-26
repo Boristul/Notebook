@@ -18,9 +18,10 @@ class PlannerFragmentViewModel(application: Application) : AndroidViewModel(appl
     override val di: DI by di()
     private val taskPointRepository by instance<TaskPointsRepository>()
 
+    val startDate = MutableLiveData(LocalDate.now())
     val selectedDate = MutableLiveData(LocalDate.now())
 
-    val taskPoints: LiveData<List<TaskPoint>> = selectedDate.switchMap {
+    private val taskPoints: LiveData<List<TaskPoint>> = selectedDate.switchMap {
         taskPointRepository.getTaskPoints(it)
     }
 

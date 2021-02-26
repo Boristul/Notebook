@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.map
 import androidx.lifecycle.switchMap
 import com.boristul.entity.TaskPoint
 import com.boristul.repository.TaskPointsRepository
@@ -22,13 +21,6 @@ class DayPlanFragmentViewModel(application: Application) : AndroidViewModel(appl
 
     val taskPoints: LiveData<List<TaskPoint>> = selectedDate.switchMap {
         taskPointRepository.getTaskPoints(it)
-    }
-
-    val tasksCount: LiveData<Pair<Int, Int>> = taskPoints.map { tasks ->
-        Pair(
-            tasks.count { it.isCompleted },
-            tasks.size
-        )
     }
 
     suspend fun delete(id: Long) = taskPointRepository.delete(id)

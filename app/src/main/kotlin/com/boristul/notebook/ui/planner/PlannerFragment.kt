@@ -40,17 +40,23 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
         }
 
         binding.viewPager.apply {
-            val startDate = checkNotNull(viewModel.selectedDate.value)
-            adapter = DayPlanViewPagerAdapter(this@PlannerFragment)
-            setCurrentItem(startDate.dayOfMonth - 1, false)
+            adapter = DayPlanViewPagerAdapter(this@PlannerFragment).apply {
+                viewModel.startDate.observe(owner) {
+                    viewModel.selectedDate.value = it
+                    startDate = it
+                    setCurrentItem(it.dayOfMonth - 1, false)
+                }
+            }
 
             TabLayoutMediator(binding.tabLayout, this) { tab, position ->
-                tab.text = startDate.withDayOfMonth(1).plusDays(position).toString(dayPattern)
+                tab.text =
+                    checkNotNull(viewModel.selectedDate.value).withDayOfMonth(1).plusDays(position).toString(dayPattern)
             }.attach()
 
             registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
-                    viewModel.selectedDate.value = startDate.withDayOfMonth(1).plusDays(position)
+                    viewModel.selectedDate.value =
+                        checkNotNull(viewModel.selectedDate.value).withDayOfMonth(1).plusDays(position)
                 }
             })
         }
@@ -78,10 +84,10 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
     private fun showCalendarDialog() {
         requireContext().showDatePicker(
             viewModel.selectedDate.value,
-            LocalDate.now().minusMonths(1),
-            LocalDate.now().plusMonths(1)
+            LocalDate.now().minusYears(1),
+            LocalDate.now().plusYears(1)
         ) {
-            viewModel.selectedDate.value = it
+            viewModel.startDate.value = it
         }
     }
 }
