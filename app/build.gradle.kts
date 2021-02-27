@@ -118,6 +118,7 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navigationVersion")
     implementation("androidx.preference:preference:1.1.1")
+    implementation("androidx.viewpager2:viewpager2:1.1.0-alpha01")
     // endregion
 
     // region Core
