@@ -127,10 +127,6 @@ dependencies {
     implementation("org.kodein.di:kodein-di-framework-android-x:$kodeinVersion")
     // endregion
 
-    // region UI
-    implementation("devs.mulham.horizontalcalendar:horizontalcalendar:1.3.4")
-    // endregion
-
     // region Google services
     implementation(platform("com.google.firebase:firebase-bom:26.1.0"))
     implementation("com.google.firebase:firebase-analytics-ktx")

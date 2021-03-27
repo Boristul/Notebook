@@ -1,7 +1,6 @@
 plugins {
     id("com.android.library")
     kotlin("android")
-    kotlin("android.extensions")
     kotlin("kapt")
 }
 
@@ -56,11 +55,12 @@ dependencies {
     // endregion
 
     // region AndroidX
+    val lifecycleVersion: String by project
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
     // endregion
 
     // region Core
-    implementation("joda-time:joda-time:2.10.8")
+    implementation("joda-time:joda-time:2.10.10")
     // endregion
 }

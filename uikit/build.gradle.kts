@@ -1,7 +1,6 @@
 plugins {
     id("com.android.library")
     kotlin("android")
-    kotlin("android.extensions")
     kotlin("kapt")
 }
 
@@ -64,7 +63,7 @@ dependencies {
 
     // region UI
     api("com.daimajia.swipelayout:library:1.2.0@aar")
-    api("com.google.android.material:material:1.3.0-beta01")
+    api("com.google.android.material:material:1.4.0-alpha01")
     implementation("net.cachapa.expandablelayout:expandablelayout:2.9.2")
     api("com.airbnb.android:lottie:3.5.0")
     // endregion
