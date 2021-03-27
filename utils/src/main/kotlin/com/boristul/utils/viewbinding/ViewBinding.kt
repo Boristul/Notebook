@@ -34,10 +34,12 @@ fun <T : ViewBinding> KClass<T>.inflate(
     return if (inflateMethod.parameterTypes.size > 2) {
         inflateMethod.invoke(null, inflater, parent, attachToRoot)
     } else {
-        if (!attachToRoot) Log.d(
-            "ViewBinding",
-            "attachToRoot is always true for ${java.simpleName}.inflate"
-        )
+        if (!attachToRoot) {
+            Log.d(
+                "ViewBinding",
+                "attachToRoot is always true for ${java.simpleName}.inflate"
+            )
+        }
         inflateMethod.invoke(null, inflater, parent)
     } as T
 }

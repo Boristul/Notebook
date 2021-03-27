@@ -1,5 +1,5 @@
 plugins {
-    id("io.gitlab.arturbosch.detekt") version "1.12.0"
+    id("io.gitlab.arturbosch.detekt") version "1.16.0"
     kotlin("plugin.serialization") version "1.4.10"
 }
 
@@ -11,13 +11,13 @@ buildscript {
     dependencies {
         val kotlinVersion: String by project
 
-        classpath("com.android.tools.build:gradle:4.1.1")
+        classpath("com.android.tools.build:gradle:4.1.3")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
         classpath("org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion")
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.3.2")
-        classpath("com.google.gms:google-services:4.3.4")
-        classpath("com.google.firebase:firebase-crashlytics-gradle:2.4.1")
-        classpath("com.google.firebase:perf-plugin:1.3.4")
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.3.4")
+        classpath("com.google.gms:google-services:4.3.5")
+        classpath("com.google.firebase:firebase-crashlytics-gradle:2.5.2")
+        classpath("com.google.firebase:perf-plugin:1.3.5")
     }
 }
 
@@ -63,5 +63,5 @@ detekt {
 }
 
 dependencies {
-    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.12.0")
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.16.0")
 }

@@ -1,7 +1,6 @@
 plugins {
     id("com.android.library")
     kotlin("android")
-    kotlin("android.extensions")
     kotlin("kapt")
 }
 
@@ -47,6 +46,6 @@ dependencies {
     // endregion
 
     // region Core
-    api("joda-time:joda-time:2.10.8")
+    api("joda-time:joda-time:2.10.10")
     // endregion
 }
