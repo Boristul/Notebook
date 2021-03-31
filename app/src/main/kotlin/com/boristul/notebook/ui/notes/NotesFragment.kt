@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.boristul.notebook.R
 import com.boristul.notebook.databinding.FragmentNotesBinding
+
 import com.boristul.utils.collectOnStarted
 import com.boristul.utils.getColorCompat
 import com.boristul.utils.setColor
@@ -59,7 +60,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
         viewModel.state.collectOnStarted(lifecycleScope, lifecycle) { state ->
             when (state) {
                 NoteState.Started -> Unit
-                NoteState.NoteDeleted -> requireActivity().toast(R.string.nf_successful_delete)
+                is NoteState.NoteDeleted -> requireActivity().toast(R.string.nf_successful_delete)
             }
         }
     }

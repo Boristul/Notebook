@@ -22,6 +22,6 @@ class NotesFragmentViewModel(application: Application) : AndroidViewModel(applic
     val notes = notesRepository.getAll()
     fun delete(id: Long) = viewModelScope.launch {
         notesRepository.delete(id)
-        statePrivate.value = NoteState.NoteDeleted
+        statePrivate.value = NoteState.NoteDeleted(id)
     }
 }
