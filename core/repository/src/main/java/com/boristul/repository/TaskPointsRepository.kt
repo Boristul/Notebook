@@ -1,10 +1,10 @@
 package com.boristul.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.map
 import com.boristul.database.dao.TaskPointsDao
 import com.boristul.database.entity.TaskPointEntity
 import com.boristul.entity.TaskPoint
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import org.joda.time.LocalDate
 
 class TaskPointsRepository(
@@ -17,10 +17,10 @@ class TaskPointsRepository(
 
     suspend fun update(taskPoint: TaskPoint) = taskPointsDao.update(taskPoint.toEntity())
 
-    fun getTaskPoints(date: LocalDate): LiveData<List<TaskPoint>> = taskPointsDao.get(date).map()
+    fun getTaskPoints(date: LocalDate): Flow<List<TaskPoint>> = taskPointsDao.get(date).map()
 
     suspend fun delete(id: Long) = taskPointsDao.delete(id)
 
-    private fun LiveData<List<TaskPointEntity>>.map() = map { it.toList<TaskPoint>() }
+    private fun Flow<List<TaskPointEntity>>.map() = map { it.toList<TaskPoint>() }
     private fun TaskPoint.toEntity() = TaskPointEntity(title, date, isCompleted, id)
 }

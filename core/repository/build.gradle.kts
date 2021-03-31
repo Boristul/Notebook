@@ -52,7 +52,6 @@ dependencies {
 
     // region AndroidX
     val lifecycleVersion: String by project
-    api("androidx.lifecycle:lifecycle-livedata:$lifecycleVersion")
     api("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
     // endregion
 

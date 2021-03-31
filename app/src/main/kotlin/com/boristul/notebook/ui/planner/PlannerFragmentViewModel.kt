@@ -2,12 +2,14 @@ package com.boristul.notebook.ui.planner
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.map
-import androidx.lifecycle.switchMap
 import com.boristul.entity.TaskPoint
 import com.boristul.repository.TaskPointsRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
 import org.joda.time.LocalDate
 import org.kodein.di.DI
 import org.kodein.di.DIAware
@@ -18,17 +20,28 @@ class PlannerFragmentViewModel(application: Application) : AndroidViewModel(appl
     override val di: DI by di()
     private val taskPointRepository by instance<TaskPointsRepository>()
 
-    val startDate = MutableLiveData(LocalDate.now())
-    val selectedDate = MutableLiveData(LocalDate.now())
+    private val startDatePrivate = MutableStateFlow(LocalDate.now())
+    val startDate: StateFlow<LocalDate> = startDatePrivate.asStateFlow()
 
-    private val taskPoints: LiveData<List<TaskPoint>> = selectedDate.switchMap {
+    private val selectedDatePrivate = MutableStateFlow(LocalDate.now())
+    val selectedDate: StateFlow<LocalDate> = selectedDatePrivate.asStateFlow()
+
+    private val taskPoints: Flow<List<TaskPoint>> = selectedDatePrivate.flatMapLatest {
         taskPointRepository.getTaskPoints(it)
     }
 
-    val tasksCount: LiveData<Pair<Int, Int>> = taskPoints.map { tasks ->
+    val tasksCount: Flow<Pair<Int, Int>> = taskPoints.map { tasks ->
         Pair(
             tasks.count { it.isCompleted },
             tasks.size
         )
+    }
+
+    fun setStartDate(date: LocalDate) {
+        startDatePrivate.value = date
+    }
+
+    fun setSelectedDate(date: LocalDate) {
+        selectedDatePrivate.value = date
     }
 }

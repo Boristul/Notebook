@@ -1,12 +1,12 @@
 package com.boristul.database.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.boristul.database.entity.TaskPointEntity
+import kotlinx.coroutines.flow.Flow
 import org.joda.time.LocalDate
 
 @Dao
@@ -18,7 +18,7 @@ interface TaskPointsDao {
     suspend fun update(taskPoint: TaskPointEntity)
 
     @Query("SELECT * FROM task_points WHERE date = :date")
-    fun get(date: LocalDate): LiveData<List<TaskPointEntity>>
+    fun get(date: LocalDate): Flow<List<TaskPointEntity>>
 
     @Query("DELETE from task_points WHERE _id = :id")
     suspend fun delete(id: Long)

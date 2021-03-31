@@ -121,6 +121,11 @@ dependencies {
     implementation("androidx.viewpager2:viewpager2:1.1.0-alpha01")
     // endregion
 
+    // region Lifecycle
+    val lifecycleVersion: String by project
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
+    // endregion
+
     // region Core
     val kodeinVersion: String by project
     implementation("org.kodein.di:kodein-di-jvm:$kodeinVersion")

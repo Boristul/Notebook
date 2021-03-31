@@ -8,6 +8,9 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.boristul.notebook.R
@@ -18,6 +21,8 @@ import com.boristul.utils.setColor
 import com.boristul.utils.showDatePicker
 import com.boristul.utils.viewbinding.viewBinding
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.joda.time.DateTimeZone
 import org.joda.time.LocalDate
 import org.joda.time.format.DateTimeFormat
@@ -28,23 +33,28 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
     private val binding by viewBinding<FragmentPlannerBinding>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val owner = viewLifecycleOwner
         val dayPattern = DateTimeFormat.forPattern("dd.MM.YYYY").withZone(DateTimeZone.getDefault())
 
         (requireActivity() as AppCompatActivity).supportActionBar?.apply {
             setHasOptionsMenu(true)
 
-            viewModel.tasksCount.observe(owner) {
-                title = getString(R.string.pf_completed_count, it.first.toString(), it.second.toString())
+            lifecycleScope.launchWhenStarted {
+                viewModel.tasksCount.collect {
+                    title = getString(R.string.pf_completed_count, it.first.toString(), it.second.toString())
+                }
             }
         }
 
         binding.viewPager.apply {
             adapter = DayPlanViewPagerAdapter(this@PlannerFragment).apply {
-                viewModel.startDate.observe(owner) {
-                    viewModel.selectedDate.value = it
-                    startDate = it
-                    setCurrentItem(it.dayOfMonth - 1, false)
+                lifecycleScope.launch {
+                    lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                        viewModel.startDate.collect {
+                            viewModel.setSelectedDate(it)
+                            startDate = it
+                            setCurrentItem(it.dayOfMonth - 1, false)
+                        }
+                    }
                 }
             }
 
@@ -58,8 +68,9 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
             registerOnPageChangeCallback(
                 object : ViewPager2.OnPageChangeCallback() {
                     override fun onPageSelected(position: Int) {
-                        viewModel.selectedDate.value =
+                        viewModel.setSelectedDate(
                             checkNotNull(viewModel.selectedDate.value).withDayOfMonth(1).plusDays(position)
+                        )
                     }
                 }
             )
@@ -91,7 +102,7 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
             LocalDate.now().minusYears(1),
             LocalDate.now().plusYears(1)
         ) {
-            viewModel.startDate.value = it
+            viewModel.setStartDate(it)
         }
     }
 }
