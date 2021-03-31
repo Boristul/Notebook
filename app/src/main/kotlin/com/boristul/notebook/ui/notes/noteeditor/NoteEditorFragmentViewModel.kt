@@ -30,7 +30,7 @@ class NoteEditorFragmentViewModel(
         private set
 
     private val selectedTags = noteWithTags?.tags?.toMutableList() ?: mutableListOf()
-    val tags = tagsRepository.getAllLiveData()
+    val tags = tagsRepository.getAll()
     fun updateTagsList(tag: Tag, isSelected: Boolean) = selectedTags.run { if (isSelected) add(tag) else remove(tag) }
 
     init {

@@ -1,6 +1,5 @@
 package com.boristul.database.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -8,6 +7,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import com.boristul.database.entity.TagEntity
 import com.boristul.database.entity.TagWithNotesEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TagsDao {
@@ -18,11 +18,11 @@ interface TagsDao {
     suspend fun getAll(): List<TagEntity>
 
     @Query("SELECT * FROM tags")
-    fun getAllLiveData(): LiveData<List<TagEntity>>
+    fun getAllFlow(): Flow<List<TagEntity>>
 
     @Transaction
     @Query("SELECT * FROM tags")
-    fun getAllTagsWithNotesLiveData(): LiveData<List<TagWithNotesEntity>>
+    fun getAllTagsWithNotesFlow(): Flow<List<TagWithNotesEntity>>
 
     @Query("DELETE FROM tags WHERE _id = :id")
     suspend fun delete(id: Long)

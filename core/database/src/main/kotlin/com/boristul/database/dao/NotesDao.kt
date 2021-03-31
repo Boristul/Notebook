@@ -1,6 +1,5 @@
 package com.boristul.database.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -10,6 +9,7 @@ import androidx.room.Update
 import com.boristul.database.entity.NoteEntity
 import com.boristul.database.entity.NoteTagCrossRef
 import com.boristul.database.entity.NoteWithTagsEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 abstract class NotesDao {
@@ -37,7 +37,7 @@ abstract class NotesDao {
 
     @Transaction
     @Query("SELECT * FROM notes ORDER BY _id DESC")
-    abstract fun getAllLiveData(): LiveData<List<NoteWithTagsEntity>>
+    abstract fun getAllFlow(): Flow<List<NoteWithTagsEntity>>
 
     @Insert(onConflict = OnConflictStrategy.ABORT)
     protected abstract suspend fun insert(note: NoteEntity)

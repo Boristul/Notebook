@@ -1,13 +1,13 @@
 package com.boristul.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.map
 import com.boristul.database.dao.NotesDao
 import com.boristul.database.entity.NoteEntity
 import com.boristul.database.entity.NoteWithTagsEntity
 import com.boristul.database.entity.TagEntity
 import com.boristul.entity.NoteWithTags
 import com.boristul.entity.Tag
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import org.joda.time.DateTime
 
 class NotesRepository(
@@ -25,8 +25,8 @@ class NotesRepository(
 
     suspend fun delete(id: Long) = notesDao.delete(id)
 
-    fun getAll(): LiveData<List<NoteWithTags>> = notesDao.getAllLiveData().map()
+    fun getAll(): Flow<List<NoteWithTags>> = notesDao.getAllFlow().map()
 
-    private fun LiveData<List<NoteWithTagsEntity>>.map() = map { it.toList<NoteWithTags>() }
+    private fun Flow<List<NoteWithTagsEntity>>.map() = map { it.toList<NoteWithTags>() }
     private fun Tag.toEntity() = TagEntity(name, id)
 }
