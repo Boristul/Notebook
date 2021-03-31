@@ -5,9 +5,7 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,11 +14,10 @@ import com.boristul.notebook.R
 import com.boristul.notebook.databinding.FragmentDayPlanBinding
 import com.boristul.notebook.ui.planner.PlannerFragmentDirections
 import com.boristul.notebook.ui.planner.taskadapter.TaskListAdapter
+import com.boristul.utils.collectOnStarted
 import com.boristul.utils.viewbinding.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import org.joda.time.LocalDate
 
 class DayPlanFragment : Fragment(R.layout.fragment_day_plan) {
@@ -46,13 +43,9 @@ class DayPlanFragment : Fragment(R.layout.fragment_day_plan) {
                 val notEmptyIndex = 0
                 val emptyIndex = 1
 
-                lifecycleScope.launch {
-                    lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                        viewModel.taskPoints.collect {
-                            binding.viewSwitcher.displayedChild = if (it.isNotEmpty()) notEmptyIndex else emptyIndex
-                            tasks = it
-                        }
-                    }
+                viewModel.taskPoints.collectOnStarted(lifecycleScope, lifecycle) {
+                    binding.viewSwitcher.displayedChild = if (it.isNotEmpty()) notEmptyIndex else emptyIndex
+                    tasks = it
                 }
 
                 onClickListener = { task ->

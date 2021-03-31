@@ -10,10 +10,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.boristul.notebook.R
 import com.boristul.notebook.databinding.FragmentNoteEditorBinding
+import com.boristul.utils.collectOnStarted
 import com.boristul.utils.distinctUntilChanged
 import com.boristul.utils.hideKeyboard
 import com.boristul.utils.navArgsFactory
@@ -53,16 +53,23 @@ class NoteEditorFragment : Fragment(R.layout.fragment_note_editor) {
         }
 
         binding.save.apply {
-            viewModel.isTitleNotEmpty.distinctUntilChanged().observe(viewLifecycleOwner) {
+            viewModel.isDataNotEmpty.distinctUntilChanged().observe(viewLifecycleOwner) {
                 isEnabled = it
             }
 
             setOnClickListener {
-                viewModel.viewModelScope.launch {
-                    viewModel.save()
+                viewModel.save()
+            }
+        }
+
+        viewModel.state.collectOnStarted(lifecycleScope, lifecycle) { state ->
+            when (state) {
+                NoteEditorState.Started -> Unit
+                NoteEditorState.SaveCompleted -> {
                     requireActivity().toast(R.string.nef_successful_save)
                     findNavController().popBackStack()
                 }
+                NoteEditorState.Loading -> Unit
             }
         }
 

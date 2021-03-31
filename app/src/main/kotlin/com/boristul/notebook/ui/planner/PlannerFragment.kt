@@ -8,21 +8,18 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.boristul.notebook.R
 import com.boristul.notebook.databinding.FragmentPlannerBinding
 import com.boristul.notebook.ui.planner.dayplan.DayPlanViewPagerAdapter
+import com.boristul.utils.collectOnStarted
 import com.boristul.utils.getColorCompat
 import com.boristul.utils.setColor
 import com.boristul.utils.showDatePicker
 import com.boristul.utils.viewbinding.viewBinding
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import org.joda.time.DateTimeZone
 import org.joda.time.LocalDate
 import org.joda.time.format.DateTimeFormat
@@ -38,23 +35,17 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
         (requireActivity() as AppCompatActivity).supportActionBar?.apply {
             setHasOptionsMenu(true)
 
-            lifecycleScope.launchWhenStarted {
-                viewModel.tasksCount.collect {
-                    title = getString(R.string.pf_completed_count, it.first.toString(), it.second.toString())
-                }
+            viewModel.tasksCount.collectOnStarted(lifecycleScope, lifecycle) {
+                title = getString(R.string.pf_completed_count, it.first.toString(), it.second.toString())
             }
         }
 
         binding.viewPager.apply {
             adapter = DayPlanViewPagerAdapter(this@PlannerFragment).apply {
-                lifecycleScope.launch {
-                    lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                        viewModel.startDate.collect {
-                            viewModel.setSelectedDate(it)
-                            startDate = it
-                            setCurrentItem(it.dayOfMonth - 1, false)
-                        }
-                    }
+                viewModel.startDate.collectOnStarted(lifecycleScope, lifecycle) {
+                    viewModel.setSelectedDate(it)
+                    startDate = it
+                    setCurrentItem(it.dayOfMonth - 1, false)
                 }
             }
 
