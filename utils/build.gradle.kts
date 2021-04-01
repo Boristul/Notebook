@@ -57,6 +57,7 @@ dependencies {
     // region AndroidX
     val lifecycleVersion: String by project
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
     // endregion
 

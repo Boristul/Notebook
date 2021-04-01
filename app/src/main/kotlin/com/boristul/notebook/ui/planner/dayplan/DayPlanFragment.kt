@@ -5,8 +5,7 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.distinctUntilChanged
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,9 +14,10 @@ import com.boristul.notebook.R
 import com.boristul.notebook.databinding.FragmentDayPlanBinding
 import com.boristul.notebook.ui.planner.PlannerFragmentDirections
 import com.boristul.notebook.ui.planner.taskadapter.TaskListAdapter
+import com.boristul.utils.collectOnStarted
 import com.boristul.utils.viewbinding.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.joda.time.LocalDate
 
 class DayPlanFragment : Fragment(R.layout.fragment_day_plan) {
@@ -33,18 +33,17 @@ class DayPlanFragment : Fragment(R.layout.fragment_day_plan) {
     private val binding by viewBinding<FragmentDayPlanBinding>()
     private val viewModel by viewModels<DayPlanFragmentViewModel>()
 
+    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val owner = viewLifecycleOwner
-
         @Suppress("UnsafeCast")
-        viewModel.selectedDate.value = requireArguments().get(PAGE_DATE) as LocalDate
+        viewModel.setSelectedDate(requireArguments().get(PAGE_DATE) as LocalDate)
 
         binding.tasksList.apply {
             adapter = TaskListAdapter().apply {
                 val notEmptyIndex = 0
                 val emptyIndex = 1
 
-                viewModel.taskPoints.distinctUntilChanged().observe(owner) {
+                viewModel.taskPoints.collectOnStarted(lifecycleScope, lifecycle) {
                     binding.viewSwitcher.displayedChild = if (it.isNotEmpty()) notEmptyIndex else emptyIndex
                     tasks = it
                 }
@@ -54,25 +53,16 @@ class DayPlanFragment : Fragment(R.layout.fragment_day_plan) {
                         MaterialAlertDialogBuilder(requireActivity())
                             .setTitle(R.string.pf_mark_uncompleted_title)
                             .setMessage(R.string.pf_mark_uncompleted_description)
-                            .setPositiveButton(R.string.pf_yes) { _, _ ->
-                                viewModel.viewModelScope.launch {
-                                    viewModel.update(task.id, !task.isCompleted)
-                                }
-                            }
+                            .setPositiveButton(R.string.pf_yes) { _, _ -> viewModel.update(task.id, false) }
                             .setNegativeButton(R.string.pf_cancel, null)
                             .show()
                     } else {
-                        viewModel.viewModelScope.launch {
-                            viewModel.update(task.id, !task.isCompleted)
-                        }
+                        viewModel.update(task.id, true)
                     }
                 }
 
-                onDeleteClickListener = {
-                    viewModel.viewModelScope.launch {
-                        viewModel.delete(it.id)
-                    }
-                }
+                onDeleteClickListener = { viewModel.delete(it.id) }
+
                 onLongClickListener = {
                     findNavController().navigate(PlannerFragmentDirections.actionPlannerToTaskEditor(task = it))
                 }

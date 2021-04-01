@@ -8,17 +8,18 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.boristul.notebook.R
 import com.boristul.notebook.databinding.FragmentNotesBinding
+
+import com.boristul.utils.collectOnStarted
 import com.boristul.utils.getColorCompat
 import com.boristul.utils.setColor
 import com.boristul.utils.toast
-import kotlinx.coroutines.launch
 
 class NotesFragment : Fragment(R.layout.fragment_notes) {
 
@@ -35,15 +36,13 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
                 val notEmptyIndex = 0
                 val emptyIndex = 1
 
-                viewModel.notes.observe(viewLifecycleOwner) {
+                viewModel.notes.collectOnStarted(lifecycleScope, lifecycle) {
                     binding.viewSwitcher.displayedChild = if (it.isNotEmpty()) notEmptyIndex else emptyIndex
                     notes = it
                 }
+
                 onDeleteClickListener = {
-                    viewModel.viewModelScope.launch {
-                        viewModel.delete(it.note.id)
-                        requireActivity().toast(R.string.nf_successful_delete)
-                    }
+                    viewModel.delete(it.note.id)
                 }
 
                 onClickListener = {
@@ -56,6 +55,13 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
 
         binding.addNote.setOnClickListener {
             findNavController().navigate(NotesFragmentDirections.actionNotesToNoteEditor(null))
+        }
+
+        viewModel.state.collectOnStarted(lifecycleScope, lifecycle) { state ->
+            when (state) {
+                NoteState.Started -> Unit
+                is NoteState.NoteDeleted -> requireActivity().toast(R.string.nf_successful_delete)
+            }
         }
     }
 

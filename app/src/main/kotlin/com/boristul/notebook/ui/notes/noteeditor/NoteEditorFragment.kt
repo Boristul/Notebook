@@ -6,11 +6,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.distinctUntilChanged
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.boristul.notebook.R
 import com.boristul.notebook.databinding.FragmentNoteEditorBinding
+import com.boristul.utils.collectOnStarted
 import com.boristul.utils.distinctUntilChanged
 import com.boristul.utils.hideKeyboard
 import com.boristul.utils.navArgsFactory
@@ -18,6 +21,7 @@ import com.boristul.utils.setViewCount
 import com.boristul.utils.toast
 import com.boristul.utils.viewbinding.viewBinding
 import com.google.android.material.chip.Chip
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class NoteEditorFragment : Fragment(R.layout.fragment_note_editor) {
@@ -49,32 +53,43 @@ class NoteEditorFragment : Fragment(R.layout.fragment_note_editor) {
         }
 
         binding.save.apply {
-            viewModel.isTitleNotEmpty.distinctUntilChanged().observe(viewLifecycleOwner) {
+            viewModel.isDataNotEmpty.distinctUntilChanged().observe(viewLifecycleOwner) {
                 isEnabled = it
             }
 
             setOnClickListener {
-                viewModel.viewModelScope.launch {
-                    viewModel.save()
-                    requireActivity().toast(R.string.nef_successful_save)
-                    findNavController().popBackStack()
-                }
+                viewModel.save()
             }
         }
 
-        viewModel.tags.observe(viewLifecycleOwner) { tags ->
-            binding.chips.setViewCount(
-                tags.size,
-                { layoutInflater.inflate(R.layout.item_tag_chip_choice, this, false) as Chip },
-                {
-                    text = tags[it].name
-                    isChecked = viewModel.isTagSelected(tags[it])
-
-                    setOnCheckedChangeListener { _, isChecked ->
-                        viewModel.updateTagsList(tags[it], isChecked)
-                    }
+        viewModel.state.collectOnStarted(lifecycleScope, lifecycle) { state ->
+            when (state) {
+                NoteEditorState.Started -> Unit
+                NoteEditorState.SaveCompleted -> {
+                    requireActivity().toast(R.string.nef_successful_save)
+                    findNavController().popBackStack()
                 }
-            )
+                NoteEditorState.Loading -> Unit
+            }
+        }
+
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.tags.collect { tags ->
+                    binding.chips.setViewCount(
+                        tags.size,
+                        { layoutInflater.inflate(R.layout.item_tag_chip_choice, this, false) as Chip },
+                        {
+                            text = tags[it].name
+                            isChecked = viewModel.isTagSelected(tags[it])
+
+                            setOnCheckedChangeListener { _, isChecked ->
+                                viewModel.updateTagsList(tags[it], isChecked)
+                            }
+                        }
+                    )
+                }
+            }
         }
     }
 
