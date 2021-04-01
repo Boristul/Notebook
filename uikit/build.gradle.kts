@@ -1,3 +1,5 @@
+import com.boristul.buildsrc.Libs.Kotlin
+
 plugins {
     id("com.android.library")
     kotlin("android")
@@ -45,8 +47,7 @@ android {
 
 dependencies {
     // region Kotlin
-    val kotlinVersion: String by project
-    implementation(kotlin("stdlib-jdk8", kotlinVersion))
+    implementation(kotlin("stdlib-jdk8", Kotlin.kotlinVersion))
     // endregion
 
     // region Local
@@ -63,7 +64,7 @@ dependencies {
 
     // region UI
     api("com.daimajia.swipelayout:library:1.2.0@aar")
-    api("com.google.android.material:material:1.4.0-alpha01")
+    api("com.google.android.material:material:1.4.0-alpha02")
     implementation("net.cachapa.expandablelayout:expandablelayout:2.9.2")
     api("com.airbnb.android:lottie:3.5.0")
     // endregion

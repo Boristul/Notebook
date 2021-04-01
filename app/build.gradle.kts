@@ -1,3 +1,4 @@
+import com.boristul.buildsrc.Libs
 import java.util.Properties
 
 plugins {
@@ -101,8 +102,7 @@ android {
 
 dependencies {
     // region Kotlin
-    val kotlinVersion: String by project
-    implementation(kotlin("stdlib-jdk8", kotlinVersion))
+    implementation(kotlin("stdlib-jdk8", Libs.Kotlin.kotlinVersion))
     // endregion
 
     // region Local
