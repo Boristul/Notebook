@@ -1,5 +1,5 @@
 plugins {
-    id("io.gitlab.arturbosch.detekt") version "1.16.0"
+    id("io.gitlab.arturbosch.detekt") version com.boristul.buildsrc.Libs.Versions.detektVersion
     kotlin("plugin.serialization") version "1.4.10"
 }
 
@@ -9,15 +9,13 @@ buildscript {
         jcenter()
     }
     dependencies {
-        val kotlinVersion: String by project
-
-        classpath("com.android.tools.build:gradle:4.1.3")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
-        classpath("org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion")
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.3.4")
-        classpath("com.google.gms:google-services:4.3.5")
-        classpath("com.google.firebase:firebase-crashlytics-gradle:2.5.2")
-        classpath("com.google.firebase:perf-plugin:1.3.5")
+        classpath(com.boristul.buildsrc.Libs.gradle)
+        classpath(com.boristul.buildsrc.Libs.Kotlin.gradlePlugin)
+        classpath(com.boristul.buildsrc.Libs.Kotlin.serialization)
+        classpath(com.boristul.buildsrc.Libs.AndroidX.safeArgsPlugin)
+        classpath(com.boristul.buildsrc.Libs.GoogleServices.googleServicesPlugin)
+        classpath(com.boristul.buildsrc.Libs.GoogleServices.firebaseCrashlyticsPlugin)
+        classpath(com.boristul.buildsrc.Libs.GoogleServices.firebasePerfPlugin)
     }
 }
 
@@ -63,5 +61,5 @@ detekt {
 }
 
 dependencies {
-    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.16.0")
+    detektPlugins(com.boristul.buildsrc.Libs.detektPlugin)
 }
