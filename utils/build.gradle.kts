@@ -1,4 +1,4 @@
-import com.boristul.buildsrc.Libs.Kotlin
+import com.boristul.buildsrc.Libs
 
 plugins {
     id("com.android.library")
@@ -47,22 +47,19 @@ android {
 
 dependencies {
     // region Kotlin
-    implementation(kotlin("stdlib-jdk8", Kotlin.kotlinVersion))
+    implementation(kotlin("stdlib-jdk8", Libs.Kotlin.kotlinVersion))
     // endregion
 
     // region Navigation
-    val navigationVersion: String by project
-    implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
+    implementation(Libs.Navigation.navigationFragment)
     // endregion
 
     // region AndroidX
-    val lifecycleVersion: String by project
-    implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+    implementation(Libs.AndroidX.lifecycleRuntime)
+    implementation(Libs.AndroidX.lifecycleLivedata)
     // endregion
 
     // region Core
-    implementation("joda-time:joda-time:2.10.10")
+    implementation(Libs.Core.jodaTime)
     // endregion
 }

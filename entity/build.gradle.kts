@@ -1,4 +1,4 @@
-import com.boristul.buildsrc.Libs.Kotlin
+import com.boristul.buildsrc.Libs
 
 plugins {
     id("com.android.library")
@@ -43,10 +43,10 @@ android {
 
 dependencies {
     // region Kotlin
-    implementation(kotlin("stdlib-jdk8", Kotlin.kotlinVersion))
+    implementation(kotlin("stdlib-jdk8", Libs.Kotlin.kotlinVersion))
     // endregion
 
     // region Core
-    api("joda-time:joda-time:2.10.10")
+    api(Libs.Core.jodaTime)
     // endregion
 }

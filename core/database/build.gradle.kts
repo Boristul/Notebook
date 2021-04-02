@@ -1,4 +1,4 @@
-import com.boristul.buildsrc.Libs.Kotlin
+import com.boristul.buildsrc.Libs
 
 plugins {
     id("com.android.library")
@@ -42,7 +42,7 @@ android {
 
 dependencies {
     // region Kotlin
-    implementation(kotlin("stdlib-jdk8", Kotlin.kotlinVersion))
+    implementation(kotlin("stdlib-jdk8", Libs.Kotlin.kotlinVersion))
     // endregion
 
     // region Local
@@ -50,16 +50,12 @@ dependencies {
     // endregion
 
     // region Core
-    val kodeinVersion: String by project
-    implementation("org.kodein.di:kodein-di-jvm:$kodeinVersion")
+    implementation(Libs.Kodein.kodein)
     // endregion
 
     // region AndroidX
-    val lifecycleVersion: String by project
-    implementation("androidx.lifecycle:lifecycle-livedata:$lifecycleVersion")
-
     val roomVersion: String by project
-    kapt("androidx.room:room-compiler:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
+    kapt(Libs.Room.roomCompiler)
+    implementation(Libs.Room.roomKtx)
     // endregion
 }

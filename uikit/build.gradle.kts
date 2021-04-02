@@ -1,4 +1,4 @@
-import com.boristul.buildsrc.Libs.Kotlin
+import com.boristul.buildsrc.Libs
 
 plugins {
     id("com.android.library")
@@ -47,7 +47,7 @@ android {
 
 dependencies {
     // region Kotlin
-    implementation(kotlin("stdlib-jdk8", Kotlin.kotlinVersion))
+    implementation(kotlin("stdlib-jdk8", Libs.Kotlin.kotlinVersion))
     // endregion
 
     // region Local
@@ -55,17 +55,16 @@ dependencies {
     // endregion
 
     // region AndroidX
-    implementation("androidx.preference:preference:1.1.1")
-    api("androidx.core:core-ktx:1.3.2")
-    api("androidx.appcompat:appcompat:1.2.0")
-    api("androidx.constraintlayout:constraintlayout:2.0.4")
+    implementation(Libs.AndroidX.preference)
+    api(Libs.AndroidX.core)
+    api(Libs.AndroidX.appCompat)
+    api(Libs.AndroidX.constraintLayout)
     // endregion
 
 
     // region UI
-    api("com.daimajia.swipelayout:library:1.2.0@aar")
-    api("com.google.android.material:material:1.4.0-alpha02")
-    implementation("net.cachapa.expandablelayout:expandablelayout:2.9.2")
-    api("com.airbnb.android:lottie:3.5.0")
+    api(Libs.Core.swipeLayout)
+    api(Libs.Core.material)
+    api(Libs.Core.lottie)
     // endregion
 }
