@@ -1,4 +1,3 @@
-import com.boristul.buildsrc.Libs
 import java.util.Properties
 
 plugins {
@@ -12,15 +11,15 @@ plugins {
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdk = 30
 
     defaultConfig {
         applicationId = "com.boristul.notebook"
         versionCode = 1
         versionName = "0.0.0"
 
-        minSdkVersion(21)
-        targetSdkVersion(30)
+        minSdk = 21
+        targetSdk = 30
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -78,13 +77,8 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
     packagingOptions {
-        exclude("META-INF/DEPENDENCIES")
+        resources.excludes.add("META-INF/DEPENDENCIES")
     }
 
     configurations {
@@ -101,10 +95,6 @@ android {
 }
 
 dependencies {
-    // region Kotlin
-    implementation(kotlin("stdlib-jdk8", Libs.Kotlin.kotlinVersion))
-    // endregion
-
     // region Local
     implementation(project(":uikit"))
     implementation(project(":core:repository"))
@@ -114,25 +104,34 @@ dependencies {
 
     // region AndroidX
     val navigationVersion: String by project
-    implementation(Libs.AndroidX.core)
-    implementation(Libs.Navigation.navigationFragment)
-    implementation(Libs.Navigation.navigationUI)
-    implementation(Libs.AndroidX.preference)
-    implementation(Libs.AndroidX.viewPager2)
+    implementation("androidx.core:core-ktx:1.6.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
+    implementation("androidx.navigation:navigation-ui-ktx:$navigationVersion")
+    implementation("androidx.preference:preference:1.1.1")
+    implementation("androidx.viewpager2:viewpager2:1.1.0-beta01")
     // endregion
 
     // region Lifecycle
     val lifecycleVersion: String by project
-    implementation(Libs.AndroidX.lifecycleRuntime)
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
     // endregion
 
     // region Core
-    implementation(Libs.Kodein.kodein)
-    implementation(Libs.Kodein.kodeinAndroid)
+    val kodeinVersion: String by project
+    implementation("org.kodein.di:kodein-di-jvm:$kodeinVersion")
+    implementation("org.kodein.di:kodein-di-framework-android-x:$kodeinVersion")
     // endregion
 
     // region Google services
-    implementation(platform(Libs.GoogleServices.firebaseBom))
-    Libs.GoogleServices.googleServicesDeps.forEach { implementation(it) }
+    implementation(platform("com.google.firebase:firebase-bom:26.1.0"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-crashlytics-ktx")
+    implementation("com.google.firebase:firebase-perf-ktx")
+    implementation("com.google.firebase:firebase-inappmessaging-display")
+    implementation("com.google.firebase:firebase-messaging-ktx")
+    implementation("com.google.android.gms:play-services-auth:19.2.0")
+    implementation("com.google.api-client:google-api-client-android:1.26.0")
+    implementation("com.google.http-client:google-http-client-gson:1.26.0")
+    implementation("com.google.apis:google-api-services-drive:v3-rev136-1.25.0")
     // endregion
 }
