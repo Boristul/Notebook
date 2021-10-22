@@ -6,11 +6,14 @@ plugins {
 }
 
 android {
-    compileSdk = 30
+    val compileSdkVersion: String by project
+    val targetSdkVersion: String by project
+
+    compileSdk = compileSdkVersion.toInt()
 
     defaultConfig {
         minSdk = 21
-        targetSdk = 30
+        targetSdk = targetSdkVersion.toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")

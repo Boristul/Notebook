@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 import org.joda.time.DateTime
 import org.kodein.di.DI
 import org.kodein.di.DIAware
-import org.kodein.di.android.x.di
+import org.kodein.di.android.x.closestDI
 import org.kodein.di.instance
 
 class NoteEditorFragmentViewModel(
@@ -24,7 +24,7 @@ class NoteEditorFragmentViewModel(
     private val noteWithTags: NoteWithTags?
 ) : AndroidViewModel(application), DIAware {
 
-    override val di: DI by di()
+    override val di: DI by closestDI()
     private val notesRepository by instance<NotesRepository>()
     private val tagsRepository by instance<TagsRepository>()
 

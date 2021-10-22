@@ -11,7 +11,10 @@ plugins {
 }
 
 android {
-    compileSdk = 30
+    val compileSdkVersion: String by project
+    val targetSdkVersion: String by project
+
+    compileSdk = compileSdkVersion.toInt()
 
     defaultConfig {
         applicationId = "com.boristul.notebook"
@@ -19,7 +22,7 @@ android {
         versionName = "0.0.0"
 
         minSdk = 21
-        targetSdk = 30
+        targetSdk = targetSdkVersion.toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
