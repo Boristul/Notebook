@@ -1,5 +1,3 @@
-import com.boristul.buildsrc.Libs
-
 plugins {
     id("com.android.library")
     kotlin("android")
@@ -7,14 +5,14 @@ plugins {
 }
 
 android {
-    compileSdkVersion(30)
+    val compileSdkVersion: String by project
+    val targetSdkVersion: String by project
+
+    compileSdk = compileSdkVersion.toInt()
 
     defaultConfig {
-        versionCode = 1
-        versionName = "0.0.0"
-
-        minSdkVersion(21)
-        targetSdkVersion(30)
+        minSdk = 21
+        targetSdk = targetSdkVersion.toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -29,11 +27,6 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
     sourceSets {
         getByName("main").java.srcDirs("src/main/kotlin")
         getByName("test").java.srcDirs("src/test/kotlin")
@@ -42,20 +35,18 @@ android {
 }
 
 dependencies {
-    // region Kotlin
-    implementation(kotlin("stdlib-jdk8", Libs.Kotlin.kotlinVersion))
-    // endregion
-
     // region Local
     implementation(project(":entity"))
     implementation(project(":core:database"))
     // endregion
 
     // region AndroidX
-    api(Libs.AndroidX.lifecycleLivedata)
+    val lifecycleVersion: String by project
+    api("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
     // endregion
 
     // region Core
-    implementation(Libs.Kodein.kodein)
+    val kodeinVersion: String by project
+    implementation("org.kodein.di:kodein-di-jvm:$kodeinVersion")
     // endregion
 }

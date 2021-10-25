@@ -105,12 +105,12 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="8dp"
             android:src="@drawable/ic_pencil"
-            android:tint="?colorOnBackground"
             app:layout_constraintEnd_toStartOf="@id/share"
 
             app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bottom_divider" />
+            app:layout_constraintTop_toBottomOf="@id/bottom_divider"
+            app:tint="?colorOnBackground" />
 
         <ImageButton
             android:id="@+id/share"
@@ -120,11 +120,11 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="8dp"
             android:src="@drawable/ic_share"
-            android:tint="?colorOnBackground"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/edit"
-            app:layout_constraintTop_toBottomOf="@id/bottom_divider" />
+            app:layout_constraintTop_toBottomOf="@id/bottom_divider"
+            app:tint="?colorOnBackground" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,5 +1,7 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
-    id("io.gitlab.arturbosch.detekt") version com.boristul.buildsrc.Libs.Versions.detektVersion
+    id("io.gitlab.arturbosch.detekt") version "1.18.1"
     kotlin("plugin.serialization") version "1.4.10"
 }
 
@@ -9,13 +11,14 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath(com.boristul.buildsrc.Libs.gradle)
-        classpath(com.boristul.buildsrc.Libs.Kotlin.gradlePlugin)
-        classpath(com.boristul.buildsrc.Libs.Kotlin.serialization)
-        classpath(com.boristul.buildsrc.Libs.AndroidX.safeArgsPlugin)
-        classpath(com.boristul.buildsrc.Libs.GoogleServices.googleServicesPlugin)
-        classpath(com.boristul.buildsrc.Libs.GoogleServices.firebaseCrashlyticsPlugin)
-        classpath(com.boristul.buildsrc.Libs.GoogleServices.firebasePerfPlugin)
+        val kotlinVersion: String by project
+        classpath("com.android.tools.build:gradle:7.0.3")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
+        classpath("org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion")
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5")
+        classpath("com.google.gms:google-services:4.3.10")
+        classpath("com.google.firebase:firebase-crashlytics-gradle:2.7.1")
+        classpath("com.google.firebase:perf-plugin:1.4.0")
     }
 }
 
@@ -32,9 +35,9 @@ tasks.register("clean", Delete::class) {
 }
 
 subprojects.forEach { module ->
-    module.tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    module.tasks.withType<KotlinCompile> {
         kotlinOptions {
-            jvmTarget = "1.8"
+            jvmTarget = "11"
             @Suppress("SuspiciousCollectionReassignment")
             freeCompilerArgs += listOf(
                 //"-XXLanguage:+InlineClasses",
@@ -61,5 +64,5 @@ detekt {
 }
 
 dependencies {
-    detektPlugins(com.boristul.buildsrc.Libs.detektPlugin)
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.18.1")
 }

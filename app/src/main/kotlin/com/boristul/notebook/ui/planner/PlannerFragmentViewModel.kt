@@ -13,11 +13,11 @@ import kotlinx.coroutines.flow.map
 import org.joda.time.LocalDate
 import org.kodein.di.DI
 import org.kodein.di.DIAware
-import org.kodein.di.android.x.di
+import org.kodein.di.android.x.closestDI
 import org.kodein.di.instance
 
 class PlannerFragmentViewModel(application: Application) : AndroidViewModel(application), DIAware {
-    override val di: DI by di()
+    override val di: DI by closestDI()
     private val taskPointRepository by instance<TaskPointsRepository>()
 
     private val startDatePrivate = MutableStateFlow(LocalDate.now())

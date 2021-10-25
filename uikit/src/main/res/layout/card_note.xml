@@ -56,17 +56,17 @@
             app:layout_constraintTop_toBottomOf="@id/title"
             tools:text="Sunday 22:45" />
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <ImageView
             android:id="@+id/arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_right_arrow"
-            android:tint="?colorOnBackground"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/title"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="?colorOnBackground" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

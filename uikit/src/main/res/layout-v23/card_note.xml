@@ -13,7 +13,7 @@
         android:background="?colorSecondary"
         android:foreground="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_delete"
-        android:tint="?colorOnPrimary" />
+        app:tint="?colorOnPrimary" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/surface_layout"
