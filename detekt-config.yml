@@ -1,5 +1,5 @@
 build:
-  maxIssues: 10
+  maxIssues: 5
   excludeCorrectable: false
   weights:
     UnsafeCallOnNullableType: 100500
@@ -49,27 +49,33 @@ output-reports:
 
 comments:
   active: true
-  excludes: ['**/test*/**', '**/androidTest*/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
+  excludes: [ '**/test*/**', '**/androidTest*/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**' ]
   AbsentOrWrongFileLicense:
     active: false
     licenseTemplateFile: 'license.template'
+    licenseTemplateIsRegex: false
   CommentOverPrivateFunction:
     active: false
   CommentOverPrivateProperty:
+    active: false
+  DeprecatedBlockTag:
     active: false
   EndOfSentenceFormat:
     active: false
     endOfSentenceFormat: '([.?!][ \t\n\r\f<])|([.?!:]$)'
   UndocumentedPublicClass:
     active: false
+    excludes: [ '**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**' ]
     searchInNestedClass: true
     searchInInnerClass: true
     searchInInnerObject: true
     searchInInnerInterface: true
   UndocumentedPublicFunction:
     active: false
+    excludes: [ '**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**' ]
   UndocumentedPublicProperty:
     active: false
+    excludes: [ '**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**' ]
 
 complexity:
   active: true
@@ -78,7 +84,6 @@ complexity:
     threshold: 4
   ComplexInterface:
     active: true
-    excludes: []
     threshold: 10
     includeStaticDeclarations: true
     includePrivateDeclarations: true
@@ -88,7 +93,16 @@ complexity:
     ignoreSingleWhenExpression: false
     ignoreSimpleWhenEntries: false
     ignoreNestingFunctions: false
-    nestingFunctions: [run, let, apply, with, also, use, forEach, isNotNull, ifNull]
+    nestingFunctions:
+      - 'also'
+      - 'apply'
+      - 'forEach'
+      - 'isNotNull'
+      - 'ifNull'
+      - 'let'
+      - 'run'
+      - 'use'
+      - 'with'
   LabeledExpression:
     active: false
     ignoredLabels: []
@@ -98,6 +112,7 @@ complexity:
   LongMethod:
     active: true
     threshold: 60
+    ignoreAnnotated: [ ]
   LongParameterList:
     active: true
     functionThreshold: 6
@@ -185,7 +200,11 @@ exceptions:
   active: true
   ExceptionRaisedInUnexpectedLocation:
     active: true
-    methodNames: [toString, hashCode, equals, finalize]
+    methodNames:
+      - 'equals'
+      - 'finalize'
+      - 'hashCode'
+      - 'toString'
   InstanceOfCheckForException:
     active: true
     excludes: ['**/test*/**', '**/androidTest*/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
@@ -203,10 +222,10 @@ exceptions:
   SwallowedException:
     active: true
     ignoredExceptionTypes:
-      - InterruptedException
-      - NumberFormatException
-      - ParseException
-      - MalformedURLException
+      - 'InterruptedException'
+      - 'MalformedURLException'
+      - 'NumberFormatException'
+      - 'ParseException'
     allowedExceptionNameRegex: '_|(ignore|expected).*'
   ThrowingExceptionFromFinally:
     active: true
@@ -214,33 +233,39 @@ exceptions:
     active: true
   ThrowingExceptionsWithoutMessageOrCause:
     active: true
-    excludes: []
+    excludes: [ '**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**' ]
     exceptions:
-      - IllegalArgumentException
-      - IllegalStateException
-      - IOException
+      - 'ArrayIndexOutOfBoundsException'
+      - 'Exception'
+      - 'IllegalArgumentException'
+      - 'IllegalMonitorStateException'
+      - 'IllegalStateException'
+      - 'IndexOutOfBoundsException'
+      - 'NullPointerException'
+      - 'RuntimeException'
+      - 'Throwable'
   ThrowingNewInstanceOfSameException:
     active: true
   TooGenericExceptionCaught:
     active: true
     excludes: ['**/test*/**', '**/androidTest*/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
     exceptionNames:
-      - ArrayIndexOutOfBoundsException
-      - Error
-      - Exception
-      - IllegalMonitorStateException
-      - NullPointerException
-      - IndexOutOfBoundsException
-      - RuntimeException
-      - Throwable
+      - 'ArrayIndexOutOfBoundsException'
+      - 'Error'
+      - 'Exception'
+      - 'IllegalMonitorStateException'
+      - 'IndexOutOfBoundsException'
+      - 'NullPointerException'
+      - 'RuntimeException'
+      - 'Throwable'
     allowedExceptionNameRegex: '_|(ignore|expected).*'
   TooGenericExceptionThrown:
     active: true
     exceptionNames:
-      - Error
-      - Exception
-      - Throwable
-      - RuntimeException
+      - 'Error'
+      - 'Exception'
+      - 'RuntimeException'
+      - 'Throwable'
 
 formatting:
   active: true
@@ -253,8 +278,10 @@ formatting:
     active: true
     autoCorrect: true
   ArgumentListWrapping:
-    active: true
+    active: false
     autoCorrect: true
+    indentSize: 4
+    maxLineLength: 120
   ChainWrapping:
     active: true
     autoCorrect: true
@@ -324,12 +351,13 @@ formatting:
   NoWildcardImports:
     active: true
   PackageName:
-    active: true
-    autoCorrect: true
+    active: false
+    autoCorrect: false
   ParameterListWrapping:
     active: true
     autoCorrect: true
     indentSize: 4
+    maxLineLength: 120
   SpacingAroundAngleBrackets:
     active: true
     autoCorrect: true
@@ -375,24 +403,28 @@ formatting:
 
 naming:
   active: true
+  BooleanPropertyNaming:
+    active: false
+    excludes: [ '**/test*/**', '**/androidTest*/**', '**/commonTest*/**', '**/jvmTest*/**', '**/jsTest*/**', '**/iosTest*/**' ]
+    allowedPattern: '^(is|has|are)'
   ClassNaming:
     active: true
-    excludes: []
+    excludes: [ '**/test*/**', '**/androidTest*/**', '**/commonTest*/**', '**/jvmTest*/**', '**/jsTest*/**', '**/iosTest*/**' ]
     classPattern: '[A-Z][a-zA-Z0-9]*'
   ConstructorParameterNaming:
     active: true
-    excludes: []
+    excludes: [ '**/test*/**', '**/androidTest*/**', '**/commonTest*/**', '**/jvmTest*/**', '**/jsTest*/**', '**/iosTest*/**' ]
     parameterPattern: '[a-z][A-Za-z0-9]*'
     privateParameterPattern: '[a-z][A-Za-z0-9]*'
     excludeClassPattern: '$^'
     ignoreOverridden: true
   EnumNaming:
     active: true
-    excludes: []
+    excludes: [ '**/test*/**', '**/androidTest*/**', '**/commonTest*/**', '**/jvmTest*/**', '**/jsTest*/**', '**/iosTest*/**' ]
     enumEntryPattern: '[A-Z][_a-zA-Z0-9]*'
   ForbiddenClassName:
     active: false
-    excludes: ['**/test*/**', '**/androidTest*/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
+    excludes: [ '**/test*/**', '**/androidTest*/**', '**/commonTest*/**', '**/jvmTest*/**', '**/jsTest*/**', '**/iosTest*/**' ]
     forbiddenName: []
   FunctionMaxLength:
     active: true
@@ -404,20 +436,21 @@ naming:
     minimumFunctionNameLength: 3
   FunctionNaming:
     active: true
-    excludes: []
+    excludes: [ '**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**' ]
     functionPattern: '([a-z][a-zA-Z0-9]*)|(`.*`)'
     excludeClassPattern: '$^'
     ignoreOverridden: true
-    ignoreAnnotated: ['Composable']
+    ignoreAnnotated:
+      - 'Composable'
   FunctionParameterNaming:
     active: true
-    excludes: []
+    excludes: [ '**/test*/**', '**/androidTest*/**', '**/commonTest*/**', '**/jvmTest*/**', '**/jsTest*/**', '**/iosTest*/**' ]
     parameterPattern: '[a-z][A-Za-z0-9]*'
     excludeClassPattern: '$^'
     ignoreOverridden: true
   InvalidPackageDeclaration:
     active: true
-    excludes: ['*.kts']
+    excludes: [ '**/*.kts' ]
     rootPackage: ''
   MatchingDeclarationName:
     active: true
@@ -425,36 +458,38 @@ naming:
   MemberNameEqualsClassName:
     active: true
     ignoreOverridden: true
+  NoNameShadowing:
+    active: true
   NonBooleanPropertyPrefixedWithIs:
     active: true
-    excludes: []
+    excludes: [ '**/test*/**', '**/androidTest*/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**' ]
   ObjectPropertyNaming:
     active: true
-    excludes: []
+    excludes: [ '**/test*/**', '**/androidTest*/**', '**/commonTest*/**', '**/jvmTest*/**', '**/jsTest*/**', '**/iosTest*/**' ]
     constantPattern: '[A-Za-z][_A-Za-z0-9]*'
     propertyPattern: '[A-Za-z][_A-Za-z0-9]*'
     privatePropertyPattern: '(_)?[A-Za-z][_A-Za-z0-9]*'
   PackageNaming:
     active: true
-    excludes: []
-    packagePattern: '[a-z]+(\.[a-z][A-Za-z0-9]*)*'
+    excludes: [ '**/test*/**', '**/androidTest*/**', '**/commonTest*/**', '**/jvmTest*/**', '**/jsTest*/**', '**/iosTest*/**' ]
+    packagePattern: '[a-z]+(\.[a-z][_A-Za-z0-9]*)*'
   TopLevelPropertyNaming:
     active: true
-    excludes: []
+    excludes: [ '**/test*/**', '**/androidTest*/**', '**/commonTest*/**', '**/jvmTest*/**', '**/jsTest*/**', '**/iosTest*/**' ]
     constantPattern: '[A-Z][_A-Z0-9]*'
     propertyPattern: '[A-Za-z][_A-Za-z0-9]*'
     privatePropertyPattern: '_?[A-Za-z][_A-Za-z0-9]*'
   VariableMaxLength:
     active: true
-    excludes: []
+    excludes: [ '**/test*/**', '**/androidTest*/**', '**/commonTest*/**', '**/jvmTest*/**', '**/jsTest*/**', '**/iosTest*/**' ]
     maximumVariableNameLength: 64
   VariableMinLength:
     active: false
-    excludes: []
+    excludes: [ '**/test*/**', '**/androidTest*/**', '**/commonTest*/**', '**/jvmTest*/**', '**/jsTest*/**', '**/iosTest*/**' ]
     minimumVariableNameLength: 1
   VariableNaming:
     active: true
-    excludes: []
+    excludes: [ '**/test*/**', '**/androidTest*/**', '**/commonTest*/**', '**/jvmTest*/**', '**/jsTest*/**', '**/iosTest*/**' ]
     variablePattern: '[a-z][A-Za-z0-9]*'
     privateVariablePattern: '(_)?[a-z][A-Za-z0-9]*'
     excludeClassPattern: '$^'
@@ -466,15 +501,21 @@ performance:
     active: true
   ForEachOnRange:
     active: true
-    excludes: ['**/test*/**', '**/androidTest*/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
+    excludes: [ '**/test*/**', '**/androidTest*/**', '**/commonTest*/**', '**/jvmTest*/**', '**/jsTest*/**', '**/iosTest*/**' ]
   SpreadOperator:
     active: true
-    excludes: ['**/test*/**', '**/androidTest*/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
+    excludes: [ '**/test*/**', '**/androidTest*/**', '**/commonTest*/**', '**/jvmTest*/**', '**/jsTest*/**', '**/iosTest*/**' ]
   UnnecessaryTemporaryInstantiation:
     active: true
 
 potential-bugs:
   active: true
+  AvoidReferentialEquality:
+    active: true
+    forbiddenTypePatterns:
+      - 'kotlin.String'
+  CastToNullableType:
+    active: true
   Deprecation:
     active: true
   DontDowncastCollectionTypes:
@@ -494,7 +535,11 @@ potential-bugs:
   IgnoredReturnValue:
     active: true
     restrictToAnnotatedMethods: true
-    returnValueAnnotations: ['*.CheckReturnValue', '*.CheckResult']
+    returnValueAnnotations:
+      - '*.CheckResult'
+      - '*.CheckReturnValue'
+    ignoreReturnValueAnnotations:
+      - '*.CanIgnoreReturnValue'
   ImplicitDefaultLocale:
     active: true
   ImplicitUnitReturnType:
@@ -534,6 +579,8 @@ potential-bugs:
     active: true
   UnsafeCast:
     active: true
+  UnusedUnaryOperator:
+    active: true
   UselessPostfixExpression:
     active: true
   WrongEqualsTypeParameter:
@@ -566,7 +613,10 @@ style:
     includeLineWrapping: true
   ForbiddenComment:
     active: true
-    values: ['TODO:', 'FIXME:', 'STOPSHIP:']
+    values:
+      - 'FIXME:'
+      - 'STOPSHIP:'
+      - 'TODO:'
     allowedPatterns: ''
   ForbiddenImport:
     active: false
@@ -574,11 +624,15 @@ style:
     forbiddenPatterns: ''
   ForbiddenMethodCall:
     active: true
-    methods: ['kotlin.io.println', 'kotlin.io.print']
+    methods:
+      - 'kotlin.io.print'
+      - 'kotlin.io.println'
   ForbiddenPublicDataClass:
     active: true
-    excludes: ['**']
-    ignorePackages: ['*.internal', '*.internal.*']
+    excludes: [ '**' ]
+    ignorePackages:
+      - '*.internal'
+      - '*.internal.*'
   ForbiddenVoid:
     active: true
     ignoreOverridden: false
@@ -588,7 +642,8 @@ style:
     ignoreOverridableFunction: true
     ignoreActualFunction: true
     excludedFunctions: 'describeContents'
-    excludeAnnotatedFunction: ['dagger.Provides']
+    excludeAnnotatedFunction:
+      - 'dagger.Provides'
   LibraryCodeMustSpecifyReturnType:
     active: true
     excludes: ['**']
@@ -600,8 +655,12 @@ style:
     maxJumpCount: 1
   MagicNumber:
     active: true
-    excludes: ['**/test*/**', '**/androidTest*/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
-    ignoreNumbers: ['-1', '0', '1', '2']
+    excludes: [ '**/test*/**', '**/androidTest*/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**' ]
+    ignoreNumbers:
+      - '-1'
+      - '0'
+      - '1'
+      - '2'
     ignoreHashCodeFunction: true
     ignorePropertyDeclaration: false
     ignoreLocalVariableDeclaration: false
@@ -618,7 +677,6 @@ style:
     active: false
   MaxLineLength:
     active: true
-    excludes: "**/*Dao.kt"
     maxLineLength: 130
     excludePackageStatements: true
     excludeImportStatements: true
@@ -634,6 +692,8 @@ style:
   NewLineAtEndOfFile:
     active: true
   NoTabs:
+    active: true
+  ObjectLiteralToLambda:
     active: true
   OptionalAbstractKeyword:
     active: true
@@ -667,6 +727,7 @@ style:
   ThrowsCount:
     active: true
     max: 2
+    excludeGuardClauses: false
   TrailingWhitespace:
     active: true
   UnderscoresInNumericLiterals:
@@ -674,7 +735,8 @@ style:
     acceptableDecimalLength: 5
   UnnecessaryAbstractClass:
     active: true
-    excludeAnnotatedClasses: ['dagger.Module']
+    excludeAnnotatedClasses:
+      - 'dagger.Module'
   UnnecessaryAnnotationUseSiteTarget:
     active: true
   UnnecessaryApply:
@@ -704,15 +766,17 @@ style:
     active: false
   UseDataClass:
     active: true
-    excludeAnnotatedClasses: []
+    excludeAnnotatedClasses: [ ]
     allowVars: false
   UseEmptyCounterpart:
     active: true
   UseIfEmptyOrIfBlank:
     active: true
   UseIfInsteadOfWhen:
-    active: true
+    active: false
   UseIsNullOrEmpty:
+    active: true
+  UseOrEmpty:
     active: true
   UseRequire:
     active: true
@@ -726,5 +790,7 @@ style:
     active: true
   WildcardImport:
     active: true
-    excludes: []
-    excludeImports: []
+    excludes: [ '**/test*/**', '**/androidTest*/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**' ]
+    excludeImports:
+      - 'java.util.*'
+      - 'kotlinx.android.synthetic.*'
