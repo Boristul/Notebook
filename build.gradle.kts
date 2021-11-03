@@ -12,13 +12,17 @@ buildscript {
     }
     dependencies {
         val kotlinVersion: String by project
+        val hiltVersion: String by project
+
         classpath("com.android.tools.build:gradle:7.0.3")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
         classpath("org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion")
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5")
         classpath("com.google.gms:google-services:4.3.10")
-        classpath("com.google.firebase:firebase-crashlytics-gradle:2.7.1")
+        classpath("com.google.firebase:firebase-crashlytics-gradle:2.8.0")
         classpath("com.google.firebase:perf-plugin:1.4.0")
+
+        classpath("com.google.dagger:hilt-android-gradle-plugin:$hiltVersion")
     }
 }
 
@@ -50,7 +54,7 @@ subprojects.forEach { module ->
 detekt {
     config = files("detekt-config.yml")
 
-    input = files(*subprojects.map { subproject ->
+    source = files(*subprojects.map { subproject ->
         if (subproject.subprojects.isEmpty())
             "${subproject.name}/src"
         else
@@ -60,7 +64,6 @@ detekt {
     }.toTypedArray())
 
     reports { xml { enabled = false } }
-    failFast = false
 }
 
 dependencies {

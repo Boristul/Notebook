@@ -21,5 +21,5 @@ object Converters {
 
     @TypeConverter
     @JvmStatic
-    fun stringToLocalDate(value: String?): LocalDate? = LocalDate(value)
+    fun stringToLocalDate(value: String?): LocalDate = LocalDate(value)
 }

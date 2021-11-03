@@ -14,7 +14,9 @@ import com.boristul.notebook.databinding.ActivityMainBinding
 import com.boristul.utils.findNavControllerInOnCreate
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<MainActivityViewModel>()

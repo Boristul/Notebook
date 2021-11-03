@@ -1,20 +1,18 @@
 package com.boristul.notebook.ui.notes
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.boristul.repository.NotesRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import org.kodein.di.DI
-import org.kodein.di.DIAware
-import org.kodein.di.android.x.closestDI
-import org.kodein.di.instance
+import javax.inject.Inject
 
-class NotesFragmentViewModel(application: Application) : AndroidViewModel(application), DIAware {
-    override val di: DI by closestDI()
-    private val notesRepository by instance<NotesRepository>()
+@HiltViewModel
+class NotesFragmentViewModel @Inject constructor(
+    private val notesRepository: NotesRepository
+) : ViewModel() {
 
     private val statePrivate = MutableStateFlow<NoteState>(NoteState.Started)
     val state = statePrivate.asStateFlow()

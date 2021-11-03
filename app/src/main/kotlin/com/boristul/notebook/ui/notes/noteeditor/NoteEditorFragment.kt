@@ -16,23 +16,20 @@ import com.boristul.notebook.databinding.FragmentNoteEditorBinding
 import com.boristul.utils.collectOnStarted
 import com.boristul.utils.distinctUntilChanged
 import com.boristul.utils.hideKeyboard
-import com.boristul.utils.navArgsFactory
 import com.boristul.utils.setViewCount
 import com.boristul.utils.toast
 import com.boristul.utils.viewbinding.viewBinding
 import com.google.android.material.chip.Chip
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class NoteEditorFragment : Fragment(R.layout.fragment_note_editor) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding by viewBinding<FragmentNoteEditorBinding>()
-        val viewModel by viewModels<NoteEditorFragmentViewModel> {
-            navArgsFactory<NoteEditorFragmentArgs> { application ->
-                NoteEditorFragmentViewModel(application, note)
-            }
-        }
+        val viewModel by viewModels<NoteEditorFragmentViewModel>()
 
         (requireActivity() as AppCompatActivity).supportActionBar?.title = getString(
             if (viewModel.isEdition) R.string.nef_title_edit else R.string.nef_title_create

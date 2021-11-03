@@ -13,12 +13,13 @@ import com.boristul.notebook.R
 import com.boristul.notebook.databinding.DialogTaskEditorBinding
 import com.boristul.utils.distinctUntilChanged
 import com.boristul.utils.hideKeyboard
-import com.boristul.utils.navArgsFactory
 import com.boristul.utils.showKeyboard
 import com.boristul.utils.viewbinding.inflateViewBinding
 import com.boristul.utils.viewbinding.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class TaskEditorDialog : DialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         inflater.inflateViewBinding<DialogTaskEditorBinding>(container, false).root
@@ -27,11 +28,7 @@ class TaskEditorDialog : DialogFragment() {
         val binding by viewBinding<DialogTaskEditorBinding>()
         val owner = viewLifecycleOwner
 
-        val viewModel by viewModels<TaskEditorDialogViewModel> {
-            navArgsFactory<TaskEditorDialogArgs> { application ->
-                TaskEditorDialogViewModel(application, task, date)
-            }
-        }
+        val viewModel by viewModels<TaskEditorDialogViewModel>()
 
         binding.title.text = getString(
             if (viewModel.isEdition) R.string.ted_edit_title else R.string.ted_create_title

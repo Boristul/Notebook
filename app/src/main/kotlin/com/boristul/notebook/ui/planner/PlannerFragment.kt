@@ -20,10 +20,12 @@ import com.boristul.utils.setColor
 import com.boristul.utils.showDatePicker
 import com.boristul.utils.viewbinding.viewBinding
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 import org.joda.time.DateTimeZone
 import org.joda.time.LocalDate
 import org.joda.time.format.DateTimeFormat
 
+@AndroidEntryPoint
 class PlannerFragment : Fragment(R.layout.fragment_planner) {
 
     private val viewModel by viewModels<PlannerFragmentViewModel>()
