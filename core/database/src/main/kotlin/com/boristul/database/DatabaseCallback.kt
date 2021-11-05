@@ -3,7 +3,7 @@ package com.boristul.database
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-internal class DatabaseCallback : RoomDatabase.Callback() {
+class DatabaseCallback : RoomDatabase.Callback() {
 
     @Suppress("MaxLineLength")
     override fun onCreate(db: SupportSQLiteDatabase) {

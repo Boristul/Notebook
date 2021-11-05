@@ -1,25 +1,24 @@
 package com.boristul.notebook.ui.planner.taskeditor
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
 import com.boristul.entity.TaskPoint
 import com.boristul.repository.TaskPointsRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import org.joda.time.LocalDate
-import org.kodein.di.DI
-import org.kodein.di.DIAware
-import org.kodein.di.android.x.closestDI
-import org.kodein.di.instance
+import javax.inject.Inject
 
-class TaskEditorDialogViewModel(
-    application: Application,
-    private val task: TaskPoint?,
-    private val date: LocalDate?
-) : AndroidViewModel(application), DIAware {
-    override val di: DI by closestDI()
-    private val taskPointRepository by instance<TaskPointsRepository>()
+@HiltViewModel
+class TaskEditorDialogViewModel @Inject constructor(
+    private val taskPointsRepository: TaskPointsRepository,
+    savedStateHandle: SavedStateHandle
+) : ViewModel() {
+
+    private val task = savedStateHandle.get<TaskPoint>("task")
+    private val date = savedStateHandle.get<LocalDate>("date")
 
     var isEdition: Boolean = false
         private set
@@ -37,9 +36,9 @@ class TaskEditorDialogViewModel(
 
     suspend fun save() {
         if (!isEdition) {
-            taskPointRepository.insert(checkNotNull(title.value), checkNotNull(date))
+            taskPointsRepository.insert(checkNotNull(title.value), checkNotNull(date))
         } else {
-            taskPointRepository.update(checkNotNull(task).id, checkNotNull(title.value))
+            taskPointsRepository.update(checkNotNull(task).id, checkNotNull(title.value))
         }
     }
 }

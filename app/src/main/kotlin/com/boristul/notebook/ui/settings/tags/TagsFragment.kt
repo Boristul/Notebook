@@ -16,9 +16,11 @@ import com.boristul.utils.setViewCount
 import com.boristul.utils.viewbinding.viewBinding
 import com.google.android.material.chip.Chip
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class TagsFragment : Fragment(R.layout.fragment_tags) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

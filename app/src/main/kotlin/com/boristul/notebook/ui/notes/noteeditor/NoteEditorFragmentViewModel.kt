@@ -1,32 +1,30 @@
 package com.boristul.notebook.ui.notes.noteeditor
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.boristul.entity.NoteWithTags
 import com.boristul.entity.Tag
 import com.boristul.repository.NotesRepository
 import com.boristul.repository.TagsRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.joda.time.DateTime
-import org.kodein.di.DI
-import org.kodein.di.DIAware
-import org.kodein.di.android.x.closestDI
-import org.kodein.di.instance
+import javax.inject.Inject
 
-class NoteEditorFragmentViewModel(
-    application: Application,
-    private val noteWithTags: NoteWithTags?
-) : AndroidViewModel(application), DIAware {
+@HiltViewModel
+class NoteEditorFragmentViewModel @Inject constructor(
+    private val notesRepository: NotesRepository,
+    tagsRepository: TagsRepository,
+    savedStateHandle: SavedStateHandle
+) : ViewModel() {
 
-    override val di: DI by closestDI()
-    private val notesRepository by instance<NotesRepository>()
-    private val tagsRepository by instance<TagsRepository>()
+    private val noteWithTags: NoteWithTags? = savedStateHandle.get("note")
 
     val title = MutableLiveData("")
     val description = MutableLiveData("")

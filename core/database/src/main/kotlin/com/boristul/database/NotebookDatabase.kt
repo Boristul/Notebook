@@ -21,7 +21,7 @@ import com.boristul.database.entity.TaskPointEntity
     version = 1
 )
 @TypeConverters(Converters::class)
-internal abstract class NotebookDatabase : RoomDatabase() {
+abstract class NotebookDatabase : RoomDatabase() {
     abstract val notesDao: NotesDao
     abstract val tagsDao: TagsDao
     abstract val taskPointsDao: TaskPointsDao

@@ -8,6 +8,15 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     id("androidx.navigation.safeargs.kotlin")
+    id("dagger.hilt.android.plugin")
+}
+
+hilt {
+    enableAggregatingTask = true
+}
+
+kapt {
+    correctErrorTypes = true
 }
 
 android {
@@ -107,7 +116,7 @@ dependencies {
 
     // region AndroidX
     val navigationVersion: String by project
-    implementation("androidx.core:core-ktx:1.6.0")
+    implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navigationVersion")
     implementation("androidx.preference:preference:1.1.1")
@@ -120,9 +129,9 @@ dependencies {
     // endregion
 
     // region Core
-    val kodeinVersion: String by project
-    implementation("org.kodein.di:kodein-di-jvm:$kodeinVersion")
-    implementation("org.kodein.di:kodein-di-framework-android-x:$kodeinVersion")
+    val hiltVersion: String by project
+    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
     // endregion
 
     // region Google services

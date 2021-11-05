@@ -4,6 +4,10 @@ plugins {
     kotlin("kapt")
 }
 
+kapt {
+    correctErrorTypes = true
+}
+
 android {
     val compileSdkVersion: String by project
     val targetSdkVersion: String by project
@@ -46,7 +50,8 @@ dependencies {
     // endregion
 
     // region Core
-    val kodeinVersion: String by project
-    implementation("org.kodein.di:kodein-di-jvm:$kodeinVersion")
+    val hiltVersion: String by project
+    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
     // endregion
 }

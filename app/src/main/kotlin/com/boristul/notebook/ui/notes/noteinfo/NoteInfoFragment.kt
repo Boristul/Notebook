@@ -14,15 +14,17 @@ import com.boristul.utils.setViewCount
 import com.boristul.utils.viewbinding.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NoteInfoFragment : BottomSheetDialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         inflater.inflate(R.layout.fragment_note_info, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val viewModel by viewModels<NoteInfoFragmentViewModel> {
-            navArgsFactory<NoteInfoFragmentArgs> { application ->
-                NoteInfoFragmentViewModel(application, note)
+            navArgsFactory<NoteInfoFragmentArgs> {
+                NoteInfoFragmentViewModel(note)
             }
         }
         val binding by viewBinding<FragmentNoteInfoBinding>()
