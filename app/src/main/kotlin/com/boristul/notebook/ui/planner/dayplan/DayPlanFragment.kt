@@ -5,7 +5,6 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -43,7 +42,7 @@ class DayPlanFragment : Fragment(R.layout.fragment_day_plan) {
                 val notEmptyIndex = 0
                 val emptyIndex = 1
 
-                viewModel.taskPoints.collectOnStarted(lifecycleScope, lifecycle) {
+                viewModel.taskPoints.collectOnStarted(viewLifecycleOwner) {
                     binding.viewSwitcher.displayedChild = if (it.isNotEmpty()) notEmptyIndex else emptyIndex
                     tasks = it
                 }

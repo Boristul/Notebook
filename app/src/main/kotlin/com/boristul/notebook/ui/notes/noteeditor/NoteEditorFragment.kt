@@ -6,10 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.distinctUntilChanged
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.boristul.notebook.R
 import com.boristul.notebook.databinding.FragmentNoteEditorBinding
@@ -21,8 +18,6 @@ import com.boristul.utils.toast
 import com.boristul.utils.viewbinding.viewBinding
 import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class NoteEditorFragment : Fragment(R.layout.fragment_note_editor) {
@@ -59,7 +54,7 @@ class NoteEditorFragment : Fragment(R.layout.fragment_note_editor) {
             }
         }
 
-        viewModel.state.collectOnStarted(lifecycleScope, lifecycle) { state ->
+        viewModel.state.collectOnStarted(viewLifecycleOwner) { state ->
             when (state) {
                 NoteEditorState.Started -> Unit
                 NoteEditorState.SaveCompleted -> {
@@ -70,23 +65,19 @@ class NoteEditorFragment : Fragment(R.layout.fragment_note_editor) {
             }
         }
 
-        lifecycleScope.launch {
-            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.tags.collect { tags ->
-                    binding.chips.setViewCount(
-                        tags.size,
-                        { layoutInflater.inflate(R.layout.item_tag_chip_choice, this, false) as Chip },
-                        {
-                            text = tags[it].name
-                            isChecked = viewModel.isTagSelected(tags[it])
+        viewModel.tags.collectOnStarted(viewLifecycleOwner) { tags ->
+            binding.chips.setViewCount(
+                tags.size,
+                { layoutInflater.inflate(R.layout.item_tag_chip_choice, this, false) as Chip },
+                {
+                    text = tags[it].name
+                    isChecked = viewModel.isTagSelected(tags[it])
 
-                            setOnCheckedChangeListener { _, isChecked ->
-                                viewModel.updateTagsList(tags[it], isChecked)
-                            }
-                        }
-                    )
+                    setOnCheckedChangeListener { _, isChecked ->
+                        viewModel.updateTagsList(tags[it], isChecked)
+                    }
                 }
-            }
+            )
         }
     }
 

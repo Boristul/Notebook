@@ -134,6 +134,10 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
     // endregion
 
+    // region UI
+    implementation("com.android.databinding:viewbinding:7.1.3")
+    // endregion
+
     // region Google services
     implementation(platform("com.google.firebase:firebase-bom:26.1.0"))
     implementation("com.google.firebase:firebase-analytics-ktx")
