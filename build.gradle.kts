@@ -1,8 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("io.gitlab.arturbosch.detekt") version "1.18.1"
-    kotlin("plugin.serialization") version "1.4.10"
+    id("io.gitlab.arturbosch.detekt") version com.boristul.libs.Libs.Versions.detektVersion
+    kotlin("plugin.serialization") version com.boristul.libs.Libs.Versions.kotlinVersion
 }
 
 buildscript {
@@ -11,18 +11,15 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        val kotlinVersion: String by project
-        val hiltVersion: String by project
+        classpath(com.boristul.libs.Libs.gradle)
+        classpath(com.boristul.libs.Libs.Kotlin.gradlePlugin)
+        classpath(com.boristul.libs.Libs.Kotlin.serialization)
+        classpath(com.boristul.libs.Libs.Navigation.navigationArgsPlugin)
+        classpath(com.boristul.libs.Libs.GoogleServices.googleServicesPlugin)
+        classpath(com.boristul.libs.Libs.GoogleServices.firebaseCrashlyticsPlugin)
+        classpath(com.boristul.libs.Libs.GoogleServices.firebasePerfPlugin)
 
-        classpath("com.android.tools.build:gradle:7.1.3")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
-        classpath("org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion")
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.4.2")
-        classpath("com.google.gms:google-services:4.3.10")
-        classpath("com.google.firebase:firebase-crashlytics-gradle:2.8.1")
-        classpath("com.google.firebase:perf-plugin:1.4.1")
-
-        classpath("com.google.dagger:hilt-android-gradle-plugin:$hiltVersion")
+        classpath(com.boristul.libs.Libs.Hilt.hiltPlugin)
     }
 }
 
@@ -67,5 +64,5 @@ detekt {
 }
 
 dependencies {
-    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.18.1")
+    detektPlugins(com.boristul.libs.Libs.detektPlugin)
 }

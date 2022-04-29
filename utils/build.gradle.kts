@@ -1,3 +1,6 @@
+import com.boristul.libs.Config
+import com.boristul.libs.Libs
+
 plugins {
     id("com.android.library")
     kotlin("android")
@@ -5,14 +8,12 @@ plugins {
 }
 
 android {
-    val compileSdkVersion: String by project
-    val targetSdkVersion: String by project
 
-    compileSdk = compileSdkVersion.toInt()
+    compileSdk = Config.compileSdk
 
     defaultConfig {
         minSdk = 21
-        targetSdk = targetSdkVersion.toInt()
+        targetSdk = Config.targetSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -40,17 +41,15 @@ android {
 
 dependencies {
     // region Navigation
-    val navigationVersion: String by project
-    implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
+    implementation(Libs.Navigation.navigationFragment)
     // endregion
 
     // region AndroidX
-    val lifecycleVersion: String by project
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+    implementation(Libs.AndroidX.lifecycleLivedata)
+    implementation(Libs.AndroidX.lifecycleRuntime)
     // endregion
 
     // region Core
-    implementation("joda-time:joda-time:2.10.14")
+    implementation(Libs.Core.jodaTime)
     // endregion
 }
