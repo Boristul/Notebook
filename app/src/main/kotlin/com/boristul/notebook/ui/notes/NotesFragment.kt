@@ -5,17 +5,16 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.boristul.notebook.R
 import com.boristul.notebook.databinding.FragmentNotesBinding
-
 import com.boristul.utils.collectOnStarted
 import com.boristul.utils.getColorCompat
 import com.boristul.utils.setColor
@@ -29,16 +28,31 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
         val binding = FragmentNotesBinding.bind(view)
         val viewModel by viewModels<NotesFragmentViewModel>()
 
-        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
-            setHasOptionsMenu(true)
-        }
+        requireActivity().addMenuProvider(
+            object : MenuProvider {
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    menuInflater.inflate(R.menu.menu_notes, menu)
+                    menu.setColor(requireContext().getColorCompat(R.color.menu))
+                }
+
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean = when (menuItem.itemId) {
+                    R.id.mn_add -> {
+                        findNavController().navigate(NotesFragmentDirections.actionNotesToNoteEditor(null))
+                        true
+                    }
+                    else -> false
+                }
+            },
+            viewLifecycleOwner,
+            Lifecycle.State.STARTED
+        )
 
         binding.notesList.apply {
             adapter = NotesListAdapter().apply {
                 val notEmptyIndex = 0
                 val emptyIndex = 1
 
-                viewModel.notes.collectOnStarted(lifecycleScope, lifecycle) {
+                viewModel.notes.collectOnStarted(viewLifecycleOwner) {
                     binding.viewSwitcher.displayedChild = if (it.isNotEmpty()) notEmptyIndex else emptyIndex
                     notes = it
                 }
@@ -59,24 +73,12 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
             findNavController().navigate(NotesFragmentDirections.actionNotesToNoteEditor(null))
         }
 
-        viewModel.state.collectOnStarted(lifecycleScope, lifecycle) { state ->
+        viewModel.setStartedState()
+        viewModel.state.collectOnStarted(viewLifecycleOwner) { state ->
             when (state) {
                 NoteState.Started -> Unit
                 is NoteState.NoteDeleted -> requireActivity().toast(R.string.nf_successful_delete)
             }
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_notes, menu)
-        menu.setColor(requireContext().getColorCompat(R.color.menu))
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.mn_add -> {
-            findNavController().navigate(NotesFragmentDirections.actionNotesToNoteEditor(null))
-            true
-        }
-        else -> false
     }
 }

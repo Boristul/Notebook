@@ -9,7 +9,7 @@ object ThemeSelector {
     private const val THEME_PREF = "theme_type_pref"
     private const val DEFAULT_VALUE = "-1"
 
-    // TODO: this is because of list pref use only string-arrays
+    // This is because of list pref use only string-arrays
     fun initTheme(context: Context) {
         PreferenceManager.getDefaultSharedPreferences(context).getString(
             THEME_PREF,

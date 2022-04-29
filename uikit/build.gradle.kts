@@ -44,15 +44,15 @@ dependencies {
     // endregion
 
     // region AndroidX
-    implementation("androidx.preference:preference:1.1.1")
+    implementation("androidx.preference:preference:1.2.0")
     api("androidx.core:core-ktx:1.7.0")
-    api("androidx.appcompat:appcompat:1.3.1")
-    api("androidx.constraintlayout:constraintlayout:2.1.1")
+    api("androidx.appcompat:appcompat:1.4.1")
+    api("androidx.constraintlayout:constraintlayout:2.1.3")
     // endregion
 
 
     // region UI
-    api("com.google.android.material:material:1.4.0-alpha02")
+    api("com.google.android.material:material:1.7.0-alpha01")
     api("com.daimajia.swipelayout:library:1.2.0@aar")
     api("com.airbnb.android:lottie:3.5.0")
     // endregion

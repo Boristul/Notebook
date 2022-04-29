@@ -79,6 +79,8 @@
     <string name="pf_mark_uncompleted_title">Mark as uncompleted</string>
     <string name="pf_mark_uncompleted_description">Are you sure you want to mark this task as uncompleted?</string>
     <string name="pf_yes">Yes</string>
+    <string name="pf_edit_task">Edit</string>
+    <string name="pf_delete_task">Delete</string>
     <!--  endregion  -->
 
     <!--  region TaskEditorDialog  -->

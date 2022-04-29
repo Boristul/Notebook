@@ -119,7 +119,7 @@ dependencies {
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
     implementation("androidx.navigation:navigation-ui-ktx:$navigationVersion")
-    implementation("androidx.preference:preference:1.1.1")
+    implementation("androidx.preference:preference:1.2.0")
     implementation("androidx.viewpager2:viewpager2:1.1.0-beta01")
     // endregion
 
@@ -134,6 +134,10 @@ dependencies {
     kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
     // endregion
 
+    // region UI
+    implementation("com.android.databinding:viewbinding:7.1.3")
+    // endregion
+
     // region Google services
     implementation(platform("com.google.firebase:firebase-bom:26.1.0"))
     implementation("com.google.firebase:firebase-analytics-ktx")
@@ -141,7 +145,7 @@ dependencies {
     implementation("com.google.firebase:firebase-perf-ktx")
     implementation("com.google.firebase:firebase-inappmessaging-display")
     implementation("com.google.firebase:firebase-messaging-ktx")
-    implementation("com.google.android.gms:play-services-auth:19.2.0")
+    implementation("com.google.android.gms:play-services-auth:20.2.0")
     implementation("com.google.api-client:google-api-client-android:1.26.0")
     implementation("com.google.http-client:google-http-client-gson:1.26.0")
     implementation("com.google.apis:google-api-services-drive:v3-rev136-1.25.0")

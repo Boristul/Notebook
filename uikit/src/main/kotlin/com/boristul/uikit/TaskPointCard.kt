@@ -2,17 +2,18 @@ package com.boristul.uikit
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.ViewGroup
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.getSystemService
 import com.boristul.uikit.databinding.CardTaskPointBinding
 import com.boristul.utils.attr
 import com.boristul.utils.getDrawableCompat
-import com.daimajia.swipe.SwipeLayout
 
 class TaskPointCard @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : SwipeLayout(context, attrs, defStyleAttr) {
+) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     companion object {
         private const val CHECKED_SPEED = 2f
@@ -27,7 +28,6 @@ class TaskPointCard @JvmOverloads constructor(
             binding.title.text = value
         }
 
-    var onDeleteClickListener: (() -> Unit)? = null
     var onClickListener: (() -> Unit)? = null
     var onLongClickListener: (() -> Unit)? = null
 
@@ -48,15 +48,24 @@ class TaskPointCard @JvmOverloads constructor(
     }
 
     init {
-        binding.delete.setOnClickListener { onDeleteClickListener?.invoke() }
-        surfaceView.setOnClickListener { onClickListener?.invoke() }
-        surfaceView.setOnLongClickListener {
+        setOnClickListener { onClickListener?.invoke() }
+        setOnLongClickListener {
             onLongClickListener?.invoke()
             true
         }
 
+        layoutParams = ViewGroup.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+        val verticalPadding = context.resources.getDimensionPixelSize(R.dimen.card_vertical_margin)
+        val horizontalPadding = context.resources.getDimensionPixelSize(R.dimen.card_horizontal_margin)
+
+        setPadding(horizontalPadding, verticalPadding, horizontalPadding, verticalPadding)
+
         context.apply {
-            binding.surfaceLayout.background =
+            background =
                 getDrawableCompat(attr(android.R.attr.selectableItemBackground).resourceId)
         }
     }

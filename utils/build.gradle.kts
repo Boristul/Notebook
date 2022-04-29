@@ -51,6 +51,6 @@ dependencies {
     // endregion
 
     // region Core
-    implementation("joda-time:joda-time:2.10.10")
+    implementation("joda-time:joda-time:2.10.14")
     // endregion
 }

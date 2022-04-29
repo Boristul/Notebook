@@ -17,7 +17,12 @@ class NotesFragmentViewModel @Inject constructor(
     private val statePrivate = MutableStateFlow<NoteState>(NoteState.Started)
     val state = statePrivate.asStateFlow()
 
+    fun setStartedState() {
+        statePrivate.value = NoteState.Started
+    }
+
     val notes = notesRepository.getAll()
+
     fun delete(id: Long) = viewModelScope.launch {
         notesRepository.delete(id)
         statePrivate.value = NoteState.NoteDeleted(id)

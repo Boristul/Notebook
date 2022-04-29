@@ -36,6 +36,6 @@ android {
 
 dependencies {
     // region Core
-    api("joda-time:joda-time:2.10.10")
+    api("joda-time:joda-time:2.10.14")
     // endregion
 }

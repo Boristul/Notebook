@@ -2,10 +2,10 @@ package com.boristul.notebook.ui.planner.dayplan
 
 import android.os.Bundle
 import android.view.View
+import android.widget.PopupMenu
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,7 +18,6 @@ import com.boristul.utils.collectOnStarted
 import com.boristul.utils.viewbinding.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.joda.time.LocalDate
 
 @AndroidEntryPoint
@@ -35,7 +34,6 @@ class DayPlanFragment : Fragment(R.layout.fragment_day_plan) {
     private val binding by viewBinding<FragmentDayPlanBinding>()
     private val viewModel by viewModels<DayPlanFragmentViewModel>()
 
-    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         @Suppress("UnsafeCast")
         viewModel.setSelectedDate(requireArguments().get(PAGE_DATE) as LocalDate)
@@ -45,7 +43,7 @@ class DayPlanFragment : Fragment(R.layout.fragment_day_plan) {
                 val notEmptyIndex = 0
                 val emptyIndex = 1
 
-                viewModel.taskPoints.collectOnStarted(lifecycleScope, lifecycle) {
+                viewModel.taskPoints.collectOnStarted(viewLifecycleOwner) {
                     binding.viewSwitcher.displayedChild = if (it.isNotEmpty()) notEmptyIndex else emptyIndex
                     tasks = it
                 }
@@ -63,10 +61,26 @@ class DayPlanFragment : Fragment(R.layout.fragment_day_plan) {
                     }
                 }
 
-                onDeleteClickListener = { viewModel.delete(it.id) }
+                onLongClickListener = { task, card ->
+                    PopupMenu(requireContext(), card).apply {
+                        inflate(R.menu.popup_planner)
 
-                onLongClickListener = {
-                    findNavController().navigate(PlannerFragmentDirections.actionPlannerToTaskEditor(task = it))
+                        setOnMenuItemClickListener {
+                            when (it.itemId) {
+                                R.id.popup_delete -> {
+                                    viewModel.delete(task.id)
+                                    true
+                                }
+                                R.id.popup_edit -> {
+                                    findNavController().navigate(PlannerFragmentDirections.actionPlannerToTaskEditor(task = task))
+                                    true
+                                }
+
+                                else -> false
+                            }
+                        }
+                        show()
+                    }
                 }
             }
             layoutManager = LinearLayoutManager(requireContext())
