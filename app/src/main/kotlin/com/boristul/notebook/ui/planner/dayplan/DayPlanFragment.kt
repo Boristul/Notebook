@@ -18,7 +18,6 @@ import com.boristul.utils.collectOnStarted
 import com.boristul.utils.viewbinding.viewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.joda.time.LocalDate
 
 @AndroidEntryPoint
@@ -35,7 +34,6 @@ class DayPlanFragment : Fragment(R.layout.fragment_day_plan) {
     private val binding by viewBinding<FragmentDayPlanBinding>()
     private val viewModel by viewModels<DayPlanFragmentViewModel>()
 
-    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         @Suppress("UnsafeCast")
         viewModel.setSelectedDate(requireArguments().get(PAGE_DATE) as LocalDate)
