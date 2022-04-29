@@ -2,6 +2,7 @@ package com.boristul.notebook.ui.planner.dayplan
 
 import android.os.Bundle
 import android.view.View
+import android.widget.PopupMenu
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -60,10 +61,27 @@ class DayPlanFragment : Fragment(R.layout.fragment_day_plan) {
                     }
                 }
 
-                onDeleteClickListener = { viewModel.delete(it.id) }
+                onLongClickListener = { task, card ->
 
-                onLongClickListener = {
-                    findNavController().navigate(PlannerFragmentDirections.actionPlannerToTaskEditor(task = it))
+                    PopupMenu(requireContext(), card).apply {
+                        inflate(R.menu.popup_planner)
+
+                        setOnMenuItemClickListener {
+                            when (it.itemId) {
+                                R.id.popup_delete -> {
+                                    viewModel.delete(task.id)
+                                    true
+                                }
+                                R.id.popup_edit -> {
+                                    findNavController().navigate(PlannerFragmentDirections.actionPlannerToTaskEditor(task = task))
+                                    true
+                                }
+
+                                else -> false
+                            }
+                        }
+                        show()
+                    }
                 }
             }
             layoutManager = LinearLayoutManager(requireContext())

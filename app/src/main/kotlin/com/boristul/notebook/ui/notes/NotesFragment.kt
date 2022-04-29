@@ -69,6 +69,7 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
             findNavController().navigate(NotesFragmentDirections.actionNotesToNoteEditor(null))
         }
 
+        viewModel.setStartedState()
         viewModel.state.collectOnStarted(viewLifecycleOwner) { state ->
             when (state) {
                 NoteState.Started -> Unit

@@ -1,5 +1,6 @@
 package com.boristul.notebook.ui.planner.taskadapter
 
+import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DiffUtil
@@ -15,9 +16,8 @@ class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.ItemViewHolder>() {
             field = value
         }
 
-    var onDeleteClickListener: ((TaskPoint) -> Unit)? = null
     var onClickListener: ((TaskPoint) -> Unit)? = null
-    var onLongClickListener: ((TaskPoint) -> Unit)? = null
+    var onLongClickListener: ((TaskPoint, view: View) -> Unit)? = null
 
     private var updatedItem: Long? = null
 
@@ -35,8 +35,7 @@ class TaskListAdapter : RecyclerView.Adapter<TaskListAdapter.ItemViewHolder>() {
             onClickListener?.invoke(tasks[bindingAdapterPosition])
             updatedItem = tasks[bindingAdapterPosition].id
         }
-        card.onDeleteClickListener = { onDeleteClickListener?.invoke(tasks[bindingAdapterPosition]) }
-        card.onLongClickListener = { onLongClickListener?.invoke(tasks[bindingAdapterPosition]) }
+        card.onLongClickListener = { onLongClickListener?.invoke(tasks[bindingAdapterPosition], card) }
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) =

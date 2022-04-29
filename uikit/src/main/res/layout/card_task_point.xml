@@ -3,59 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:layout_height="wrap_content"
-    tools:parentTag="com.daimajia.swipe.SwipeLayout"
+    tools:paddingBottom="@dimen/card_vertical_margin"
+
+    tools:paddingEnd="@dimen/card_horizontal_margin"
+    tools:paddingStart="@dimen/card_horizontal_margin"
+    tools:paddingTop="@dimen/card_vertical_margin"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout"
     tools:theme="@style/AppTheme">
 
-    <FrameLayout
-        android:id="@+id/delete"
-        android:layout_width="72dp"
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="?colorSecondary"
-        android:foreground="?attr/selectableItemBackgroundBorderless">
+        android:layout_marginEnd="16dp"
+        android:maxLines="2"
+        android:textAppearance="?textAppearanceBody2"
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_delete"
-            app:tint="?colorOnPrimary" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/checkbox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Title of note" />
 
-    </FrameLayout>
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/checkbox"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/surface_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingStart="@dimen/card_horizontal_margin"
-        android:paddingTop="@dimen/card_vertical_margin"
-        android:paddingEnd="@dimen/card_horizontal_margin"
-        android:paddingBottom="@dimen/card_vertical_margin">
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:maxLines="2"
-            android:textAppearance="?textAppearanceBody2"
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/checkbox"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Title of note" />
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/checkbox"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/title"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lottie_rawRes="@raw/check" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/title"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_rawRes="@raw/check" />
 
 </merge>
