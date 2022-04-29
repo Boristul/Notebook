@@ -40,7 +40,7 @@ android {
 
 dependencies {
     // region Local
-    implementation(project(":utils"))
+    implementation(project(Libs.Local.utils))
     // endregion
 
     // region AndroidX

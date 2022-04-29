@@ -40,8 +40,8 @@ android {
 
 dependencies {
     // region Local
-    implementation(project(":entity"))
-    implementation(project(":core:database"))
+    implementation(project(Libs.Local.entity))
+    implementation(project(Libs.Local.database))
     // endregion
 
     // region AndroidX

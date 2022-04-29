@@ -39,7 +39,7 @@ android {
 
 dependencies {
     // region Local
-    implementation(project(":entity"))
+    implementation(project(Libs.Local.entity))
     // endregion
 
     // region Core

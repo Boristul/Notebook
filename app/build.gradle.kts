@@ -108,10 +108,10 @@ android {
 
 dependencies {
     // region Local
-    implementation(project(":uikit"))
-    implementation(project(":core:repository"))
-    implementation(project(":utils"))
-    implementation(project(":entity"))
+    implementation(project(Libs.Local.uiKit))
+    implementation(project(Libs.Local.repository))
+    implementation(project(Libs.Local.utils))
+    implementation(project(Libs.Local.entity))
     // endregion
 
     // region AndroidX

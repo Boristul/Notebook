@@ -16,6 +16,14 @@ object Libs {
         const val serialization = "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlinVersion}"
     }
 
+    object Local {
+        const val uiKit = ":uikit"
+        const val repository = ":core:repository"
+        const val database = ":core:database"
+        const val utils = ":utils"
+        const val entity = ":entity"
+    }
+
     object AndroidX {
         private const val lifecycleVersion = "2.4.1"
 
