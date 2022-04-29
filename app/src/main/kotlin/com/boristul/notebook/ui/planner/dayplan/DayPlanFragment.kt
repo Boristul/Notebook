@@ -62,7 +62,6 @@ class DayPlanFragment : Fragment(R.layout.fragment_day_plan) {
                 }
 
                 onLongClickListener = { task, card ->
-
                     PopupMenu(requireContext(), card).apply {
                         inflate(R.menu.popup_planner)
 

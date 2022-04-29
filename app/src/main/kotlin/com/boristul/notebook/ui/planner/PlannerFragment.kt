@@ -40,26 +40,30 @@ class PlannerFragment : Fragment(R.layout.fragment_planner) {
             }
         }
 
-        requireActivity().addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.menu_planner, menu)
-                menu.setColor(requireContext().getColorCompat(R.color.menu))
-            }
+        requireActivity().addMenuProvider(
+            object : MenuProvider {
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    menuInflater.inflate(R.menu.menu_planner, menu)
+                    menu.setColor(requireContext().getColorCompat(R.color.menu))
+                }
 
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean = when (menuItem.itemId) {
-                R.id.mp_add -> {
-                    findNavController().navigate(
-                        PlannerFragmentDirections.actionPlannerToTaskEditor(date = checkNotNull(viewModel.selectedDate.value))
-                    )
-                    true
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean = when (menuItem.itemId) {
+                    R.id.mp_add -> {
+                        findNavController().navigate(
+                            PlannerFragmentDirections.actionPlannerToTaskEditor(date = checkNotNull(viewModel.selectedDate.value))
+                        )
+                        true
+                    }
+                    R.id.mp_calendar -> {
+                        showCalendarDialog()
+                        true
+                    }
+                    else -> false
                 }
-                R.id.mp_calendar -> {
-                    showCalendarDialog()
-                    true
-                }
-                else -> false
-            }
-        }, viewLifecycleOwner, Lifecycle.State.STARTED)
+            },
+            viewLifecycleOwner,
+            Lifecycle.State.STARTED
+        )
 
         binding.viewPager.apply {
             adapter = DayPlanViewPagerAdapter(this@PlannerFragment).apply {

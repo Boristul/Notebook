@@ -32,9 +32,8 @@ import kotlin.reflect.KProperty
  * ```
  * Accessing `binding` before `onViewCreated` or after `onViewDestroy` throws [IllegalStateException].
  */
-inline fun <reified VB : ViewBinding> Fragment.viewBinding(): ReadOnlyProperty<Any?, VB> {
-    return ViewBindingDelegate(this, VB::class)
-}
+inline fun <reified VB : ViewBinding> Fragment.viewBinding(): ReadOnlyProperty<Any?, VB> =
+    ViewBindingDelegate(this, VB::class)
 
 /** @see viewBinding */
 @PublishedApi

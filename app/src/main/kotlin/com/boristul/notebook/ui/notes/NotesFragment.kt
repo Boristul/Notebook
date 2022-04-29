@@ -28,20 +28,24 @@ class NotesFragment : Fragment(R.layout.fragment_notes) {
         val binding = FragmentNotesBinding.bind(view)
         val viewModel by viewModels<NotesFragmentViewModel>()
 
-        requireActivity().addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.menu_notes, menu)
-                menu.setColor(requireContext().getColorCompat(R.color.menu))
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean = when (menuItem.itemId) {
-                R.id.mn_add -> {
-                    findNavController().navigate(NotesFragmentDirections.actionNotesToNoteEditor(null))
-                    true
+        requireActivity().addMenuProvider(
+            object : MenuProvider {
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    menuInflater.inflate(R.menu.menu_notes, menu)
+                    menu.setColor(requireContext().getColorCompat(R.color.menu))
                 }
-                else -> false
-            }
-        }, viewLifecycleOwner, Lifecycle.State.STARTED)
+
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean = when (menuItem.itemId) {
+                    R.id.mn_add -> {
+                        findNavController().navigate(NotesFragmentDirections.actionNotesToNoteEditor(null))
+                        true
+                    }
+                    else -> false
+                }
+            },
+            viewLifecycleOwner,
+            Lifecycle.State.STARTED
+        )
 
         binding.notesList.apply {
             adapter = NotesListAdapter().apply {

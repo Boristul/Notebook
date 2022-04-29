@@ -35,9 +35,7 @@ import kotlin.reflect.KClass
 inline fun <reified VB : ViewBinding> ViewGroup.inflateViewBinding(
     context: Context = this.context,
     attachToRoot: Boolean = true,
-): VB {
-    return VB::class.inflate(LayoutInflater.from(context), this, attachToRoot)
-}
+): VB = VB::class.inflate(LayoutInflater.from(context), this, attachToRoot)
 
 /**
  * Inflates ViewBinding with type [VB].
@@ -63,9 +61,7 @@ inline fun <reified VB : ViewBinding> ViewGroup.inflateViewBinding(
 inline fun <reified VB : ViewBinding> Context.inflateViewBinding(
     root: ViewGroup? = null,
     attachToRoot: Boolean = root != null,
-): VB {
-    return VB::class.inflate(LayoutInflater.from(this), root, attachToRoot)
-}
+): VB = VB::class.inflate(LayoutInflater.from(this), root, attachToRoot)
 
 /**
  * Inflates ViewBinding with type [VB] using given [LayoutInflater].
@@ -97,9 +93,7 @@ inline fun <reified VB : ViewBinding> Context.inflateViewBinding(
 inline fun <reified VB : ViewBinding> LayoutInflater.inflateViewBinding(
     root: ViewGroup? = null,
     attachToRoot: Boolean = root != null,
-): VB {
-    return VB::class.inflate(this, root, attachToRoot)
-}
+): VB = VB::class.inflate(this, root, attachToRoot)
 
 /**
  * Dynamically calls method `inflate` on ViewBinding class.
@@ -123,16 +117,14 @@ internal fun <VB : ViewBinding> KClass<VB>.inflate(
 
 private val inflateMethodsCache = mutableMapOf<Class<out ViewBinding>, Method>()
 
-private fun Class<out ViewBinding>.getInflateMethod(): Method {
-    return inflateMethodsCache.getOrPut(this) {
-        declaredMethods.find { method ->
-            val parameterTypes = method.parameterTypes
-            method.name == "inflate" &&
-                parameterTypes[0] == LayoutInflater::class.java &&
-                parameterTypes.getOrNull(1) == ViewGroup::class.java &&
-                (parameterTypes.size == 2 || parameterTypes[2] == Boolean::class.javaPrimitiveType)
-        } ?: error("Method ${this.simpleName}.inflate(LayoutInflater, ViewGroup[, boolean]) not found.")
-    }
+private fun Class<out ViewBinding>.getInflateMethod(): Method = inflateMethodsCache.getOrPut(this) {
+    declaredMethods.find { method ->
+        val parameterTypes = method.parameterTypes
+        method.name == "inflate" &&
+            parameterTypes[0] == LayoutInflater::class.java &&
+            parameterTypes.getOrNull(1) == ViewGroup::class.java &&
+            (parameterTypes.size == 2 || parameterTypes[2] == Boolean::class.javaPrimitiveType)
+    } ?: error("Method ${this.simpleName}.inflate(LayoutInflater, ViewGroup[, boolean]) not found.")
 }
 
 /**
@@ -169,6 +161,5 @@ internal fun <VB : ViewBinding> KClass<VB>.bind(rootView: View): VB {
 
 private val bindMethodsCache = mutableMapOf<Class<out ViewBinding>, Method>()
 
-private fun Class<out ViewBinding>.getBindMethod(): Method {
-    return bindMethodsCache.getOrPut(this) { getDeclaredMethod("bind", View::class.java) }
-}
+private fun Class<out ViewBinding>.getBindMethod(): Method =
+    bindMethodsCache.getOrPut(this) { getDeclaredMethod("bind", View::class.java) }
