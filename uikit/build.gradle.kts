@@ -1,3 +1,6 @@
+import com.boristul.libs.Config
+import com.boristul.libs.Libs
+
 plugins {
     id("com.android.library")
     kotlin("android")
@@ -5,14 +8,11 @@ plugins {
 }
 
 android {
-    val compileSdkVersion: String by project
-    val targetSdkVersion: String by project
-
-    compileSdk = compileSdkVersion.toInt()
+    compileSdk = Config.compileSdk
 
     defaultConfig {
         minSdk = 21
-        targetSdk = targetSdkVersion.toInt()
+        targetSdk = Config.targetSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -44,16 +44,16 @@ dependencies {
     // endregion
 
     // region AndroidX
-    implementation("androidx.preference:preference:1.2.0")
-    api("androidx.core:core-ktx:1.7.0")
-    api("androidx.appcompat:appcompat:1.4.1")
-    api("androidx.constraintlayout:constraintlayout:2.1.3")
+    implementation(Libs.AndroidX.preference)
+    implementation(Libs.AndroidX.core)
+    implementation(Libs.AndroidX.appCompat)
+    api(Libs.AndroidX.constraintLayout)
     // endregion
 
 
     // region UI
-    api("com.google.android.material:material:1.7.0-alpha01")
-    api("com.daimajia.swipelayout:library:1.2.0@aar")
-    api("com.airbnb.android:lottie:3.5.0")
+    api(Libs.Core.material)
+    api(Libs.Core.swipeLayout)
+    api(Libs.Core.lottie)
     // endregion
 }

@@ -1,3 +1,6 @@
+import com.boristul.libs.Config
+import com.boristul.libs.Libs
+
 plugins {
     id("com.android.library")
     kotlin("android")
@@ -10,14 +13,11 @@ kapt {
 }
 
 android {
-    val compileSdkVersion: String by project
-    val targetSdkVersion: String by project
-
-    compileSdk = compileSdkVersion.toInt()
+    compileSdk = Config.compileSdk
 
     defaultConfig {
         minSdk = 21
-        targetSdk = targetSdkVersion.toInt()
+        targetSdk = Config.targetSdk
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -43,14 +43,13 @@ dependencies {
     // endregion
 
     // region Core
-    val hiltVersion: String by project
-    implementation("com.google.dagger:hilt-android:$hiltVersion")
-    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    implementation(Libs.Hilt.hiltAndroid)
+    kapt(Libs.Hilt.hiltCompiler)
+    implementation(Libs.Core.jodaTime)
     // endregion
 
     // region AndroidX
-    val roomVersion: String by project
-    kapt("androidx.room:room-compiler:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
+    implementation(Libs.Room.roomKtx)
+    kapt(Libs.Room.roomCompiler)
     // endregion
 }
